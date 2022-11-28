@@ -194,10 +194,21 @@ void showCollectMeasurementsDialog(bool* collectMeasurements, char file_folder_p
 			timeDifferenceSum += std::chrono::duration_cast<std::chrono::milliseconds>(t2 - t1).count();
 			t1 = t2;
 
+			// TODO: Skicka PWM och DAC till STM32 PLC
+
 			// Update the sampling
 			if (sampleTime <= timeDifferenceSum) {
 				// Check if samples is above 0
 				if (showSamplesInPlot > 0) {
+
+					// Get the measurements data
+					uint16_t adcRaw[ADC_LENGTH];
+					uint16_t dadcRaw[DADC_LENGTH];
+					uint8_t diRaw[DI_LENGTH];
+					uint16_t icRaw[IC_LENGTH];
+					uint16_t eRaw[E_LENGTH];
+					getRawMeasurements(adcRaw, dadcRaw, diRaw, icRaw, eRaw);
+
 					// Update vectors
 					updateVectors(ADC, showSamplesInPlot, ADC_LENGTH, showSamplesInPlot);
 					updateVectors(DADC, showSamplesInPlot, DADC_LENGTH, showSamplesInPlot);

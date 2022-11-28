@@ -58,13 +58,15 @@ void Callback_Function_Read(uint32_t* ID, uint8_t data[], bool* is_new_message) 
 }
 
 // Fields for the measurements
-uint8_t analogGain[ANALOG_GAIN];
-uint16_t pwmPrescaler[PWM_PRESCALER];
-uint8_t digitalInput[DI_LENGTH];
-uint16_t analogSingleInput[ADC_LENGTH];
-uint16_t analogDifferentialInput[DADC_LENGTH];
-uint16_t inputCapture[IC_LENGTH];
-uint16_t encoderInput[E_LENGTH];
+uint8_t digitalInput[DI_LENGTH] = { 0 };
+uint16_t analogSingleInput[ADC_LENGTH] = { 0 };
+uint16_t analogDifferentialInput[DADC_LENGTH] = { 0 };
+uint16_t inputCapture[IC_LENGTH] = { 0 };
+uint16_t encoderInput[E_LENGTH] = { 0 };
+
+// Fields for the settings
+uint8_t analogGain[ANALOG_GAIN] = { 0 };
+uint16_t pwmPrescaler[PWM_PRESCALER] = { 0 };
 
 // Functions fot the measurements
 uint32_t readAnalogGainsFromSTM32PLC(uint8_t data[], uint32_t byteIndex);
@@ -222,4 +224,12 @@ uint32_t readAlarmBFromSTM32PLC(uint8_t data[], uint32_t byteIndex) {
     uint8_t activated = data[byteIndex++];
 
     return byteIndex;
+}
+
+void getRawMeasurements(uint16_t adcRaw[], uint16_t dadcRaw[], uint8_t diRaw[], uint16_t icRaw[], uint16_t eRaw[]) {
+    memcpy(adcRaw, analogSingleInput, sizeof(uint16_t) * ADC_LENGTH);
+    memcpy(dadcRaw, analogDifferentialInput, sizeof(uint16_t)*DADC_LENGTH);
+    memcpy(diRaw, digitalInput, sizeof(uint8_t) * DI_LENGTH);
+    memcpy(icRaw, inputCapture, sizeof(uint16_t) * IC_LENGTH);
+    memcpy(eRaw, encoderInput, sizeof(uint16_t) * E_LENGTH);
 }
