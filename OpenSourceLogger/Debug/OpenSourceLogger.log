@@ -1,0 +1,19 @@
+﻿  DatabaseHandler.cpp
+C:\Users\dmn\VS\OpenSourceLogger\OpenSourceLogger\Hardware\Database\DatabaseHandler.cpp(2,10): fatal  error C1083: Cannot open include file: 'mysqlx/xdevapi.h': No such file or directory
+  USBHandler.cpp
+C:\Users\dmn\VS\OpenSourceLogger\OpenSourceLogger\Hardware\USB\USBHandler.cpp(3,10): fatal  error C1083: Cannot open include file: 'boost/asio.hpp': No such file or directory
+  OpenSourceLogger.cpp
+C:\Users\dmn\VS\OpenSourceLogger\OpenSourceLogger\OpenSourceLogger.cpp(15,10): fatal  error C1083: Cannot open include file: 'imgui.h': No such file or directory
+  OpenSourceLoggerProtocol.cpp
+C:\Users\dmn\VS\OpenSourceLogger\OpenSourceLogger\Hardware\USB\Protocols\OpenSourceLogger\OpenSourceLoggerProtocol.cpp(156,32): warning C4244: '=': conversion from 'float' to 'uint16_t', possible loss of data
+  CalibrationDialog.cpp
+C:\Users\dmn\VS\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\CalibrationDialog\CalibrationDialog.cpp(2,10): fatal  error C1083: Cannot open include file: 'imgui.h': No such file or directory
+  CollectMeasurementsDialog.cpp
+C:\Users\dmn\VS\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\CollectMeasurementsDialog\CollectMeasurementsDialog.cpp(2,10): fatal  error C1083: Cannot open include file: 'imgui.h': No such file or directory
+  ConnectDialog.cpp
+C:\Users\dmn\VS\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\ConnectDialog\ConnectDialog.cpp(2,10): fatal  error C1083: Cannot open include file: 'imgui.h': No such file or directory
+  FileDialog.cpp
+C:\Users\dmn\VS\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\FileDialog\FileDialog.cpp(4,10): fatal  error C1083: Cannot open include file: 'imgui.h': No such file or directory
+  Windows.cpp
+C:\Users\dmn\VS\OpenSourceLogger\OpenSourceLogger\Windows\Windows.cpp(2,10): fatal  error C1083: Cannot open include file: 'imgui.h': No such file or directory
+  Generating Code...

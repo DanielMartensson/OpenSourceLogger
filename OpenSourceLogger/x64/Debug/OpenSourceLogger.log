@@ -1,0 +1,38 @@
+﻿  DatabaseHandler.cpp
+C:\vcpkg\installed\x64-windows\include\mysqlx\common.h(38,1): warning C4005: '_SILENCE_CXX17_ITERATOR_BASE_CLASS_DEPRECATION_WARNING': macro redefinition
+C:\vcpkg\installed\x64-windows\include\mysqlx\common.h(38,1): message : '_SILENCE_CXX17_ITERATOR_BASE_CLASS_DEPRECATION_WARNING' previously declared on the command line
+  OpenSourceLoggerProtocol.cpp
+C:\Users\dmn\VS\OpenSourceLogger\OpenSourceLogger\Hardware\USB\Protocols\OpenSourceLogger\OpenSourceLoggerProtocol.cpp(156,32): warning C4244: '=': conversion from 'float' to 'uint16_t', possible loss of data
+  USBHandler.cpp
+  Please define _WIN32_WINNT or _WIN32_WINDOWS appropriately. For example:
+  - add -D_WIN32_WINNT=0x0601 to the compiler command line; or
+  - add _WIN32_WINNT=0x0601 to your project's Preprocessor Definitions.
+  Assuming _WIN32_WINNT=0x0601 (i.e. Windows 7 target).
+C:\Users\dmn\VS\OpenSourceLogger\OpenSourceLogger\Hardware\USB\USBHandler.cpp(98,65): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\dmn\VS\OpenSourceLogger\OpenSourceLogger\Hardware\USB\USBHandler.cpp(110,73): warning C4267: '=': conversion from 'size_t' to 'uint32_t', possible loss of data
+  OpenSourceLogger.cpp
+  CalibrationDialog.cpp
+C:\Users\dmn\VS\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\CalibrationDialog\CalibrationDialog.cpp(64,133): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\dmn\VS\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\CalibrationDialog\CalibrationDialog.cpp(65,128): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\dmn\VS\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\CalibrationDialog\CalibrationDialog.cpp(66,133): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\dmn\VS\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\CalibrationDialog\CalibrationDialog.cpp(67,152): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\dmn\VS\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\CalibrationDialog\CalibrationDialog.cpp(68,113): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\dmn\VS\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\CalibrationDialog\CalibrationDialog.cpp(69,113): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\dmn\VS\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\CalibrationDialog\CalibrationDialog.cpp(70,101): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+  CollectMeasurementsDialog.cpp
+C:\Users\dmn\VS\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\CollectMeasurementsDialog\CollectMeasurementsDialog.cpp(202,56): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\dmn\VS\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\CollectMeasurementsDialog\CollectMeasurementsDialog.cpp(203,58): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\dmn\VS\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\CollectMeasurementsDialog\CollectMeasurementsDialog.cpp(204,56): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\dmn\VS\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\CollectMeasurementsDialog\CollectMeasurementsDialog.cpp(205,56): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\dmn\VS\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\CollectMeasurementsDialog\CollectMeasurementsDialog.cpp(206,54): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\dmn\VS\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\CollectMeasurementsDialog\CollectMeasurementsDialog.cpp(207,54): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\dmn\VS\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\CollectMeasurementsDialog\CollectMeasurementsDialog.cpp(208,52): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\dmn\VS\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\CollectMeasurementsDialog\CollectMeasurementsDialog.cpp(310,120): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\dmn\VS\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\CollectMeasurementsDialog\CollectMeasurementsDialog.cpp(343,56): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\dmn\VS\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\CollectMeasurementsDialog\CollectMeasurementsDialog.cpp(352,54): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+  ConnectDialog.cpp
+  Windows.cpp
+C:\Users\dmn\VS\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\FileDialog\FileDialog.h(1,1): warning C4005: '_CRT_SECURE_NO_WARNINGS': macro redefinition
+C:\Users\dmn\VS\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\FileDialog\FileDialog.h(1,1): message : '_CRT_SECURE_NO_WARNINGS' previously declared on the command line
+  Generating Code...
+  OpenSourceLogger.vcxproj -> C:\Users\dmn\VS\OpenSourceLogger\x64\Debug\OpenSourceLogger.exe

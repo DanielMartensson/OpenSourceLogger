@@ -1,0 +1,205 @@
+﻿  DatabaseHandler.cpp
+  USBHandler.cpp
+  Please define _WIN32_WINNT or _WIN32_WINDOWS appropriately. For example:
+  - add -D_WIN32_WINNT=0x0601 to the compiler command line; or
+  - add _WIN32_WINNT=0x0601 to your project's Preprocessor Definitions.
+  Assuming _WIN32_WINNT=0x0601 (i.e. Windows 7 target).
+C:\Users\dmn\VS\OpenSourceLogger\OpenSourceLogger\Hardware\USB\USBHandler.cpp(96,65): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\dmn\VS\OpenSourceLogger\OpenSourceLogger\Hardware\USB\USBHandler.cpp(109,73): warning C4267: '=': conversion from 'size_t' to 'uint32_t', possible loss of data
+  OpenSourceLogger.cpp
+  OpenSourceLoggerProtocol.cpp
+C:\Users\dmn\VS\OpenSourceLogger\OpenSourceLogger\Hardware\USB\Protocols\OpenSourceLogger\OpenSourceLoggerProtocol.cpp(156,32): warning C4244: '=': conversion from 'float' to 'uint16_t', possible loss of data
+  CalibrationDialog.cpp
+C:\Users\dmn\VS\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\CalibrationDialog\CalibrationDialog.cpp(64,133): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\dmn\VS\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\CalibrationDialog\CalibrationDialog.cpp(65,128): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\dmn\VS\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\CalibrationDialog\CalibrationDialog.cpp(66,133): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\dmn\VS\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\CalibrationDialog\CalibrationDialog.cpp(67,152): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\dmn\VS\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\CalibrationDialog\CalibrationDialog.cpp(68,113): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\dmn\VS\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\CalibrationDialog\CalibrationDialog.cpp(69,113): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\dmn\VS\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\CalibrationDialog\CalibrationDialog.cpp(70,101): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+  CollectMeasurementsDialog.cpp
+C:\Users\dmn\VS\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\CollectMeasurementsDialog\CollectMeasurementsDialog.cpp(36,27): error C3083: 'filesystem': the symbol to the left of a '::' must be a type
+C:\Users\dmn\VS\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\CollectMeasurementsDialog\CollectMeasurementsDialog.cpp(36,39): error C2039: 'exists': is not a member of 'std'
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.33.31629\include\fstream(26): message : see declaration of 'std'
+C:\Users\dmn\VS\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\CollectMeasurementsDialog\CollectMeasurementsDialog.cpp(36,45): error C3861: 'exists': identifier not found
+C:\Users\dmn\VS\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\CollectMeasurementsDialog\CollectMeasurementsDialog.cpp(202,56): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\dmn\VS\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\CollectMeasurementsDialog\CollectMeasurementsDialog.cpp(203,58): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\dmn\VS\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\CollectMeasurementsDialog\CollectMeasurementsDialog.cpp(204,56): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\dmn\VS\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\CollectMeasurementsDialog\CollectMeasurementsDialog.cpp(205,56): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\dmn\VS\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\CollectMeasurementsDialog\CollectMeasurementsDialog.cpp(206,54): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\dmn\VS\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\CollectMeasurementsDialog\CollectMeasurementsDialog.cpp(207,54): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\dmn\VS\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\CollectMeasurementsDialog\CollectMeasurementsDialog.cpp(208,52): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\dmn\VS\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\CollectMeasurementsDialog\CollectMeasurementsDialog.cpp(310,120): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\dmn\VS\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\CollectMeasurementsDialog\CollectMeasurementsDialog.cpp(343,56): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\dmn\VS\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\CollectMeasurementsDialog\CollectMeasurementsDialog.cpp(352,54): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+  ConnectDialog.cpp
+C:\Users\dmn\VS\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\ConnectDialog\ConnectDialog.cpp(181,76): error C2664: 'bool ImGui::InputText(const char *,char *,size_t,ImGuiInputTextFlags,ImGuiInputTextCallback,void *)': cannot convert argument 2 from 'const _Elem *' to 'char *'
+          with
+          [
+              _Elem=char
+          ]
+C:\Users\dmn\VS\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\ConnectDialog\ConnectDialog.cpp(181,36): message : Conversion loses qualifiers
+C:\vcpkg\installed\x64-windows\include\imgui.h(565,29): message : see declaration of 'ImGui::InputText'
+C:\Users\dmn\VS\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\ConnectDialog\ConnectDialog.cpp(182,80): error C2664: 'bool ImGui::InputText(const char *,char *,size_t,ImGuiInputTextFlags,ImGuiInputTextCallback,void *)': cannot convert argument 2 from 'const _Elem *' to 'char *'
+          with
+          [
+              _Elem=char
+          ]
+C:\Users\dmn\VS\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\ConnectDialog\ConnectDialog.cpp(182,40): message : Conversion loses qualifiers
+C:\vcpkg\installed\x64-windows\include\imgui.h(565,29): message : see declaration of 'ImGui::InputText'
+C:\Users\dmn\VS\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\ConnectDialog\ConnectDialog.cpp(184,84): error C2664: 'bool ImGui::InputText(const char *,char *,size_t,ImGuiInputTextFlags,ImGuiInputTextCallback,void *)': cannot convert argument 2 from 'const _Elem *' to 'char *'
+          with
+          [
+              _Elem=char
+          ]
+C:\Users\dmn\VS\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\ConnectDialog\ConnectDialog.cpp(184,44): message : Conversion loses qualifiers
+C:\vcpkg\installed\x64-windows\include\imgui.h(565,29): message : see declaration of 'ImGui::InputText'
+C:\Users\dmn\VS\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\ConnectDialog\ConnectDialog.cpp(185,115): error C2664: 'bool ImGui::InputText(const char *,char *,size_t,ImGuiInputTextFlags,ImGuiInputTextCallback,void *)': cannot convert argument 2 from 'const _Elem *' to 'char *'
+          with
+          [
+              _Elem=char
+          ]
+C:\Users\dmn\VS\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\ConnectDialog\ConnectDialog.cpp(185,44): message : Conversion loses qualifiers
+C:\vcpkg\installed\x64-windows\include\imgui.h(565,29): message : see declaration of 'ImGui::InputText'
+C:\Users\dmn\VS\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\ConnectDialog\ConnectDialog.cpp(200,6): error C2664: 'bool openDatabaseConnection(char [],int,char [],char [],char [])': cannot convert argument 1 from 'const _Elem *' to 'char []'
+          with
+          [
+              _Elem=char
+          ]
+C:\Users\dmn\VS\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\ConnectDialog\ConnectDialog.cpp(200,39): message : Conversion loses qualifiers
+C:\Users\dmn\VS\OpenSourceLogger\OpenSourceLogger\Hardware\Database\DatabaseHandler.h(1,6): message : see declaration of 'openDatabaseConnection'
+C:\Users\dmn\VS\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\ConnectDialog\ConnectDialog.cpp(293,29): error C2664: 'void dropSchema(char [])': cannot convert argument 1 from 'const _Elem *' to 'char []'
+          with
+          [
+              _Elem=char
+          ]
+C:\Users\dmn\VS\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\ConnectDialog\ConnectDialog.cpp(293,27): message : Conversion loses qualifiers
+C:\Users\dmn\VS\OpenSourceLogger\OpenSourceLogger\Hardware\Database\DatabaseHandler.h(4,6): message : see declaration of 'dropSchema'
+  FileDialog.cpp
+  The contents of <filesystem> are available only with C++17 or later.
+C:\Users\dmn\VS\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\FileDialog\FileDialog.cpp(21,52): error C3083: 'filesystem': the symbol to the left of a '::' must be a type
+C:\Users\dmn\VS\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\FileDialog\FileDialog.cpp(21,64): error C2039: 'current_path': is not a member of 'std'
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.33.31629\include\sstream(20): message : see declaration of 'std'
+C:\Users\dmn\VS\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\FileDialog\FileDialog.cpp(21,76): error C3861: 'current_path': identifier not found
+C:\Users\dmn\VS\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\FileDialog\FileDialog.cpp(37,21): error C3083: 'filesystem': the symbol to the left of a '::' must be a type
+C:\Users\dmn\VS\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\FileDialog\FileDialog.cpp(37,33): error C2039: 'path': is not a member of 'std'
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.33.31629\include\sstream(20): message : see declaration of 'std'
+C:\Users\dmn\VS\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\FileDialog\FileDialog.cpp(37,37): error C3536: 'path': cannot be used before it is initialized
+C:\Users\dmn\VS\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\FileDialog\FileDialog.cpp(37,37): error C2064: term does not evaluate to a function taking 1 arguments
+C:\Users\dmn\VS\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\FileDialog\FileDialog.cpp(38,13): error C3083: 'filesystem': the symbol to the left of a '::' must be a type
+C:\Users\dmn\VS\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\FileDialog\FileDialog.cpp(38,25): error C2039: 'is_directory': is not a member of 'std'
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.33.31629\include\sstream(20): message : see declaration of 'std'
+C:\Users\dmn\VS\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\FileDialog\FileDialog.cpp(38,7): error C3861: 'is_directory': identifier not found
+C:\Users\dmn\VS\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\FileDialog\FileDialog.cpp(44,14): error C3083: 'filesystem': the symbol to the left of a '::' must be a type
+C:\Users\dmn\VS\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\FileDialog\FileDialog.cpp(44,26): error C2039: 'exists': is not a member of 'std'
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.33.31629\include\sstream(20): message : see declaration of 'std'
+C:\Users\dmn\VS\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\FileDialog\FileDialog.cpp(44,8): error C3861: 'exists': identifier not found
+C:\Users\dmn\VS\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\FileDialog\FileDialog.cpp(50,38): error C3083: 'filesystem': the symbol to the left of a '::' must be a type
+C:\Users\dmn\VS\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\FileDialog\FileDialog.cpp(50,50): error C2039: 'current_path': is not a member of 'std'
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.33.31629\include\sstream(20): message : see declaration of 'std'
+C:\Users\dmn\VS\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\FileDialog\FileDialog.cpp(50,62): error C3861: 'current_path': identifier not found
+C:\Users\dmn\VS\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\FileDialog\FileDialog.cpp(60,8): error C2039: 'vector': is not a member of 'std'
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.33.31629\include\sstream(20): message : see declaration of 'std'
+C:\Users\dmn\VS\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\FileDialog\FileDialog.cpp(60,14): error C2065: 'vector': undeclared identifier
+C:\Users\dmn\VS\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\FileDialog\FileDialog.cpp(60,20): error C3083: 'filesystem': the symbol to the left of a '::' must be a type
+C:\Users\dmn\VS\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\FileDialog\FileDialog.cpp(60,32): error C2039: 'directory_entry': is not a member of 'std'
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.33.31629\include\sstream(20): message : see declaration of 'std'
+C:\Users\dmn\VS\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\FileDialog\FileDialog.cpp(60,47): error C2065: 'directory_entry': undeclared identifier
+C:\Users\dmn\VS\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\FileDialog\FileDialog.cpp(60,49): error C2065: 'files': undeclared identifier
+C:\Users\dmn\VS\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\FileDialog\FileDialog.cpp(61,8): error C2039: 'vector': is not a member of 'std'
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.33.31629\include\sstream(20): message : see declaration of 'std'
+C:\Users\dmn\VS\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\FileDialog\FileDialog.cpp(61,14): error C2065: 'vector': undeclared identifier
+C:\Users\dmn\VS\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\FileDialog\FileDialog.cpp(61,20): error C3083: 'filesystem': the symbol to the left of a '::' must be a type
+C:\Users\dmn\VS\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\FileDialog\FileDialog.cpp(61,32): error C2039: 'directory_entry': is not a member of 'std'
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.33.31629\include\sstream(20): message : see declaration of 'std'
+C:\Users\dmn\VS\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\FileDialog\FileDialog.cpp(61,47): error C2065: 'directory_entry': undeclared identifier
+C:\Users\dmn\VS\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\FileDialog\FileDialog.cpp(61,49): error C2065: 'folders': undeclared identifier
+C:\Users\dmn\VS\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\FileDialog\FileDialog.cpp(63,24): error C3083: 'filesystem': the symbol to the left of a '::' must be a type
+C:\Users\dmn\VS\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\FileDialog\FileDialog.cpp(63,36): error C2039: 'directory_iterator': is not a member of 'std'
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.33.31629\include\sstream(20): message : see declaration of 'std'
+C:\Users\dmn\VS\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\FileDialog\FileDialog.cpp(63,4): error C2530: 'p': references must be initialized
+C:\Users\dmn\VS\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\FileDialog\FileDialog.cpp(63,4): error C3531: 'p': a symbol whose type contains 'auto' must have an initializer
+C:\Users\dmn\VS\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\FileDialog\FileDialog.cpp(63,17): error C2143: syntax error: missing ';' before ':'
+C:\Users\dmn\VS\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\FileDialog\FileDialog.cpp(63,4): error C3861: 'directory_iterator': identifier not found
+C:\Users\dmn\VS\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\FileDialog\FileDialog.cpp(63,80): error C2143: syntax error: missing ';' before ')'
+C:\Users\dmn\VS\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\FileDialog\FileDialog.cpp(65,6): error C2065: 'folders': undeclared identifier
+C:\Users\dmn\VS\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\FileDialog\FileDialog.cpp(68,6): error C2065: 'files': undeclared identifier
+C:\Users\dmn\VS\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\FileDialog\FileDialog.cpp(80,37): error C3083: 'filesystem': the symbol to the left of a '::' must be a type
+C:\Users\dmn\VS\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\FileDialog\FileDialog.cpp(80,49): error C2039: 'path': is not a member of 'std'
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.33.31629\include\sstream(20): message : see declaration of 'std'
+C:\Users\dmn\VS\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\FileDialog\FileDialog.cpp(80,53): error C3861: 'path': identifier not found
+C:\Users\dmn\VS\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\FileDialog\FileDialog.cpp(83,23): error C2065: 'folders': undeclared identifier
+C:\Users\dmn\VS\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\FileDialog\FileDialog.cpp(84,26): error C2065: 'folders': undeclared identifier
+C:\Users\dmn\VS\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\FileDialog\FileDialog.cpp(87,33): error C2065: 'folders': undeclared identifier
+C:\Users\dmn\VS\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\FileDialog\FileDialog.cpp(95,35): error C2065: 'folders': undeclared identifier
+C:\Users\dmn\VS\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\FileDialog\FileDialog.cpp(152,9): error C2039: 'sort': is not a member of 'std'
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.33.31629\include\sstream(20): message : see declaration of 'std'
+C:\Users\dmn\VS\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\FileDialog\FileDialog.cpp(152,14): error C2065: 'files': undeclared identifier
+C:\Users\dmn\VS\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\FileDialog\FileDialog.cpp(152,29): error C2065: 'files': undeclared identifier
+C:\Users\dmn\VS\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\FileDialog\FileDialog.cpp(152,56): error C3083: 'filesystem': the symbol to the left of a '::' must be a type
+C:\Users\dmn\VS\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\FileDialog\FileDialog.cpp(152,68): error C2039: 'directory_entry': is not a member of 'std'
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.33.31629\include\sstream(20): message : see declaration of 'std'
+C:\Users\dmn\VS\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\FileDialog\FileDialog.cpp(159,5): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+C:\Users\dmn\VS\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\FileDialog\FileDialog.cpp(152,83): error C2143: syntax error: missing ',' before '&'
+C:\Users\dmn\VS\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\FileDialog\FileDialog.cpp(154,13): error C2065: 'a': undeclared identifier
+C:\Users\dmn\VS\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\FileDialog\FileDialog.cpp(154,44): error C2065: 'b': undeclared identifier
+C:\Users\dmn\VS\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\FileDialog\FileDialog.cpp(157,13): error C2065: 'a': undeclared identifier
+C:\Users\dmn\VS\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\FileDialog\FileDialog.cpp(157,44): error C2065: 'b': undeclared identifier
+C:\Users\dmn\VS\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\FileDialog\FileDialog.cpp(159,5): error C2065: 'a': undeclared identifier
+C:\Users\dmn\VS\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\FileDialog\FileDialog.cpp(159,5): error C2065: 'b': undeclared identifier
+C:\Users\dmn\VS\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\FileDialog\FileDialog.cpp(152,13): error C3861: 'sort': identifier not found
+C:\Users\dmn\VS\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\FileDialog\FileDialog.cpp(162,9): error C2039: 'sort': is not a member of 'std'
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.33.31629\include\sstream(20): message : see declaration of 'std'
+C:\Users\dmn\VS\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\FileDialog\FileDialog.cpp(162,14): error C2065: 'files': undeclared identifier
+C:\Users\dmn\VS\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\FileDialog\FileDialog.cpp(162,29): error C2065: 'files': undeclared identifier
+C:\Users\dmn\VS\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\FileDialog\FileDialog.cpp(162,56): error C3083: 'filesystem': the symbol to the left of a '::' must be a type
+C:\Users\dmn\VS\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\FileDialog\FileDialog.cpp(162,68): error C2039: 'directory_entry': is not a member of 'std'
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.33.31629\include\sstream(20): message : see declaration of 'std'
+C:\Users\dmn\VS\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\FileDialog\FileDialog.cpp(169,5): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+C:\Users\dmn\VS\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\FileDialog\FileDialog.cpp(162,83): error C2143: syntax error: missing ',' before '&'
+C:\Users\dmn\VS\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\FileDialog\FileDialog.cpp(164,13): error C2065: 'a': undeclared identifier
+C:\Users\dmn\VS\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\FileDialog\FileDialog.cpp(164,29): error C2065: 'b': undeclared identifier
+C:\Users\dmn\VS\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\FileDialog\FileDialog.cpp(167,13): error C2065: 'a': undeclared identifier
+C:\Users\dmn\VS\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\FileDialog\FileDialog.cpp(167,29): error C2065: 'b': undeclared identifier
+C:\Users\dmn\VS\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\FileDialog\FileDialog.cpp(169,5): error C2065: 'a': undeclared identifier
+C:\Users\dmn\VS\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\FileDialog\FileDialog.cpp(169,5): error C2065: 'b': undeclared identifier
+C:\Users\dmn\VS\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\FileDialog\FileDialog.cpp(162,13): error C3861: 'sort': identifier not found
+C:\Users\dmn\VS\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\FileDialog\FileDialog.cpp(172,9): error C2039: 'sort': is not a member of 'std'
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.33.31629\include\sstream(20): message : see declaration of 'std'
+C:\Users\dmn\VS\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\FileDialog\FileDialog.cpp(172,14): error C2065: 'files': undeclared identifier
+C:\Users\dmn\VS\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\FileDialog\FileDialog.cpp(172,29): error C2065: 'files': undeclared identifier
+C:\Users\dmn\VS\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\FileDialog\FileDialog.cpp(172,56): error C3083: 'filesystem': the symbol to the left of a '::' must be a type
+C:\Users\dmn\VS\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\FileDialog\FileDialog.cpp(172,68): error C2039: 'directory_entry': is not a member of 'std'
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.33.31629\include\sstream(20): message : see declaration of 'std'
+C:\Users\dmn\VS\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\FileDialog\FileDialog.cpp(179,5): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+C:\Users\dmn\VS\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\FileDialog\FileDialog.cpp(172,83): error C2143: syntax error: missing ',' before '&'
+C:\Users\dmn\VS\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\FileDialog\FileDialog.cpp(174,13): error C2065: 'a': undeclared identifier
+C:\Users\dmn\VS\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\FileDialog\FileDialog.cpp(174,45): error C2065: 'b': undeclared identifier
+C:\Users\dmn\VS\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\FileDialog\FileDialog.cpp(177,13): error C2065: 'a': undeclared identifier
+C:\Users\dmn\VS\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\FileDialog\FileDialog.cpp(177,45): error C2065: 'b': undeclared identifier
+C:\Users\dmn\VS\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\FileDialog\FileDialog.cpp(179,5): error C2065: 'a': undeclared identifier
+C:\Users\dmn\VS\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\FileDialog\FileDialog.cpp(179,5): error C2065: 'b': undeclared identifier
+C:\Users\dmn\VS\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\FileDialog\FileDialog.cpp(172,13): error C3861: 'sort': identifier not found
+C:\Users\dmn\VS\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\FileDialog\FileDialog.cpp(182,9): error C2039: 'sort': is not a member of 'std'
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.33.31629\include\sstream(20): message : see declaration of 'std'
+C:\Users\dmn\VS\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\FileDialog\FileDialog.cpp(182,14): error C2065: 'files': undeclared identifier
+C:\Users\dmn\VS\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\FileDialog\FileDialog.cpp(182,29): error C2065: 'files': undeclared identifier
+C:\Users\dmn\VS\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\FileDialog\FileDialog.cpp(182,56): error C3083: 'filesystem': the symbol to the left of a '::' must be a type
+C:\Users\dmn\VS\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\FileDialog\FileDialog.cpp(182,68): error C2039: 'directory_entry': is not a member of 'std'
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.33.31629\include\sstream(20): message : see declaration of 'std'
+C:\Users\dmn\VS\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\FileDialog\FileDialog.cpp(189,5): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+C:\Users\dmn\VS\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\FileDialog\FileDialog.cpp(182,83): error C2143: syntax error: missing ',' before '&'
+C:\Users\dmn\VS\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\FileDialog\FileDialog.cpp(184,13): error C2065: 'a': undeclared identifier
+C:\Users\dmn\VS\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\FileDialog\FileDialog.cpp(184,35): error C2065: 'b': undeclared identifier
+C:\Users\dmn\VS\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\FileDialog\FileDialog.cpp(187,13): error C2065: 'a': undeclared identifier
+C:\Users\dmn\VS\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\FileDialog\FileDialog.cpp(187,35): error C2065: 'b': undeclared identifier
+C:\Users\dmn\VS\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\FileDialog\FileDialog.cpp(189,5): error C2065: 'a': undeclared identifier
+C:\Users\dmn\VS\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\FileDialog\FileDialog.cpp(189,5): error C2065: 'b': undeclared identifier
+C:\Users\dmn\VS\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\FileDialog\FileDialog.cpp(182,13): error C3861: 'sort': identifier not found
+C:\Users\dmn\VS\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\FileDialog\FileDialog.cpp(192,23): error C2065: 'files': undeclared identifier
+C:\Users\dmn\VS\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\FileDialog\FileDialog.cpp(193,26): error C2065: 'files': undeclared identifier
+C:\Users\dmn\VS\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\FileDialog\FileDialog.cpp(195,32): error C2065: 'files': undeclared identifier
+C:\Users\dmn\VS\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\FileDialog\FileDialog.cpp(199,42): error C2065: 'files': undeclared identifier
+C:\Users\dmn\VS\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\FileDialog\FileDialog.cpp(201,27): error C2065: 'files': undeclared identifier
+C:\Users\dmn\VS\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\FileDialog\FileDialog.cpp(201,32): fatal  error C1003: error count exceeds 100; stopping compilation
+  Windows.cpp
