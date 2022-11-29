@@ -1,16 +1,5 @@
 ﻿  CollectMeasurementsDialog.cpp
-C:\Users\dmn\GitHub\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\CollectMeasurementsDialog\CollectMeasurementsDialog.cpp(211,56): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\dmn\GitHub\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\CollectMeasurementsDialog\CollectMeasurementsDialog.cpp(212,58): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\dmn\GitHub\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\CollectMeasurementsDialog\CollectMeasurementsDialog.cpp(213,56): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\dmn\GitHub\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\CollectMeasurementsDialog\CollectMeasurementsDialog.cpp(214,56): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\dmn\GitHub\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\CollectMeasurementsDialog\CollectMeasurementsDialog.cpp(215,54): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\dmn\GitHub\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\CollectMeasurementsDialog\CollectMeasurementsDialog.cpp(216,54): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\dmn\GitHub\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\CollectMeasurementsDialog\CollectMeasurementsDialog.cpp(217,52): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\dmn\GitHub\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\CollectMeasurementsDialog\CollectMeasurementsDialog.cpp(319,120): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\dmn\GitHub\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\CollectMeasurementsDialog\CollectMeasurementsDialog.cpp(352,56): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\dmn\GitHub\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\CollectMeasurementsDialog\CollectMeasurementsDialog.cpp(361,54): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
-  Windows.cpp
-C:\Users\dmn\GitHub\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\FileDialog\FileDialog.h(1,1): warning C4005: '_CRT_SECURE_NO_WARNINGS': macro redefinition
-C:\Users\dmn\GitHub\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\FileDialog\FileDialog.h(1,1): message : '_CRT_SECURE_NO_WARNINGS' previously declared on the command line
-  Generating Code...
+C:\Users\dmn\GitHub\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\CollectMeasurementsDialog\CollectMeasurementsDialog.cpp(327,126): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\dmn\GitHub\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\CollectMeasurementsDialog\CollectMeasurementsDialog.cpp(365,59): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\dmn\GitHub\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\CollectMeasurementsDialog\CollectMeasurementsDialog.cpp(374,57): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
   OpenSourceLogger.vcxproj -> C:\Users\dmn\GitHub\OpenSourceLogger\x64\Debug\OpenSourceLogger.exe

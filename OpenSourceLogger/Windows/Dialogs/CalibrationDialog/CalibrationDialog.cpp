@@ -3,7 +3,7 @@
 #include <string>
 #include <fstream>
 #include "nlohmann/json.hpp"
-#include "../../../Constants.h"
+#include "../../../Hardware/USB/USBHandler.h"
 
 #define CALIBRATION_FIELDS_JSON "Windows/Dialogs/CalibrationDialog/calibrationFields.json"
 
@@ -136,4 +136,81 @@ int createTable(const char collapsingHeaderText[], const char tableName[], const
 		}
 	}
 	return 0;
+}
+
+void getCalibrateMeasurementsFromRawData(float calibratedADC[], float calibratedDADC[], float calibratedDI[], float calibratedIC[], float calibratedE[]) {
+	// Get the measurements data
+	uint16_t adcRaw[ADC_LENGTH];
+	uint16_t dadcRaw[DADC_LENGTH];
+	uint8_t diRaw[DI_LENGTH];
+	uint16_t icRaw[IC_LENGTH];
+	uint16_t eRaw[E_LENGTH];
+	getRawMeasurements(adcRaw, dadcRaw, diRaw, icRaw, eRaw);
+	
+	for (int i = 0; i < ADC_LENGTH; i++) {
+		float k = (adcMax.at(i) - adcMin.at(i)) / ((float) 0xFFFF);
+		float m = adcMax.at(i) - k * ((float)0xFFFF);
+		calibratedADC[i] = k * adcRaw[i] + m; // TODO: Fixa en korrektionsfunktion här för zenerdiodläknin
+	}
+
+	for (int i = 0; i < DADC_LENGTH; i++) {
+		float k = (dadcMax.at(i) - dadcMin.at(i)) / ((float)0xFFFF);
+		float m = dadcMax.at(i) - k * ((float)0xFFFF);
+		calibratedDADC[i] = k * dadcRaw[i] + m; // TODO: Fixa en korrektionsfunktion här för zenerdiodläknin
+	}
+
+	for (int i = 0; i < DI_LENGTH; i++) {
+		float k = (diMax.at(i) - diMin.at(i)) / ((float)0x1);
+		float m = diMax.at(i) - k * ((float)0x1);
+		calibratedDI[i] = k * diRaw[i] + m; 
+	}
+
+	for (int i = 0; i < IC_LENGTH; i++) {
+		float k = (icMax.at(i) - icMin.at(i)) / ((float)0xFFFF);
+		float m = icMax.at(i) - k * ((float)0xFFFF);
+		calibratedIC[i] = k * icRaw[i] + m; 
+	}
+
+	for (int i = 0; i < E_LENGTH; i++) {
+		float k = (eMax.at(i) - eMin.at(i)) / ((float)0xFFFF);
+		float m = eMax.at(i) - k * ((float) 0xFFFF);
+		calibratedE[i] = k * eRaw[i] + m; 
+	}
+}
+
+void setControlSignals(float sliderPWM[], float sliderDAC[]) {
+	// Create raw control signals
+	uint16_t pwmRaw[PWM_LENGTH];
+	uint16_t dacRaw[DAC_LENGTH];
+
+	for (int i = 0; i < PWM_LENGTH; i++) {
+		float k = ((float) 0xFFFF) / (pwmMax.at(i) - pwmMin.at(i));
+		float m = 0xFFFF - k * pwmMax.at(i);
+		pwmRaw[i] = k * sliderPWM[i] + m;
+	}
+
+	for (int i = 0; i < DAC_LENGTH; i++) {
+		float k = ((float)0xFFF) / (dacMax.at(i) - dacMin.at(i)); // 0xFFF = 4095
+		float m = 0xFFF - k * dacMax.at(i);
+		dacRaw[i] = k * sliderDAC[i] + m;
+	}
+
+	// Set signals
+	setRawControlSignals(pwmRaw, dacRaw);
+}
+
+std::array<float, PWM_LENGTH> getMinCalibrationPWM() {
+	return pwmMin;
+}
+
+std::array<float, PWM_LENGTH> getMaxCalibrationPWM() {
+	return pwmMax;
+}
+
+std::array<float, DAC_LENGTH> getMinCalibrationDAC() {
+	return dacMin;
+}
+
+std::array<float, DAC_LENGTH> getMaxCalibrationDAC() {
+	return dacMax;
 }

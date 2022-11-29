@@ -64,6 +64,10 @@ uint16_t analogDifferentialInput[DADC_LENGTH] = { 0 };
 uint16_t inputCapture[IC_LENGTH] = { 0 };
 uint16_t encoderInput[E_LENGTH] = { 0 };
 
+// Fields for the control signals // TODO - Hur ska dessa styras?
+uint16_t pwmOutput[PWM_LENGTH] = { 0 };
+uint16_t dacOutput[DAC_LENGTH] = { 0 };
+
 // Fields for the settings
 uint8_t analogGain[ANALOG_GAIN] = { 0 };
 uint16_t pwmPrescaler[PWM_PRESCALER] = { 0 };
@@ -210,7 +214,6 @@ uint32_t readAlarmAFromSTM32PLC(uint8_t data[], uint32_t byteIndex) {
     uint8_t minute = data[byteIndex++];
     uint8_t enabled = data[byteIndex++];
     uint8_t activated = data[byteIndex++];
-    
   
     return byteIndex;
 }
@@ -232,4 +235,9 @@ void getRawMeasurements(uint16_t adcRaw[], uint16_t dadcRaw[], uint8_t diRaw[], 
     memcpy(diRaw, digitalInput, sizeof(uint8_t) * DI_LENGTH);
     memcpy(icRaw, inputCapture, sizeof(uint16_t) * IC_LENGTH);
     memcpy(eRaw, encoderInput, sizeof(uint16_t) * E_LENGTH);
+}
+
+void setRawControlSignals(uint16_t pwmRaw[], uint16_t dacRaw[]) {
+    memcpy(pwmOutput, pwmRaw, sizeof(uint16_t) * PWM_LENGTH);
+    memcpy(dacOutput, dacRaw, sizeof(uint16_t) * DAC_LENGTH);
 }
