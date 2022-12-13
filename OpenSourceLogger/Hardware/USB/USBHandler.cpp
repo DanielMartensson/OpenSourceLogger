@@ -1,19 +1,10 @@
 
 #include "USBHandler.h"
-#include <boost/asio.hpp>
-#include <thread>
 
 // USB port
 boost::asio::io_service usbPort;
 boost::asio::streambuf readData;
 boost::asio::serial_port port(usbPort);
-
-// Thread for USB reading
-uint8_t data[1024];
-void readDataViaUSB();
-std::thread usbReader(&readDataViaUSB);
-bool threadStart = false;
-bool USBThreadActive = true;
 
 bool openUSBConnection(std::string portName, int baudrateIndex, J1939* j1939) {
 	// Connect 
@@ -41,10 +32,10 @@ bool openUSBConnection(std::string portName, int baudrateIndex, J1939* j1939) {
 		port.set_option(boost::asio::serial_port_base::baud_rate(baudrate));
 
 		// Start thread
-		threadStart = true;
+		setReadUSBThreadStart(true);
 
 		// Set can-bus call back functions
-		activateJ1939CallBackAndSetJ1939(j1939);
+		activateJ1939CallBackAndSetJ1939AndSetUSBPort(j1939, &port);
 
 		// Now return
 		return isConnectedToUSB();
@@ -55,7 +46,7 @@ bool openUSBConnection(std::string portName, int baudrateIndex, J1939* j1939) {
 }
 
 bool closeUSBConnection() {
-	threadStart = false;
+	setReadUSBThreadStart(false);
 	if (isConnectedToUSB()) {
 		port.close();
 	}
@@ -94,35 +85,7 @@ void getUSBPortNames(std::vector<std::string>& portNames) {
 	}
 }
 
-int sendDataViaUSB(uint8_t data[], int lengthOfData) {
-	return port.write_some(boost::asio::buffer(data, lengthOfData));
-}
-
-void readDataViaUSB() {
-	while (USBThreadActive) {
-		std::this_thread::sleep_for(std::chrono::milliseconds(1));
-		while (threadStart) {
-			// This try-catch statement is used because if we close the USB port, then the thread stops
-			try {
-				uint32_t readBytes = 0;
-				while (1) {
-					// Blocking read
-					readBytes = port.read_some(boost::asio::buffer(data, sizeof(data)));
-
-					// Read the message
-					readUSBMessage(data, readBytes);
-
-				}
-			}
-			catch (...) {}
-		}
-	}
-
-	// Terminate the thread
-	usbReader.detach();
-}
-
 void closeUSBThread() {
 	closeUSBConnection();
-	USBThreadActive = false;
+	setUSBThreadActive(false);
 }

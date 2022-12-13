@@ -9,7 +9,6 @@
 bool openUSBConnection(std::string portName, int baudrateIndex, J1939* J1939);
 bool isConnectedToUSB();
 bool closeUSBConnection();
-int sendDataViaUSB(uint8_t data[], int lengthOfData);
 void closeUSBThread();
 void getUSBPortNames(std::vector<std::string>& portNames);
 

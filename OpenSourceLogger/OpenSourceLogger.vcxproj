@@ -19,6 +19,8 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Hardware\Tools\TimeConverter.cpp" />
+    <ClCompile Include="Windows\Dialogs\ConfigurationSTM32PLCDialog\ConfigurationSTM32PLCDialog.cpp" />
     <ClCompile Include="Hardware\Database\DatabaseHandler.cpp" />
     <ClCompile Include="Hardware\USB\Protocols\OpenSourceLogger\OpenSAEJ1939\Hardware\CAN_Transmit_Receive.c" />
     <ClCompile Include="Hardware\USB\Protocols\OpenSourceLogger\OpenSAEJ1939\Hardware\FLASH_EEPROM_RAM_Memory.c" />
@@ -54,9 +56,14 @@
     <ClCompile Include="Windows\Dialogs\CollectMeasurementsDialog\CollectMeasurementsDialog.cpp" />
     <ClCompile Include="Windows\Dialogs\ConnectDialog\ConnectDialog.cpp" />
     <ClCompile Include="Windows\Dialogs\FileDialog\FileDialog.cpp" />
+    <ClCompile Include="Windows\Dialogs\SAEJ1939Dialog\SAEJ1939Dialog.cpp" />
+    <ClCompile Include="Windows\Dialogs\UploadMeasurementToDatabaseDialog\UploadMeasurementToDatabaseDialog.cpp" />
+    <ClCompile Include="Windows\Dialogs\ViewMeasurementsFromDatabaseDialog\ViewMeasurementsFromDatabaseDialog.cpp" />
     <ClCompile Include="Windows\Windows.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Hardware\Tools\TimeConverter.h" />
+    <ClInclude Include="Windows\Dialogs\ConfigurationSTM32PLCDialog\ConfigurationSTM32PLCDialog.h" />
     <ClInclude Include="Hardware\Database\DatabaseHandler.h" />
     <ClInclude Include="Hardware\USB\Protocols\OpenSourceLogger\OpenSAEJ1939\Hardware\Hardware.h" />
     <ClInclude Include="Hardware\USB\Protocols\OpenSourceLogger\OpenSAEJ1939\ISO_11783\ISO_11783-7_Application_Layer\Application_Layer.h" />
@@ -80,6 +87,9 @@
     <ClInclude Include="Windows\Dialogs\CollectMeasurementsDialog\CollectMeasurementsDialog.h" />
     <ClInclude Include="Windows\Dialogs\ConnectDialog\ConnectDialog.h" />
     <ClInclude Include="Windows\Dialogs\FileDialog\FileDialog.h" />
+    <ClInclude Include="Windows\Dialogs\SAEJ1939Dialog\SAEJ1939Dialog.h" />
+    <ClInclude Include="Windows\Dialogs\UploadMeasurementToDatabaseDialog\UploadMeasurementToDatabaseDialog.h" />
+    <ClInclude Include="Windows\Dialogs\ViewMeasurementsFromDatabaseDialog\ViewMeasurementsFromDatabaseDialog.h" />
     <ClInclude Include="Windows\Windows.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
@@ -174,7 +184,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <LanguageStandard>stdcpp17</LanguageStandard>
+      <LanguageStandard>stdcpp20</LanguageStandard>
       <AdditionalOptions>/D _SILENCE_CXX17_ITERATOR_BASE_CLASS_DEPRECATION_WARNING %(AdditionalOptions)</AdditionalOptions>
       <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard_C>stdc11</LanguageStandard_C>

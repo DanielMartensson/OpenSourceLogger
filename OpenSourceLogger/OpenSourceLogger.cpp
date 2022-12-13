@@ -26,6 +26,7 @@
 /* My own header fiels */
 #include "Windows/Windows.h"
 #include "Hardware/USB/USBHandler.h"
+#include "Windows/Dialogs/CalibrationDialog/CalibrationDialog.h"
 
 // [Win32] Our example includes a copy of glfw3.lib pre-compiled with VS2010 to maximize ease of testing and compatibility with old VS compilers.
 // To link with VS2010-era libraries, VS2015+ requires linking with legacy_stdio_definitions.lib, which we do using this pragma.
@@ -70,7 +71,7 @@ int main(int, char**)
 #endif
 
 	// Create window with graphics context
-	GLFWwindow* window = glfwCreateWindow(1280, 720, "Dear ImGui GLFW+OpenGL3 example", NULL, NULL);
+	GLFWwindow* window = glfwCreateWindow(1280, 720, "OpenSourceLogger", NULL, NULL);
 	if (window == NULL)
 		return 1;
 	glfwMakeContextCurrent(window);
@@ -92,7 +93,7 @@ int main(int, char**)
 	ImGui_ImplOpenGL3_Init(glsl_version);
 
 	// Color for the background
-	ImVec4 clear_color = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);
+	ImVec4 clear_color = ImVec4(22.0f/255.0f, 22.0f/255.0f, 23.0f/255.0f, 1.00f);
 
 	// Load Fonts
 	// - If no fonts are loaded, dear imgui will use the default font. You can also load multiple fonts and use ImGui::PushFont()/PopFont() to select them.
@@ -112,6 +113,7 @@ int main(int, char**)
 
 	// Our windows
 	bool show_main_window = false;
+	loadMinMaxCalibration();
 
 	// Main loop
 	while (!glfwWindowShouldClose(window))
@@ -136,9 +138,6 @@ int main(int, char**)
 
 		// Show dialog windows
 		showDialogWindows();
-
-
-		ImGui::ShowDemoWindow();
 
 		// Rendering
 		ImGui::Render();

@@ -21,7 +21,8 @@ inline void create_C_array_for_combo(char array_C[], std::vector<std::string> ar
 
 void showUSBConnectionDialog(bool* connectToUsb, J1939* j1939) {
 	// Display
-	ImGui::Begin("Select USB port", connectToUsb);
+	ImGui::SetNextWindowSize(ImVec2(300.0f, 150.0f));
+	ImGui::Begin("Select USB port", connectToUsb, ImGuiWindowFlags_NoResize);
 
 	// Center for popup
 	ImVec2 center(ImGui::GetWindowPos().x + ImGui::GetWindowSize().x * 0.5f, ImGui::GetWindowPos().y + ImGui::GetWindowSize().y * 0.5f);
@@ -30,12 +31,6 @@ void showUSBConnectionDialog(bool* connectToUsb, J1939* j1939) {
 	char status[25];
 	sprintf_s(status, "Status: %s", isConnectedToUSB() == true ? "Connected" : "Disconnected");
 	ImGui::Text(status);
-
-	// Port combobox fields
-	static int portIndex = 0;
-	static int baudrateIndex = 0;
-	static char portNames_C_style[1000] = { 0 };
-	static std::vector<std::string> portNames;
 
 	// Baudrate combobox fields
 	std::vector<std::string> baudrates;
@@ -54,6 +49,12 @@ void showUSBConnectionDialog(bool* connectToUsb, J1939* j1939) {
 	baudrates.push_back("57600");
 	baudrates.push_back("115200");
 	create_C_array_for_combo(baudrates_C_style, baudrates);
+
+	// Port combobox fields
+	static int portIndex = 0;
+	static int baudrateIndex = baudrates.size() - 1; // Last index
+	static char portNames_C_style[1000] = { 0 };
+	static std::vector<std::string> portNames;
 
 	if (isConnectedToUSB()) {
 		// Make the ComboBox "disabled" for port
@@ -132,14 +133,13 @@ void showUSBConnectionDialog(bool* connectToUsb, J1939* j1939) {
 		getUSBPortNames(portNames);
 		create_C_array_for_combo(portNames_C_style, portNames);
 	}
-
-
 	ImGui::End();
 }
 
 void showDatabaseConnectionDialog(bool* connectToDatabase) {
 	// New window
-	ImGui::Begin("Connect to database", connectToDatabase);
+	ImGui::SetNextWindowSize(ImVec2(370.0f, 200.0f));
+	ImGui::Begin("Connect to database", connectToDatabase, ImGuiWindowFlags_NoResize);
 
 	// Status
 	char status[50];
@@ -290,12 +290,12 @@ void showDatabaseConnectionDialog(bool* connectToDatabase) {
 		ImGui::SameLine();
 		if (deleteSchemaConfirm) {
 			if (ImGui::Button("Delete now")) {
-				dropSchema(schema.data());
+				dropDatabaseSchema(schema.data());
 				closeDatabaseConnection();
 				ImGui::CloseCurrentPopup();
+				deleteSchemaConfirm = false;
 			}
 		}
-
 		ImGui::EndPopup();
 	}
 	ImGui::End();

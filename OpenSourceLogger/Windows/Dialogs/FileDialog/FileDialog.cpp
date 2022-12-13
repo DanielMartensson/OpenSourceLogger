@@ -28,8 +28,9 @@ static FileDialogSortOrder date_sort_order = FileDialogSortOrder::None;
 static FileDialogSortOrder type_sort_order = FileDialogSortOrder::None;
 static bool initial_path_set = false;
 
-void showFileDialog(bool* file_dialog_open, char* buffer, unsigned int buffer_size, FileDialogType type) {
+bool showFileDialog(bool* file_dialog_open, char* buffer, unsigned int buffer_size, FileDialogType type) {
 
+	bool isFileOrFolderSelected = false;
 	if (*file_dialog_open) {
 		// Check if there was already something in the buffer. If so, try to use that path (if it exists).
 		// If it doesn't exist, just put them into the current path.
@@ -55,7 +56,7 @@ void showFileDialog(bool* file_dialog_open, char* buffer, unsigned int buffer_si
 
 		ImGui::SetNextWindowSize(ImVec2(740.0f, 410.0f));
 		const char* window_title = (type == FileDialogType::OpenFile ? "Select a file" : "Select a folder");
-		ImGui::Begin(window_title, nullptr, ImGuiWindowFlags_NoResize);
+		ImGui::Begin(window_title, file_dialog_open, ImGuiWindowFlags_NoResize);
 
 		std::vector<std::filesystem::directory_entry> files;
 		std::vector<std::filesystem::directory_entry> folders;
@@ -363,11 +364,11 @@ void showFileDialog(bool* file_dialog_open, char* buffer, unsigned int buffer_si
 			file_dialog_current_file = "";
 			strcpy_s(file_dialog_error, "");
 			initial_path_set = false;
-			*file_dialog_open = false;
 		};
 
 		if (ImGui::Button("Cancel")) {
 			reset_everything();
+			*file_dialog_open = false;
 		}
 		ImGui::SameLine();
 		if (ImGui::Button("Choose")) {
@@ -379,6 +380,8 @@ void showFileDialog(bool* file_dialog_open, char* buffer, unsigned int buffer_si
 					strcpy(buffer, (file_dialog_current_path + (file_dialog_current_path.back() == '\\' ? "" : "\\") + file_dialog_current_folder).c_str());
 					strcpy_s(file_dialog_error, "");
 					reset_everything();
+					isFileOrFolderSelected = true;
+					*file_dialog_open = false;
 				}
 			}
 			else if (type == FileDialogType::OpenFile) {
@@ -389,6 +392,8 @@ void showFileDialog(bool* file_dialog_open, char* buffer, unsigned int buffer_si
 					strcpy(buffer, (file_dialog_current_path + (file_dialog_current_path.back() == '\\' ? "" : "\\") + file_dialog_current_file).c_str());
 					strcpy_s(file_dialog_error, "");
 					reset_everything();
+					isFileOrFolderSelected = true;
+					*file_dialog_open = false;
 				}
 			}
 		}
@@ -398,5 +403,7 @@ void showFileDialog(bool* file_dialog_open, char* buffer, unsigned int buffer_si
 		}
 
 		ImGui::End();
+
+		return isFileOrFolderSelected;
 	}
 }

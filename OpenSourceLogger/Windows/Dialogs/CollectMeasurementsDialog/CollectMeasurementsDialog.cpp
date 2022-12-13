@@ -3,19 +3,21 @@
 #include "../../../Hardware/USB/USBHandler.h"
 #include "../../../Constants.h"
 #include "nlohmann/json.hpp"
-#include <chrono>
+#include <chrono>  
 #include <fstream>
 #include "../CalibrationDialog/CalibrationDialog.h"
+#include "../../../Hardware/Tools/TimeConverter.h"
 
 #define PLOT_SETTING_FIELDS_JSON "Windows/Dialogs/CollectMeasurementsDialog/plotSettingFields.json"
 
-void createCheckBoxes(const char pheferialName[], bool enable[], const int lengthOfArray);
-int createMeasurementPlots(std::vector<float> lineChart[], const char pheferialName[], bool enable[], float minValue[], float maxValue[], int dimensionOfVector, int popIndexBegin, bool isControlOutput = false, float slider[] = nullptr, float minSliderValue[] = nullptr, float maxSliderValue[] = nullptr);
-void updateVectorsForPlot(std::vector<float> lineChart[], int showSamplesInPlot, int dimensionOfVector, float calibratedArray[]);
+inline void createCheckBoxes(const char pheferialName[], bool enable[], const int lengthOfArray);
+inline void createMeasurementPlots(std::vector<float> lineChart[], const char pheferialName[], bool enable[], int dimensionOfVector, bool isControlOutput = false, float minValue[] = nullptr, float maxValue[] = nullptr, float slider[] = nullptr);
+inline void updateVectorsForPlot(std::vector<float> lineChart[], int showSamplesInPlot, int dimensionOfVector, float calibratedArray[]);
 
 void showCollectMeasurementsDialog(bool* collectMeasurements, char file_folder_path[]) {
 
-	ImGui::Begin("Collect measurements", collectMeasurements);
+	ImGui::SetNextWindowSize(ImVec2(850.0f, 850.0f));
+	ImGui::Begin("Collect measurements", collectMeasurements, ImGuiWindowFlags_NoResize);
 
 	// Enable fields
 	static bool enableADC[ADC_LENGTH];
@@ -105,9 +107,8 @@ void showCollectMeasurementsDialog(bool* collectMeasurements, char file_folder_p
 
 	// Check if we are connected to the USB
 	if (isConnectedToUSB() && logFileExist) {
-		ImGui::BeginChild("groupBoxEnable", ImVec2(0, ImGui::GetFontSize() * 15.0f), true);
-
 		// Create checkboxes
+		ImGui::BeginChild("groupBoxEnable", ImVec2(0, ImGui::GetFontSize() * 15.0f), true);
 		ImGui::Text("Enable measurements:");
 		createCheckBoxes("ADC", enableADC, ADC_LENGTH);
 		createCheckBoxes("DADC", enableDADC, DADC_LENGTH);
@@ -122,7 +123,7 @@ void showCollectMeasurementsDialog(bool* collectMeasurements, char file_folder_p
 		ImGui::BeginChild("groupBoxSettings", ImVec2(0, ImGui::GetFontSize() * 15.0f), true);
 		ImGui::Text("Settings:");
 		ImGui::SliderInt("Show samples for line plot", &showSamplesInPlot, 0, 2000);
-		
+
 		// Buttons
 		if (startLogging) {
 			ImGui::PushStyleColor(ImGuiCol_Button, COLOR_RED);
@@ -135,33 +136,7 @@ void showCollectMeasurementsDialog(bool* collectMeasurements, char file_folder_p
 
 			// Open file
 			logFile.open(file_folder_path);
-			if (logFile.is_open()) {
-				// Write the first header for the log file when it just has been open
-				std::string header = "time_stamp,";
-				for (int i = 0; i < ADC_LENGTH; i++) {
-					header += std::string("adc") + std::to_string(i) + std::string(", "); // Analog to digital converter
-				}
-				for (int i = 0; i < PWM_LENGTH; i++) {
-					header += std::string("pwm") + std::to_string(i) + std::string(", "); // Pulse widt modulation
-				}
-				for (int i = 0; i < DAC_LENGTH; i++) {
-					header += std::string("dac") + std::to_string(i) + std::string(", "); // Digital to analog converter
-				}
-				for (int i = 0; i < DADC_LENGTH; i++) {
-					header += std::string("dadc") + std::to_string(i) + std::string(", "); // Differential ADC
-				}
-				for (int i = 0; i < DI_LENGTH; i++) {
-					header += std::string("di") + std::to_string(i) + std::string(", "); // Digital input
-				}
-				for (int i = 0; i < IC_LENGTH; i++) {
-					header += std::string("ic") + std::to_string(i) + std::string(", "); // Input capture
-				}
-				for (int i = 0; i < E_LENGTH - 1; i++) {
-					header += std::string("e") + std::to_string(i) + std::string(", "); // Encoder
-				}
-				header += "e2\n";
-				logFile << header;
-			}else {
+			if (!logFile.is_open()) {
 				logFileExist = false;
 				startLogging = false;
 			}
@@ -185,7 +160,7 @@ void showCollectMeasurementsDialog(bool* collectMeasurements, char file_folder_p
 		ImGui::SameLine();
 		int step = 1;
 		ImGui::PushItemWidth(100);
-		ImGui::InputScalar("Sample time for logging", ImGuiDataType_U16, &sampleTime, &step);
+		ImGui::InputScalar("Sample time for logging in milliseconds", ImGuiDataType_U16, &sampleTime, &step);
 		ImGui::PopItemWidth();
 		std::string filePath = std::string("Selected log file:") + std::string(file_folder_path);
 		ImGui::Text(filePath.c_str());
@@ -223,6 +198,32 @@ void showCollectMeasurementsDialog(bool* collectMeasurements, char file_folder_p
 					updateVectorsForPlot(DI, showSamplesInPlot, DI_LENGTH, calibratedDI);
 					updateVectorsForPlot(IC, showSamplesInPlot, IC_LENGTH, calibratedIC);
 					updateVectorsForPlot(E, showSamplesInPlot, E_LENGTH, calibratedE);
+
+					// Log values
+					std::string header = currentISO8601Time() + "," + std::to_string(sampleTime) + ",";
+					for (int i = 0; i < ADC_LENGTH; i++) {
+						header += std::to_string(ADC[i].back()) + std::to_string(i) + std::string(", "); // Analog to digital converter
+					}
+					for (int i = 0; i < PWM_LENGTH; i++) {
+						header += std::to_string(PWM[i].back()) + std::to_string(i) + std::string(", "); // Pulse widt modulation
+					}
+					for (int i = 0; i < DAC_LENGTH; i++) {
+						header += std::to_string(DAC[i].back()) + std::to_string(i) + std::string(", "); // Digital to analog converter
+					}
+					for (int i = 0; i < DADC_LENGTH; i++) {
+						header += std::to_string(DADC[i].back()) + std::to_string(i) + std::string(", "); // Differential ADC
+					}
+					for (int i = 0; i < DI_LENGTH; i++) {
+						header += std::to_string(DI[i].back()) + std::to_string(i) + std::string(", "); // Digital input
+					}
+					for (int i = 0; i < IC_LENGTH; i++) {
+						header += std::to_string(IC[i].back()) + std::to_string(i) + std::string(", "); // Input capture
+					}
+					for (int i = 0; i < E_LENGTH - 1; i++) {
+						header += std::to_string(E[i].back()) + std::to_string(i) + std::string(", "); // Encoder
+					}
+					header += std::to_string(E[E_LENGTH - 1].back()) + std::to_string(E_LENGTH - 1) + "\n";
+					logFile << header;
 				}
 
 				// Reset the time difference sum
@@ -231,20 +232,17 @@ void showCollectMeasurementsDialog(bool* collectMeasurements, char file_folder_p
 
 			// Show plots
 			ImGui::BeginChild("groupBoxPlots", ImVec2(0, 0), true);
-			int popIndex = 0;
-			popIndex = createMeasurementPlots(ADC, "ADC", enableADC, adcMin.data(), adcMax.data(), ADC_LENGTH, popIndex);
-			popIndex = createMeasurementPlots(DADC, "DADC", enableDADC, dadcMin.data(), dadcMax.data(), DADC_LENGTH, popIndex);
-			popIndex = createMeasurementPlots(DAC, "DAC", enableDAC, dacMin.data(), dacMax.data(), DAC_LENGTH, popIndex, true, controlDAC, getMinCalibrationDAC().data(), getMaxCalibrationDAC().data());
-			popIndex = createMeasurementPlots(PWM, "PWM", enablePWM, pwmMin.data(), pwmMax.data(), PWM_LENGTH, popIndex, true, controlPWM, getMinCalibrationPWM().data(), getMaxCalibrationPWM().data());
-			popIndex = createMeasurementPlots(DI, "DI", enableDI, diMin.data(), diMax.data(), DI_LENGTH, popIndex);
-			popIndex = createMeasurementPlots(IC, "IC", enableIC, icMin.data(), icMax.data(), IC_LENGTH, popIndex);
-			popIndex = createMeasurementPlots(E, "E", enableE, eMin.data(), eMax.data(), E_LENGTH, popIndex);
+			createMeasurementPlots(ADC, "ADC", enableADC, ADC_LENGTH);
+			createMeasurementPlots(DADC, "DADC", enableDADC, DADC_LENGTH);
+			createMeasurementPlots(DAC, "DAC", enableDAC, DAC_LENGTH, true, getMinCalibrationDAC().data(), getMaxCalibrationDAC().data(), controlDAC);
+			createMeasurementPlots(PWM, "PWM", enablePWM, PWM_LENGTH, true, getMinCalibrationPWM().data(), getMaxCalibrationPWM().data(), controlPWM);
+			createMeasurementPlots(DI, "DI", enableDI, DI_LENGTH);
+			createMeasurementPlots(IC, "IC", enableIC, IC_LENGTH);
+			createMeasurementPlots(E, "E", enableE, E_LENGTH);
 			ImGui::EndChild();
 
-			// TODO: Börja med loggning
-			logFile << std::to_string(showSamplesInPlot) + "\n";
-	
-		}else {
+		}
+		else {
 			// Clear all plots
 			ADC->clear();
 			DADC->clear();
@@ -260,12 +258,14 @@ void showCollectMeasurementsDialog(bool* collectMeasurements, char file_folder_p
 		if (ImGui::Button("Close")) {
 			*collectMeasurements = false;
 		}
-	}else if (!isConnectedToUSB() && logFileExist) {
+	}
+	else if (!isConnectedToUSB() && logFileExist) {
 		ImGui::Text("You need to be connected to the USB");
 		if (ImGui::Button("Close")) {
 			*collectMeasurements = false;
 		}
-	}else {
+	}
+	else {
 		ImGui::Text("You need to be connected to the USB");
 		ImGui::Text("You need to select a measurement file");
 		if (ImGui::Button("Close")) {
@@ -307,7 +307,7 @@ void showCollectMeasurementsDialog(bool* collectMeasurements, char file_folder_p
 	}
 }
 
-void createCheckBoxes(const char pheferialName[], bool enable[], const int lengthOfArray) {
+inline void createCheckBoxes(const char pheferialName[], bool enable[], const int lengthOfArray) {
 	for (int i = 0; i < lengthOfArray; i++) {
 		std::string text = std::string(pheferialName) + std::to_string(i);
 		ImGui::Checkbox(text.data(), &enable[i]);
@@ -316,50 +316,26 @@ void createCheckBoxes(const char pheferialName[], bool enable[], const int lengt
 	ImGui::NewLine();
 }
 
-int createMeasurementPlots(std::vector<float> lineChart[], const char pheferialName[], bool enable[], float minValue[], float maxValue[], int dimensionOfVector, int popIndexBegin, bool isControlOutput, float slider[], float minSliderValue[], float maxSliderValue[]) {
-	int popIndex = popIndexBegin;
+inline void createMeasurementPlots(std::vector<float> lineChart[], const char pheferialName[], bool enable[], int dimensionOfVector, bool isControlOutput, float minValue[], float maxValue[], float slider[]) {
 	for (int i = 0; i < dimensionOfVector; i++) {
 		// Show plot if enabled
 		if (enable[i]) {
-
-			// Create the plot
-			std::string text = std::string(pheferialName) + std::to_string(i);
-			ImGui::PlotLines(text.data(), lineChart[i].data(), lineChart[i].size(), 0, "", minValue[i], maxValue[i], ImVec2(0, 100.0f));
-			
-			// Create table
-			ImGui::SameLine();
-			ImGui::BeginTable("Min & Max", 2, ImGuiTableFlags_RowBg | ImGuiTableFlags_Borders | ImGuiTableFlags_BordersH | ImGuiTableFlags_BordersOuterH | ImGuiTableFlags_BordersInnerH | ImGuiTableFlags_BordersV | ImGuiTableFlags_BordersOuterV | ImGuiTableFlags_BordersInnerV | ImGuiTableFlags_BordersOuter | ImGuiTableFlags_BordersInner | ImGuiTableFlags_NoHostExtendX);
-			ImGui::TableSetupColumn("Min");
-			ImGui::TableSetupColumn("Max");
-			ImGui::TableHeadersRow();
-			ImGui::TableNextRow();
-
-			// Fill the cells for min
-			ImGui::TableSetColumnIndex(0);
-			ImGui::PushID(popIndex++);
-			ImGui::InputFloat("", &minValue[i]);
-			ImGui::PopID();
-
-			// Fill the cells for max
-			ImGui::TableSetColumnIndex(1);
-			ImGui::PushID(popIndex++);
-			ImGui::InputFloat("", &maxValue[i]);
-			ImGui::PopID();
-			ImGui::EndTable();
+			// Create the plot - Variable size
+			std::string text = std::string(pheferialName) + std::to_string(i) + " value:" + std::to_string(lineChart[i].back());
+			float minPlotSize = *min_element(lineChart[i].begin(), lineChart[i].end());
+			float maxPlotSize = *max_element(lineChart[i].begin(), lineChart[i].end());
+			ImGui::PlotLines(text.data(), lineChart[i].data(), lineChart[i].size(), 0, "", minPlotSize, maxPlotSize, ImVec2(0, 100.0f));
 
 			// Slider for control at a new line
 			if (isControlOutput) {
-				ImGui::SliderFloat(text.c_str(), &slider[i], minSliderValue[i], maxSliderValue[i]);
+				text = "Control output for: " + std::string(pheferialName) + std::to_string(i);
+				ImGui::SliderFloat(text.c_str(), &slider[i], minValue[i], maxValue[i]);
 			}
-			
 		}
 	}
-
-	// This is for the input fields
-	return popIndex;
 }
 
-void updateVectorsForPlot(std::vector<float> lineChart[], int showSamplesInPlot, int dimensionOfVector, float calibratedArray[]) {
+inline void updateVectorsForPlot(std::vector<float> lineChart[], int showSamplesInPlot, int dimensionOfVector, float calibratedArray[]) {
 	for (int i = 0; i < dimensionOfVector; i++) {
 		// Compute the difference
 		int difference = lineChart[i].size() - showSamplesInPlot;
@@ -374,8 +350,9 @@ void updateVectorsForPlot(std::vector<float> lineChart[], int showSamplesInPlot,
 				difference = lineChart[i].size() - showSamplesInPlot;
 			}
 		}
-		
+
 		// Add a new sample
 		lineChart[i].push_back(calibratedArray[i]);
 	}
 }
+

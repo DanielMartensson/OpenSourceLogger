@@ -123,6 +123,21 @@
     <ClCompile Include="Hardware\USB\Protocols\OpenSourceLogger\OpenSAEJ1939\SAE_J1939\SAE_J1939-81_Network_Management_Layer\Commanded_Address.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Windows\Dialogs\ConfigurationSTM32PLCDialog\ConfigurationSTM32PLCDialog.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Windows\Dialogs\UploadMeasurementToDatabaseDialog\UploadMeasurementToDatabaseDialog.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Hardware\Tools\TimeConverter.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Windows\Dialogs\ViewMeasurementsFromDatabaseDialog\ViewMeasurementsFromDatabaseDialog.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Windows\Dialogs\SAEJ1939Dialog\SAEJ1939Dialog.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Windows\Windows.h">
@@ -195,6 +210,21 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Hardware\USB\Protocols\OpenSourceLogger\OpenSAEJ1939\SAE_J1939\SAE_J1939-81_Network_Management_Layer\Network_Management_Layer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Windows\Dialogs\ConfigurationSTM32PLCDialog\ConfigurationSTM32PLCDialog.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Windows\Dialogs\UploadMeasurementToDatabaseDialog\UploadMeasurementToDatabaseDialog.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Hardware\Tools\TimeConverter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Windows\Dialogs\ViewMeasurementsFromDatabaseDialog\ViewMeasurementsFromDatabaseDialog.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Windows\Dialogs\SAEJ1939Dialog\SAEJ1939Dialog.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

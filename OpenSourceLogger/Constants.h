@@ -10,7 +10,10 @@
 #define E_LENGTH 3
 #define PWM_LENGTH 8
 #define IC_LENGTH 4
-#define PWM_PRESCALER 3
+#define ALL_MEASUREMENT_LENGTH ADC_LENGTH + DADC_LENGTH + DAC_LENGTH + DI_LENGTH + E_LENGTH + PWM_LENGTH + IC_LENGTH
+
+// For the settings
+#define PWM_PRESCALER 2
 #define ANALOG_GAIN 3
 
 // For the CAN Bus

@@ -15,7 +15,7 @@
 #define AVR 4
 #define QT_USB 5
 #define INTERNAL_CALLBACK 6
-#define PROCESSOR_CHOICE 6
+#define PROCESSOR_CHOICE INTERNAL_CALLBACK
 
 /* C Standard library */
 #include <stdbool.h>
