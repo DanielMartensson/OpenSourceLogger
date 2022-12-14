@@ -10,6 +10,7 @@
 	- boost-asio:x64-windows
 	- mysql-connector-cpp:x64-windows
 	- nlohmann-json:x64-windows
+	- stb:x64-windows
 */
 
 

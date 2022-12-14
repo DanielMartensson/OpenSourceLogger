@@ -9,10 +9,10 @@ bool connectedToDatabase = false;
 inline std::string getQueryForCreateJobTable(const char tableName[]);
 inline void createJobTable(const char tableName[]);
 inline void createMeasurementTable(const char tableName[]);
-inline bool createDatabaseSchema(char schemaName[]);
-inline void useDatabaseSchema(char schemaName[]);
+inline bool createDatabaseSchema(const char schemaName[]);
+inline void useDatabaseSchema(const char schemaName[]);
 
-bool openDatabaseConnection(char host[], int port, char username[], char password[], char schemaName[]) {
+bool openDatabaseConnection(const char host[], int port, const char username[], const char password[], const char schemaName[]) {
 	try {
 		// Create connection and schema
 		connection = new mysqlx::Session(mysqlx::SessionOption::HOST, host, mysqlx::SessionOption::PORT, port, mysqlx::SessionOption::USER, username, mysqlx::SessionOption::PWD, password);
@@ -44,11 +44,11 @@ bool isConnectedToDatabase() {
 	return connectedToDatabase;
 }
 
-inline void useDatabaseSchema(char schemaName[]) {
+inline void useDatabaseSchema(const char schemaName[]) {
 	connection->sql("USE " + std::string(schemaName)).execute();
 }
 
-inline bool createDatabaseSchema(char schemaName[]) {
+inline bool createDatabaseSchema(const char schemaName[]) {
 	// Check if schema exist
 	if (!connection->getSchema(schemaName).existsInDatabase()) {
 		// Create schema
@@ -67,7 +67,7 @@ inline bool createDatabaseSchema(char schemaName[]) {
 	return isConnectedToDatabase();
 }
 
-void dropDatabaseSchema(char schemaName[]) {
+void dropDatabaseSchema(const char schemaName[]) {
 	connection->dropSchema(schemaName);
 }
 
@@ -89,7 +89,7 @@ std::vector<long> getDatabaseMeasurementIDListForCombo(const char tableName[]) {
 	std::vector<long> measurementIDList;
 	if (isConnectedToDatabase()) {
 		// Select only last row
-		std::string query = "SELECT DISTINCT measurement_id FROM " + std::string(tableName) + " ORDER BY measurement_id DESC";
+		std::string query = "SELECT DISTINCT measurement_id FROM " + std::string(tableName) + " ORDER BY measurement_id";
 		mysqlx::SqlResult result = connection->sql(query).execute();
 		mysqlx::Row row = result.fetchOne();
 		while (row) {
@@ -276,7 +276,7 @@ std::vector<std::vector<std::string>> getAllDatabaseValues(const char tableName[
 						minute = first[5];
 						second = first[6];
 						microsecond = (first[10] << 21) | (first[9] << 14) | (first[8] << 7) | (first[7] & 0x7f);
-						sprintf(text, "%i-%i-%i %i:%i:%i.%i", year, month, date, hour, minute, second, microsecond);
+						sprintf_s(text, "%i-%i-%i %i:%i:%i.%i", year, month, date, hour, minute, second, microsecond);
 						values.push_back(text);
 						break;
 					default:

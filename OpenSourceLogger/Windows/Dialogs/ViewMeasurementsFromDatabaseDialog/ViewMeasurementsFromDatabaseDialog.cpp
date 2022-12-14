@@ -16,7 +16,6 @@ inline void updateJobTable();
 std::vector<std::vector<float>> measurementTableValues;
 std::vector<std::vector<std::string>> databaseValues;
 std::vector<std::vector<std::string>> jobTableValues2;
-int selectedRowIndex;
 
 void showViewMeasurementFromDatabaseDialog(bool* measurementsFromDatabase) {
 	ImGui::SetNextWindowSize(ImVec2(850.0f, 850.0f));
@@ -141,7 +140,6 @@ void showViewMeasurementFromDatabaseDialog(bool* measurementsFromDatabase) {
 		if (ImGui::Button("Delete data") && jobTableValues2.size() > 0) {
 			deleteDataFromDatabase(MEASUREMENT_TABLE, JOB_TABLE, measurementID, offsetPlot, samplesPlot);
 			updateJobTable();
-			selectedRowIndex = 0;
 		}
 
 		// Show plots
@@ -206,6 +204,7 @@ inline void createMeasurementPlots(std::vector<float> lineChart[], const char ph
 
 inline int createJobTable(const char tableID[], std::vector<std::vector<std::string>> table, int offset) {
 	long rowSize = table.size();
+	static int selectedRowIndex = 0;
 	if (rowSize > 0) {
 		long columnSize = table.at(0).size();
 		if (ImGui::BeginTable(tableID, columnSize, ImGuiTableFlags_NoHostExtendX | ImGuiTableFlags_NoHostExtendY | ImGuiTableFlags_ScrollX | ImGuiTableFlags_RowBg | ImGuiTableFlags_Borders | ImGuiTableFlags_BordersH | ImGuiTableFlags_BordersOuterH | ImGuiTableFlags_BordersInnerH | ImGuiTableFlags_BordersV | ImGuiTableFlags_BordersOuterV | ImGuiTableFlags_BordersInnerV | ImGuiTableFlags_BordersOuter | ImGuiTableFlags_BordersInner | ImGuiTableFlags_Resizable)) {
@@ -228,6 +227,11 @@ inline int createJobTable(const char tableID[], std::vector<std::vector<std::str
 					}
 				}
 				rowIndex++;
+			}
+
+			// If not selected
+			if (!isSelected) {
+				selectedRowIndex = 0;
 			}
 			ImGui::EndTable();
 		}

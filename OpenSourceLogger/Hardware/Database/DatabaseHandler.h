@@ -8,10 +8,10 @@
 #define MEASUREMENT_TABLE "measurement_table"
 #define JOB_TABLE "job_table"
 
-bool openDatabaseConnection(char host[], int port, char username[], char password[], char schemaName[]);
+bool openDatabaseConnection(const char host[], int port, const char username[], const char password[], const char schemaName[]);
 bool closeDatabaseConnection();
 bool isConnectedToDatabase();
-void dropDatabaseSchema(char schemaName[]);
+void dropDatabaseSchema(const char schemaName[]);
 long getDatabaseLatestMeasurementID(const char tableName[]);
 std::vector<long> getDatabaseMeasurementIDListForCombo(const char tableName[]);
 std::vector<std::string> getDatabaseColumnNames(const char tableName[]);

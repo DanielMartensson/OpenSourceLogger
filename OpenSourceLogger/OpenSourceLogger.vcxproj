@@ -56,6 +56,7 @@
     <ClCompile Include="Windows\Dialogs\CollectMeasurementsDialog\CollectMeasurementsDialog.cpp" />
     <ClCompile Include="Windows\Dialogs\ConnectDialog\ConnectDialog.cpp" />
     <ClCompile Include="Windows\Dialogs\FileDialog\FileDialog.cpp" />
+    <ClCompile Include="Windows\Dialogs\PinMapOfSTM32PLCDialog\PinMapOfSTM32PLCDialog.cpp" />
     <ClCompile Include="Windows\Dialogs\SAEJ1939Dialog\SAEJ1939Dialog.cpp" />
     <ClCompile Include="Windows\Dialogs\UploadMeasurementToDatabaseDialog\UploadMeasurementToDatabaseDialog.cpp" />
     <ClCompile Include="Windows\Dialogs\ViewMeasurementsFromDatabaseDialog\ViewMeasurementsFromDatabaseDialog.cpp" />
@@ -87,6 +88,7 @@
     <ClInclude Include="Windows\Dialogs\CollectMeasurementsDialog\CollectMeasurementsDialog.h" />
     <ClInclude Include="Windows\Dialogs\ConnectDialog\ConnectDialog.h" />
     <ClInclude Include="Windows\Dialogs\FileDialog\FileDialog.h" />
+    <ClInclude Include="Windows\Dialogs\PinMapOfSTM32PLCDialog\PinMapOfSTM32PLCDialog.h" />
     <ClInclude Include="Windows\Dialogs\SAEJ1939Dialog\SAEJ1939Dialog.h" />
     <ClInclude Include="Windows\Dialogs\UploadMeasurementToDatabaseDialog\UploadMeasurementToDatabaseDialog.h" />
     <ClInclude Include="Windows\Dialogs\ViewMeasurementsFromDatabaseDialog\ViewMeasurementsFromDatabaseDialog.h" />
@@ -200,8 +202,9 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>NDEBUG;_CONSOLE;_SILENCE_ALL_CXX17_DEPRECATION_WARNINGS;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>

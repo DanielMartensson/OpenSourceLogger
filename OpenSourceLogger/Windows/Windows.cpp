@@ -5,6 +5,7 @@
 #include "Dialogs/ConnectDialog/ConnectDialog.h"
 #include "Dialogs/SAEJ1939Dialog/SAEJ1939Dialog.h"
 #include "Dialogs/CalibrationDialog/CalibrationDialog.h"
+#include "Dialogs/PinMapOfSTM32PLCDialog/PinMapOfSTM32PLCDialog.h"
 #include "Dialogs/CollectMeasurementsDialog/CollectMeasurementsDialog.h"
 #include "Dialogs/ConfigurationSTM32PLCDialog/ConfigurationSTM32PLCDialog.h"
 #include "Dialogs/UploadMeasurementToDatabaseDialog/UploadMeasurementToDatabaseDialog.h"
@@ -22,7 +23,6 @@ bool collectMeasurements = false;
 bool measurementsFromDatabase = false;
 bool saeJ1939OtherECU = false;
 bool saeJ1939ThisECU = false;
-bool manualOfOpenSourceLogger = false;
 bool pinMapOfSTM32PLC = false;
 
 // Window properties
@@ -92,10 +92,6 @@ void showMainWindow(bool* show_main_window) {
 	}
 
 	if (ImGui::CollapsingHeader("Help")) {
-		if (ImGui::Button("Manual of OpenSourceLogger")) {
-			manualOfOpenSourceLogger = true;
-		}
-		ImGui::SameLine();
 		if (ImGui::Button("Pin map of STM32PLC")) {
 			pinMapOfSTM32PLC = true;
 		}
@@ -149,5 +145,9 @@ void showDialogWindows() {
 	if (saeJ1939ThisECU) {
 		// Open view SAE J1939 window for this ECU
 		showSAEJ1939ThisECUView(&saeJ1939ThisECU, &j1939);
+	}
+	if (pinMapOfSTM32PLC) {
+		// Show pin map of STM32PLC
+		showPinMapOfSTM32PLCDialog(&pinMapOfSTM32PLC);
 	}
 }

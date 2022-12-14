@@ -147,11 +147,11 @@ void showDatabaseConnectionDialog(bool* connectToDatabase) {
 	ImGui::Text(status);
 
 	// Input fields - Default values
-	static std::string host = "127.0.0.1";
-	static std::string schema = "opensourcelogger";
+	static char host[50] = "127.0.0.1";
+	static char schema[50] = "opensourcelogger";
 	static int port = 33060;
-	static std::string username = "myUser";
-	static std::string password = "myPassword";
+	static char username[50] = "myUser";
+	static char password[50] = "myPassword";
 	static bool fieldsHasBeenLoaded = false;
 
 	// Read only once
@@ -165,11 +165,11 @@ void showDatabaseConnectionDialog(bool* connectToDatabase) {
 			nlohmann::json j = nlohmann::json::parse(jsonLine);
 
 			// Sort it out
-			host = j["host"].get<std::string>();
-			schema = j["schema"].get<std::string>();
+			memcpy(host, j["host"].get<std::string>().c_str(), j["host"].get<std::string>().length());
+			memcpy(schema, j["schema"].get<std::string>().c_str(), j["schema"].get<std::string>().length());
+			memcpy(username, j["username"].get<std::string>().c_str(), j["username"].get<std::string>().length());
+			memcpy(password, j["password"].get<std::string>().c_str(), j["password"].get<std::string>().length());
 			port = j["port"].get<int>();
-			username = j["username"].get<std::string>();
-			password = j["password"].get<std::string>();
 		}
 		connectionFields.close();
 
@@ -178,11 +178,11 @@ void showDatabaseConnectionDialog(bool* connectToDatabase) {
 	}
 
 	// Display input fields
-	ImGui::InputText("Host", host.data(), 50, ImGuiInputTextFlags_CharsNoBlank);
-	ImGui::InputText("Schema", schema.data(), 50, ImGuiInputTextFlags_CharsNoBlank);
+	ImGui::InputText("Host", host, sizeof(host), ImGuiInputTextFlags_CharsNoBlank);
+	ImGui::InputText("Schema", schema, sizeof(schema), ImGuiInputTextFlags_CharsNoBlank);
 	ImGui::InputInt("Port", &port);
-	ImGui::InputText("Username", username.data(), 50, ImGuiInputTextFlags_CharsNoBlank);
-	ImGui::InputText("Password", password.data(), 50, ImGuiInputTextFlags_Password | ImGuiInputTextFlags_CharsNoBlank);
+	ImGui::InputText("Username", username, sizeof(username), ImGuiInputTextFlags_CharsNoBlank);
+	ImGui::InputText("Password", password, sizeof(password), ImGuiInputTextFlags_Password | ImGuiInputTextFlags_CharsNoBlank);
 
 	// Center for popup
 	ImVec2 center(ImGui::GetWindowPos().x + ImGui::GetWindowSize().x * 0.5f, ImGui::GetWindowPos().y + ImGui::GetWindowSize().y * 0.5f);
@@ -197,7 +197,7 @@ void showDatabaseConnectionDialog(bool* connectToDatabase) {
 
 	// Connect button
 	if (ImGui::Button("Connect")) {
-		if (openDatabaseConnection(host.data(), port, username.data(), password.data(), schema.data())) {
+		if (openDatabaseConnection(host, port, username, password, schema)) {
 			// Save Json
 			nlohmann::json j;
 			j["host"] = host;
@@ -280,7 +280,7 @@ void showDatabaseConnectionDialog(bool* connectToDatabase) {
 	ImGui::SetNextWindowPos(center, ImGuiCond_Appearing, ImVec2(0.5f, 0.5f));
 	if (ImGui::BeginPopup("DeleteSchema", ImGuiWindowFlags_Modal)) {
 		char text[100];
-		sprintf_s(text, "Do you want to delete the schema name: %s", schema.data());
+		sprintf_s(text, "Do you want to delete the schema name: %s", schema);
 		ImGui::Text(text);
 		static bool deleteSchemaConfirm;
 		ImGui::Checkbox("Yes, I want to delete the schema", &deleteSchemaConfirm);
@@ -290,7 +290,7 @@ void showDatabaseConnectionDialog(bool* connectToDatabase) {
 		ImGui::SameLine();
 		if (deleteSchemaConfirm) {
 			if (ImGui::Button("Delete now")) {
-				dropDatabaseSchema(schema.data());
+				dropDatabaseSchema(schema);
 				closeDatabaseConnection();
 				ImGui::CloseCurrentPopup();
 				deleteSchemaConfirm = false;

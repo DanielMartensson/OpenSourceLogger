@@ -42,7 +42,7 @@ void showConfigurationSTM32PLCDialog(bool* configureSTM32PLC) {
 		uint16_t prescalersPWM[2] = { 0 };
 		getPwmPrescalers(prescalersPWM);
 		char text[100];
-		sprintf(text, "Prescaler PWM0 to PWM3 = %i, PWM4 to PWM7 = %i", prescalersPWM[0], prescalersPWM[1]);
+		sprintf_s(text, "Prescaler PWM0 to PWM3 = %i, PWM4 to PWM7 = %i", prescalersPWM[0], prescalersPWM[1]);
 		ImGui::Text(text);
 		ImGui::EndChild();
 
@@ -104,7 +104,7 @@ void showConfigurationSTM32PLCDialog(bool* configureSTM32PLC) {
 		}
 		uint8_t analogGain[3] = { 0 };
 		getAnalogGain(analogGain);
-		sprintf(text, "Gain for configuration 0 = %i, Gain for configuration 1 = %i, Gain for configuration 2 = %i", analogGain[0], analogGain[1], analogGain[2]);
+		sprintf_s(text, "Gain for configuration 0 = %i, Gain for configuration 1 = %i, Gain for configuration 2 = %i", analogGain[0], analogGain[1], analogGain[2]);
 		ImGui::Text(text);
 		ImGui::EndChild();
 
@@ -165,7 +165,7 @@ void showConfigurationSTM32PLCDialog(bool* configureSTM32PLC) {
 		}
 		uint8_t year_, month_, date_, hour_, minute_;
 		getDateTime(&year_, &month_, &date_, &hour_, &minute_);
-		sprintf(text, "Date time: %i-%i-%i %i:%i", year_+2000, month_, date_, hour_, minute_);
+		sprintf_s(text, "Date time: %i-%i-%i %i:%i", year_+2000, month_, date_, hour_, minute_);
 		ImGui::Text(text);
 		ImGui::EndChild();
 
@@ -209,7 +209,7 @@ void showConfigurationSTM32PLCDialog(bool* configureSTM32PLC) {
 		}
 		uint8_t enabledAlarmA_, activatedAlarmA_, dateAlarmA_, hourAlarmA_, minuteAlarmA_;
 		getAlarmA(&enabledAlarmA_, &activatedAlarmA_, &dateAlarmA_, &hourAlarmA_, &minuteAlarmA_);
-		sprintf(text, "Alarm A(%s, %s): Date:%i Time:%i:%i", enabledAlarmA_ == 1 ? "enabled" : "disabled", activatedAlarmA_ == 1 ? "activated" : "deactivated", dateAlarmA_, hourAlarmA_, minuteAlarmA_);
+		sprintf_s(text, "Alarm A(%s, %s): Date:%i Time:%i:%i", enabledAlarmA_ == 1 ? "enabled" : "disabled", activatedAlarmA_ == 1 ? "activated" : "deactivated", dateAlarmA_, hourAlarmA_, minuteAlarmA_);
 		ImGui::Text(text);
 		ImGui::EndChild();
 
@@ -253,7 +253,7 @@ void showConfigurationSTM32PLCDialog(bool* configureSTM32PLC) {
 		}
 		uint8_t enabledAlarmB_, activatedAlarmB_, weekDayAlarmB_, hourAlarmB_, minuteAlarmB_;
 		getAlarmB(&enabledAlarmB_, &activatedAlarmB_, &weekDayAlarmB_, &hourAlarmB_, &minuteAlarmB_);
-		sprintf(text, "Alarm B(%s, %s): Weekday:%i Time:%i:%i", enabledAlarmB_ == 1 ? "enabled" : "disabled", activatedAlarmB_ == 1 ? "activated" : "deactivated", weekDayAlarmB_, hourAlarmB_, minuteAlarmB_);
+		sprintf_s(text, "Alarm B(%s, %s): Weekday:%i Time:%i:%i", enabledAlarmB_ == 1 ? "enabled" : "disabled", activatedAlarmB_ == 1 ? "activated" : "deactivated", weekDayAlarmB_, hourAlarmB_, minuteAlarmB_);
 		ImGui::Text(text);
 		ImGui::EndChild();
 

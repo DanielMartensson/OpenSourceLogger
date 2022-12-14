@@ -138,6 +138,9 @@
     <ClCompile Include="Windows\Dialogs\SAEJ1939Dialog\SAEJ1939Dialog.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Windows\Dialogs\PinMapOfSTM32PLCDialog\PinMapOfSTM32PLCDialog.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Windows\Windows.h">
@@ -225,6 +228,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Windows\Dialogs\SAEJ1939Dialog\SAEJ1939Dialog.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Windows\Dialogs\PinMapOfSTM32PLCDialog\PinMapOfSTM32PLCDialog.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
