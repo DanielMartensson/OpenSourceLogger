@@ -1,22 +1,39 @@
-﻿  SAEJ1939Dialog.cpp
+﻿  DatabaseHandler.cpp
   Please define _WIN32_WINNT or _WIN32_WINDOWS appropriately. For example:
   - add -D_WIN32_WINNT=0x0601 to the compiler command line; or
   - add _WIN32_WINNT=0x0601 to your project's Preprocessor Definitions.
   Assuming _WIN32_WINNT=0x0601 (i.e. Windows 7 target).
-C:\Users\dmn\GitHub\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\SAEJ1939Dialog\SAEJ1939Dialog.cpp(134,93): warning C4244: '+=': conversion from '_Rep' to 'long', possible loss of data
+C:\Users\dmn\GitHub\OpenSourceLogger\OpenSourceLogger\Hardware\Database\DatabaseHandler.cpp(82,45): warning C4244: '=': conversion from 'uint64_t' to 'long', possible loss of data
+C:\Users\dmn\GitHub\OpenSourceLogger\OpenSourceLogger\Hardware\Database\DatabaseHandler.cpp(96,23): warning C4244: 'initializing': conversion from 'uint64_t' to 'int', possible loss of data
+C:\Users\dmn\GitHub\OpenSourceLogger\OpenSourceLogger\Hardware\Database\DatabaseHandler.cpp(122,31): warning C4267: 'initializing': conversion from 'size_t' to 'long', possible loss of data
+C:\Users\dmn\GitHub\OpenSourceLogger\OpenSourceLogger\Hardware\Database\DatabaseHandler.cpp(124,41): warning C4267: 'initializing': conversion from 'size_t' to 'long', possible loss of data
+C:\Users\dmn\GitHub\OpenSourceLogger\OpenSourceLogger\Hardware\Database\DatabaseHandler.cpp(161,31): warning C4244: '=': conversion from 'uint64_t' to 'long', possible loss of data
+C:\Users\dmn\GitHub\OpenSourceLogger\OpenSourceLogger\Hardware\Database\DatabaseHandler.cpp(164,30): warning C4244: '=': conversion from 'int64_t' to 'long', possible loss of data
+C:\Users\dmn\GitHub\OpenSourceLogger\OpenSourceLogger\Hardware\Database\DatabaseHandler.cpp(186,34): warning C4244: '=': conversion from 'uint64_t' to 'long', possible loss of data
+C:\Users\dmn\GitHub\OpenSourceLogger\OpenSourceLogger\Hardware\Database\DatabaseHandler.cpp(189,33): warning C4244: '=': conversion from 'int64_t' to 'long', possible loss of data
+C:\Users\dmn\GitHub\OpenSourceLogger\OpenSourceLogger\Hardware\Database\DatabaseHandler.cpp(338,44): warning C4244: 'argument': conversion from 'uint64_t' to '_Ty', possible loss of data
           with
           [
-              _Rep=__int64
+              _Ty=float
           ]
-C:\Users\dmn\GitHub\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\SAEJ1939Dialog\SAEJ1939Dialog.cpp(174,93): warning C4244: '+=': conversion from '_Rep' to 'long', possible loss of data
+C:\Users\dmn\GitHub\OpenSourceLogger\OpenSourceLogger\Hardware\Database\DatabaseHandler.cpp(341,43): warning C4244: 'argument': conversion from 'int64_t' to '_Ty', possible loss of data
           with
           [
-              _Rep=__int64
+              _Ty=float
           ]
-C:\Users\dmn\GitHub\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\SAEJ1939Dialog\SAEJ1939Dialog.cpp(436,29): warning C4018: '<': signed/unsigned mismatch
-C:\Users\dmn\GitHub\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\SAEJ1939Dialog\SAEJ1939Dialog.cpp(439,29): warning C4018: '>': signed/unsigned mismatch
+  ViewMeasurementsFromDatabaseDialog.cpp
+C:\Users\dmn\GitHub\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\FileDialog\FileDialog.h(1,1): warning C4005: '_CRT_SECURE_NO_WARNINGS': macro redefinition
+C:\Users\dmn\GitHub\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\FileDialog\FileDialog.h(1,1): message : '_CRT_SECURE_NO_WARNINGS' previously declared on the command line
+C:\Users\dmn\GitHub\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\ViewMeasurementsFromDatabaseDialog\ViewMeasurementsFromDatabaseDialog.cpp(61,39): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\dmn\GitHub\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\ViewMeasurementsFromDatabaseDialog\ViewMeasurementsFromDatabaseDialog.cpp(76,62): warning C4267: 'initializing': conversion from 'size_t' to 'long', possible loss of data
+C:\Users\dmn\GitHub\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\ViewMeasurementsFromDatabaseDialog\ViewMeasurementsFromDatabaseDialog.cpp(125,40): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\dmn\GitHub\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\ViewMeasurementsFromDatabaseDialog\ViewMeasurementsFromDatabaseDialog.cpp(127,50): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\dmn\GitHub\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\ViewMeasurementsFromDatabaseDialog\ViewMeasurementsFromDatabaseDialog.cpp(182,45): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\dmn\GitHub\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\ViewMeasurementsFromDatabaseDialog\ViewMeasurementsFromDatabaseDialog.cpp(200,126): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\dmn\GitHub\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\ViewMeasurementsFromDatabaseDialog\ViewMeasurementsFromDatabaseDialog.cpp(206,29): warning C4267: 'initializing': conversion from 'size_t' to 'long', possible loss of data
+C:\Users\dmn\GitHub\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\ViewMeasurementsFromDatabaseDialog\ViewMeasurementsFromDatabaseDialog.cpp(209,39): warning C4267: 'initializing': conversion from 'size_t' to 'long', possible loss of data
   Generating code
-  2 of 4825 functions (<0.1%) were compiled, the rest were copied from previous compilation.
+  3 of 4825 functions (<0.1%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
     15 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
