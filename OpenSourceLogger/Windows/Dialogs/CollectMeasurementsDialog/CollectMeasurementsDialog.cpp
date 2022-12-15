@@ -8,8 +8,6 @@
 #include "../CalibrationDialog/CalibrationDialog.h"
 #include "../../../Hardware/Tools/TimeConverter.h"
 
-#define PLOT_SETTING_FIELDS_JSON "Windows/Dialogs/CollectMeasurementsDialog/plotSettingFields.json"
-
 inline void createCheckBoxes(const char pheferialName[], bool enable[], const int lengthOfArray);
 inline void createMeasurementPlots(std::vector<float> lineChart[], const char pheferialName[], bool enable[], int dimensionOfVector, bool isControlOutput = false, float minValue[] = nullptr, float maxValue[] = nullptr, float slider[] = nullptr);
 inline void updateVectorsForPlot(std::vector<float> lineChart[], int showSamplesInPlot, int dimensionOfVector, float calibratedArray[]);

@@ -1,2 +1,1 @@
 C:\Users\dmn\VS\OpenSourceLogger\OpenSourceLogger\x64\Debug\OpenSourceLogger.vcxproj.CopyComplete
-C:\Users\dmn\GitHub\OpenSourceLogger\OpenSourceLogger\x64\Debug\OpenSourceLogger.vcxproj.CopyComplete

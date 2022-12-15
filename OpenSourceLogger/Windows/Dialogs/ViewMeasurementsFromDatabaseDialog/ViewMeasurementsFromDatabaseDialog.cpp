@@ -7,8 +7,8 @@
 #include "../FileDialog/FileDialog.h"
 
 inline void createCheckBoxes(const char pheferialName[], bool enable[], const int lengthOfArray);
-inline void loadMeasurements(int offset, int amount, int measurementID);
-inline void loadAllDatabaseValues(int offset, int amount, int measurementID);
+inline void loadMeasurements(int step, int offset, int amount, int measurementID);
+inline void loadAllDatabaseValues(int step, int offset, int amount, int measurementID);
 inline void createMeasurementPlots(std::vector<float> lineChart[], const char pheferialName[], bool enable[], int dimensionOfVector);
 inline void fillMeasurementsVector(std::vector<float> lineChart[], const int dimensionOfVector, const int columnInDatabase);
 inline int createJobTable(const char tableID[], std::vector<std::vector<std::string>> table, int offset);
@@ -98,9 +98,16 @@ void showViewMeasurementFromDatabaseDialog(bool* measurementsFromDatabase) {
 		if (samplesPlot <= 0) {
 			samplesPlot++;
 		}
+		static int step = 1;
+		if (ImGui::InputInt("Step plot:", &step)) {
+			if (step < 1) {
+				step = 1;
+			}
+		}
+
 		if (ImGui::Button("Plot data") && jobTableValues2.size() > 0) {
-			loadMeasurements(offsetPlot, samplesPlot, measurementID);
-			loadAllDatabaseValues(offsetPlot, samplesPlot, measurementID);
+			loadMeasurements(step, offsetPlot, samplesPlot, measurementID);
+			loadAllDatabaseValues(step, offsetPlot, samplesPlot, measurementID);
 			fillMeasurementsVector(ADC, ADC_LENGTH, 0);
 			fillMeasurementsVector(PWM, PWM_LENGTH, ADC_LENGTH);
 			fillMeasurementsVector(DAC, DAC_LENGTH, PWM_LENGTH + ADC_LENGTH);
@@ -166,14 +173,14 @@ inline void createCheckBoxes(const char pheferialName[], bool enable[], const in
 	ImGui::NewLine();
 }
 
-inline void loadMeasurements(int offset, int amount, int measurementID) {
+inline void loadMeasurements(int step, int offset, int amount, int measurementID) {
 	measurementTableValues.clear();
-	measurementTableValues = getMeasurementDatabaseValues(MEASUREMENT_TABLE, measurementID, offset, amount);
+	measurementTableValues = getMeasurementDatabaseValues(MEASUREMENT_TABLE, measurementID, step, offset, amount);
 }
 
-inline void loadAllDatabaseValues(int offset, int amount, int measurementID) {
+inline void loadAllDatabaseValues(int step, int offset, int amount, int measurementID) {
 	databaseValues.clear();
-	databaseValues = getAllDatabaseValues(MEASUREMENT_TABLE, measurementID, offset, amount);
+	databaseValues = getAllDatabaseValues(MEASUREMENT_TABLE, measurementID, step, offset, amount);
 	std::vector<std::string> columnNames = getDatabaseColumnNames(MEASUREMENT_TABLE);
 	databaseValues.insert(databaseValues.begin(), columnNames); // On top
 }

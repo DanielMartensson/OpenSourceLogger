@@ -11,8 +11,7 @@
 #define STB_IMAGE_IMPLEMENTATION
 #define GL_CLAMP_TO_EDGE 0x812F
 #include "stb_image.h"
-
-#define PINMAP_PATH "Windows/Dialogs/PinMapOfSTM32PLCDialog/pinmap.png"
+#include "../../../Constants.h"
 
 bool LoadTextureFromFile(const char* filename, GLuint* out_texture, int* out_width, int* out_height);
 

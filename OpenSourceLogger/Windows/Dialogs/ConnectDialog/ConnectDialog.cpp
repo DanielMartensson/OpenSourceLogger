@@ -7,7 +7,6 @@
 #include "../../../Hardware/Database/DatabaseHandler.h"
 #include "../../../Constants.h"
 
-#define CONNECTION_FIELDS_JSON "Windows/Dialogs/ConnectDialog/connectionFields.json"
 
 inline void create_C_array_for_combo(char array_C[], std::vector<std::string> array) {
 	int index = 0;

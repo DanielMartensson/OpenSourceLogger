@@ -21,12 +21,12 @@ C:\Users\dmn\GitHub\OpenSourceLogger\OpenSourceLogger\Hardware\Database\Database
 C:\Users\dmn\GitHub\OpenSourceLogger\OpenSourceLogger\Hardware\Database\DatabaseHandler.cpp(164,30): warning C4244: '=': conversion from 'int64_t' to 'long', possible loss of data
 C:\Users\dmn\GitHub\OpenSourceLogger\OpenSourceLogger\Hardware\Database\DatabaseHandler.cpp(186,34): warning C4244: '=': conversion from 'uint64_t' to 'long', possible loss of data
 C:\Users\dmn\GitHub\OpenSourceLogger\OpenSourceLogger\Hardware\Database\DatabaseHandler.cpp(189,33): warning C4244: '=': conversion from 'int64_t' to 'long', possible loss of data
-C:\Users\dmn\GitHub\OpenSourceLogger\OpenSourceLogger\Hardware\Database\DatabaseHandler.cpp(338,44): warning C4244: 'argument': conversion from 'uint64_t' to '_Ty', possible loss of data
+C:\Users\dmn\GitHub\OpenSourceLogger\OpenSourceLogger\Hardware\Database\DatabaseHandler.cpp(411,44): warning C4244: 'argument': conversion from 'uint64_t' to '_Ty', possible loss of data
           with
           [
               _Ty=float
           ]
-C:\Users\dmn\GitHub\OpenSourceLogger\OpenSourceLogger\Hardware\Database\DatabaseHandler.cpp(341,43): warning C4244: 'argument': conversion from 'int64_t' to '_Ty', possible loss of data
+C:\Users\dmn\GitHub\OpenSourceLogger\OpenSourceLogger\Hardware\Database\DatabaseHandler.cpp(414,43): warning C4244: 'argument': conversion from 'int64_t' to '_Ty', possible loss of data
           with
           [
               _Ty=float
@@ -58,35 +58,35 @@ C:\Users\dmn\GitHub\OpenSourceLogger\OpenSourceLogger\Hardware\USB\Protocols\Ope
   - add -D_WIN32_WINNT=0x0601 to the compiler command line; or
   - add _WIN32_WINNT=0x0601 to your project's Preprocessor Definitions.
   Assuming _WIN32_WINNT=0x0601 (i.e. Windows 7 target).
+C:\Users\dmn\GitHub\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\CalibrationDialog\CalibrationDialog.cpp(32,133): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\dmn\GitHub\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\CalibrationDialog\CalibrationDialog.cpp(33,128): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
 C:\Users\dmn\GitHub\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\CalibrationDialog\CalibrationDialog.cpp(34,133): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\dmn\GitHub\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\CalibrationDialog\CalibrationDialog.cpp(35,128): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\dmn\GitHub\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\CalibrationDialog\CalibrationDialog.cpp(36,133): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\dmn\GitHub\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\CalibrationDialog\CalibrationDialog.cpp(37,152): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\dmn\GitHub\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\CalibrationDialog\CalibrationDialog.cpp(38,113): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\dmn\GitHub\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\CalibrationDialog\CalibrationDialog.cpp(39,113): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\dmn\GitHub\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\CalibrationDialog\CalibrationDialog.cpp(40,101): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\dmn\GitHub\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\CalibrationDialog\CalibrationDialog.cpp(185,32): warning C4244: '=': conversion from 'float' to 'uint16_t', possible loss of data
-C:\Users\dmn\GitHub\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\CalibrationDialog\CalibrationDialog.cpp(191,32): warning C4244: '=': conversion from 'float' to 'uint16_t', possible loss of data
+C:\Users\dmn\GitHub\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\CalibrationDialog\CalibrationDialog.cpp(35,152): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\dmn\GitHub\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\CalibrationDialog\CalibrationDialog.cpp(36,113): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\dmn\GitHub\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\CalibrationDialog\CalibrationDialog.cpp(37,113): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\dmn\GitHub\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\CalibrationDialog\CalibrationDialog.cpp(38,101): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\dmn\GitHub\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\CalibrationDialog\CalibrationDialog.cpp(183,32): warning C4244: '=': conversion from 'float' to 'uint16_t', possible loss of data
+C:\Users\dmn\GitHub\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\CalibrationDialog\CalibrationDialog.cpp(189,32): warning C4244: '=': conversion from 'float' to 'uint16_t', possible loss of data
   CollectMeasurementsDialog.cpp
   Please define _WIN32_WINNT or _WIN32_WINDOWS appropriately. For example:
   - add -D_WIN32_WINNT=0x0601 to the compiler command line; or
   - add _WIN32_WINNT=0x0601 to your project's Preprocessor Definitions.
   Assuming _WIN32_WINNT=0x0601 (i.e. Windows 7 target).
-C:\Users\dmn\GitHub\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\CollectMeasurementsDialog\CollectMeasurementsDialog.cpp(327,126): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\dmn\GitHub\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\CollectMeasurementsDialog\CollectMeasurementsDialog.cpp(341,59): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\dmn\GitHub\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\CollectMeasurementsDialog\CollectMeasurementsDialog.cpp(350,57): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\dmn\GitHub\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\CollectMeasurementsDialog\CollectMeasurementsDialog.cpp(325,126): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\dmn\GitHub\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\CollectMeasurementsDialog\CollectMeasurementsDialog.cpp(339,59): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\dmn\GitHub\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\CollectMeasurementsDialog\CollectMeasurementsDialog.cpp(348,57): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
   ConnectDialog.cpp
   Please define _WIN32_WINNT or _WIN32_WINDOWS appropriately. For example:
   - add -D_WIN32_WINNT=0x0601 to the compiler command line; or
   - add _WIN32_WINNT=0x0601 to your project's Preprocessor Definitions.
   Assuming _WIN32_WINNT=0x0601 (i.e. Windows 7 target).
-C:\Users\dmn\GitHub\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\ConnectDialog\ConnectDialog.cpp(55,49): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\dmn\GitHub\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\ConnectDialog\ConnectDialog.cpp(54,49): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
   FileDialog.cpp
 C:\Users\dmn\GitHub\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\FileDialog\FileDialog.h(1,1): warning C4005: '_CRT_SECURE_NO_WARNINGS': macro redefinition
 C:\Users\dmn\GitHub\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\FileDialog\FileDialog.h(1,1): message : '_CRT_SECURE_NO_WARNINGS' previously declared on the command line
   PinMapOfSTM32PLCDialog.cpp
-C:\Users\dmn\GitHub\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\PinMapOfSTM32PLCDialog\PinMapOfSTM32PLCDialog.cpp(27,80): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\dmn\GitHub\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\PinMapOfSTM32PLCDialog\PinMapOfSTM32PLCDialog.cpp(27,64): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\dmn\GitHub\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\PinMapOfSTM32PLCDialog\PinMapOfSTM32PLCDialog.cpp(26,80): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\dmn\GitHub\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\PinMapOfSTM32PLCDialog\PinMapOfSTM32PLCDialog.cpp(26,64): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
   SAEJ1939Dialog.cpp
   Please define _WIN32_WINNT or _WIN32_WINDOWS appropriately. For example:
   - add -D_WIN32_WINNT=0x0601 to the compiler command line; or
@@ -121,12 +121,12 @@ C:\Users\dmn\GitHub\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\FileDialog
 C:\Users\dmn\GitHub\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\FileDialog\FileDialog.h(1,1): message : '_CRT_SECURE_NO_WARNINGS' previously declared on the command line
 C:\Users\dmn\GitHub\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\ViewMeasurementsFromDatabaseDialog\ViewMeasurementsFromDatabaseDialog.cpp(61,39): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
 C:\Users\dmn\GitHub\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\ViewMeasurementsFromDatabaseDialog\ViewMeasurementsFromDatabaseDialog.cpp(76,62): warning C4267: 'initializing': conversion from 'size_t' to 'long', possible loss of data
-C:\Users\dmn\GitHub\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\ViewMeasurementsFromDatabaseDialog\ViewMeasurementsFromDatabaseDialog.cpp(125,40): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\dmn\GitHub\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\ViewMeasurementsFromDatabaseDialog\ViewMeasurementsFromDatabaseDialog.cpp(127,50): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\dmn\GitHub\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\ViewMeasurementsFromDatabaseDialog\ViewMeasurementsFromDatabaseDialog.cpp(182,45): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\dmn\GitHub\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\ViewMeasurementsFromDatabaseDialog\ViewMeasurementsFromDatabaseDialog.cpp(200,126): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\dmn\GitHub\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\ViewMeasurementsFromDatabaseDialog\ViewMeasurementsFromDatabaseDialog.cpp(206,29): warning C4267: 'initializing': conversion from 'size_t' to 'long', possible loss of data
-C:\Users\dmn\GitHub\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\ViewMeasurementsFromDatabaseDialog\ViewMeasurementsFromDatabaseDialog.cpp(209,39): warning C4267: 'initializing': conversion from 'size_t' to 'long', possible loss of data
+C:\Users\dmn\GitHub\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\ViewMeasurementsFromDatabaseDialog\ViewMeasurementsFromDatabaseDialog.cpp(132,40): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\dmn\GitHub\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\ViewMeasurementsFromDatabaseDialog\ViewMeasurementsFromDatabaseDialog.cpp(134,50): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\dmn\GitHub\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\ViewMeasurementsFromDatabaseDialog\ViewMeasurementsFromDatabaseDialog.cpp(189,45): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\dmn\GitHub\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\ViewMeasurementsFromDatabaseDialog\ViewMeasurementsFromDatabaseDialog.cpp(207,126): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\dmn\GitHub\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\ViewMeasurementsFromDatabaseDialog\ViewMeasurementsFromDatabaseDialog.cpp(213,29): warning C4267: 'initializing': conversion from 'size_t' to 'long', possible loss of data
+C:\Users\dmn\GitHub\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\ViewMeasurementsFromDatabaseDialog\ViewMeasurementsFromDatabaseDialog.cpp(216,39): warning C4267: 'initializing': conversion from 'size_t' to 'long', possible loss of data
   Windows.cpp
   Please define _WIN32_WINNT or _WIN32_WINDOWS appropriately. For example:
   - add -D_WIN32_WINNT=0x0601 to the compiler command line; or

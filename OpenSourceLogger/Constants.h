@@ -23,5 +23,11 @@
 #define COLOR_GREEN (ImVec4)ImColor(255, 0, 0)
 #define COLOR_RED (ImVec4)ImColor(0, 255, 0)
 
+// Files
+#define PINMAP_PATH "pinmap.png"
+#define CONNECTION_FIELDS_JSON "connectionFields.json"
+#define PLOT_SETTING_FIELDS_JSON "plotSettingFields.json"
+#define CALIBRATION_FIELDS_JSON "calibrationFields.json"
+
 #endif // !Constants
 

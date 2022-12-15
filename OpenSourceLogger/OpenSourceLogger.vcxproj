@@ -94,6 +94,9 @@
     <ClInclude Include="Windows\Dialogs\ViewMeasurementsFromDatabaseDialog\ViewMeasurementsFromDatabaseDialog.h" />
     <ClInclude Include="Windows\Windows.h" />
   </ItemGroup>
+  <ItemGroup>
+    <Image Include="pinmap.png" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>

@@ -220,23 +220,57 @@ void deleteDataFromDatabase(const char measurementTableName[], const char jobTab
 	}
 }
 
-std::vector<std::vector<std::string>> getAllDatabaseValues(const char tableName[], int measurementID, int offset, int amount) {
+std::vector<std::vector<std::string>> getAllDatabaseValues(const char tableName[], int measurementID, int step, int offset, int amount) {
 	std::vector<std::string> values;
 	std::vector<std::vector<std::string>> table;
 	if (isConnectedToDatabase()) {
 		// Select only the first row
 		std::string query;
-		if (offset == -1 && measurementID == -1) {
-			query = "SELECT * FROM " + std::string(tableName) + " ORDER BY measurement_id";
-		}
-		else {
-			if (measurementID >= 0 && offset == -1) {
-				query = "SELECT * FROM " + std::string(tableName) + " WHERE measurement_id = " + std::to_string(measurementID) + " ORDER BY measurement_id";
+		if (step == 1) {
+			if (offset == -1 && measurementID == -1) {
+				query = "SELECT * FROM " + std::string(tableName) + " ORDER BY measurement_id";
 			}
 			else {
-				query = "SELECT * FROM " + std::string(tableName) + " WHERE measurement_id = " + std::to_string(measurementID) + " ORDER BY measurement_id LIMIT " + std::to_string(offset) + ", " + std::to_string(amount);
+				if (measurementID >= 0 && offset == -1) {
+					query = "SELECT * FROM " + std::string(tableName) + " WHERE measurement_id = " + std::to_string(measurementID) + " ORDER BY measurement_id";
+				}
+				else {
+					query = "SELECT * FROM " + std::string(tableName) + " WHERE measurement_id = " + std::to_string(measurementID) + " ORDER BY measurement_id LIMIT " + std::to_string(offset) + ", " + std::to_string(amount);
+				}
 			}
+		}else {
+			// Create a n:th query with rownum
+			if (offset == -1 && measurementID == -1) {
+				query = std::string(tableName) + " ORDER BY measurement_id";
+			}
+			else {
+				if (measurementID >= 0 && offset == -1) {
+					query = std::string(tableName) + " WHERE measurement_id = " + std::to_string(measurementID) + " ORDER BY measurement_id";
+				}
+				else {
+					query = std::string(tableName) + " WHERE measurement_id = " + std::to_string(measurementID) + " ORDER BY measurement_id LIMIT " + std::to_string(offset) + ", " + std::to_string(amount);
+				}
+			}
+
+			std::string nthQuery = "SELECT * FROM ( SELECT @row := @row + 1 AS rownum, ";
+			std::vector<std::string> columNames = getDatabaseColumnNames(tableName);
+			for (int i = 0; i < columNames.size() - 1; i++) {
+				nthQuery += columNames.at(i) + ",";
+			}
+			nthQuery += columNames.at(columNames.size() - 1); // Without ','
+			nthQuery += " FROM ( SELECT @row := 0 ) r, " + query + ") ranked WHERE rownum % " + std::to_string(step) + " = 1";
+			query = nthQuery;
+			/* Example:
+			* SELECT * 
+				FROM ( 
+					SELECT 
+						@row := @row +1 AS rownum, id
+					FROM ( 
+						SELECT @row :=0) r, opensourcelogger.measurement_table
+					) ranked WHERE rownum % 2 = 1;
+			*/
 		}
+
 		mysqlx::SqlResult result = connection->sql(query).execute();
 		int columnCount = result.getColumnCount();
 		if (result.hasData()) {
@@ -252,7 +286,8 @@ std::vector<std::vector<std::string>> getAllDatabaseValues(const char tableName[
 			const mysqlx::byte* first;
 			char text[50];
 			while (row = result.fetchOne()) {
-				for (int i = 0; i < columnCount; i++) {
+				int i = step == 1 ? 0 : 1; // If step is 1, then we don't have the n:th row query, but if step is not 1, then we need to remove the rownum column i = 0
+				for (; i < columnCount; i++) {
 					switch (row[i].getType()) {
 					case mysqlx::common::Value::UINT64:
 						values.push_back(std::to_string(row[i].get<uint64_t>()));
@@ -292,39 +327,76 @@ std::vector<std::vector<std::string>> getAllDatabaseValues(const char tableName[
 	return table;
 }
 
-std::vector<std::vector<float>> getMeasurementDatabaseValues(const char tableName[], int measurementID, int offset, int amount) {
+std::vector<std::vector<float>> getMeasurementDatabaseValues(const char tableName[], int measurementID, int step, int offset, int amount) {
 	std::vector<float> values;
 	std::vector<std::vector<float>> table;
 	if (isConnectedToDatabase()) {
 		// Select only the first row
-		std::string query = "SELECT ";
+		std::string measurementColumns = "";
 		for (int i = 0; i < ADC_LENGTH; i++) {
-			query += std::string("adc") + std::to_string(i) + std::string(", "); // Analog to digital converter
+			measurementColumns += std::string("adc") + std::to_string(i) + std::string(", "); // Analog to digital converter
 		}
 		for (int i = 0; i < PWM_LENGTH; i++) {
-			query += std::string("pwm") + std::to_string(i) + std::string(", "); // Pulse widt modulation
+			measurementColumns += std::string("pwm") + std::to_string(i) + std::string(", "); // Pulse widt modulation
 		}
 		for (int i = 0; i < DAC_LENGTH; i++) {
-			query += std::string("dac") + std::to_string(i) + std::string(", "); // Digital to analog converter
+			measurementColumns += std::string("dac") + std::to_string(i) + std::string(", "); // Digital to analog converter
 		}
 		for (int i = 0; i < DADC_LENGTH; i++) {
-			query += std::string("dadc") + std::to_string(i) + std::string(", "); // Differential ADC
+			measurementColumns += std::string("dadc") + std::to_string(i) + std::string(", "); // Differential ADC
 		}
 		for (int i = 0; i < DI_LENGTH; i++) {
-			query += std::string("di") + std::to_string(i) + std::string(", "); // Digital input
+			measurementColumns += std::string("di") + std::to_string(i) + std::string(", "); // Digital input
 		}
 		for (int i = 0; i < IC_LENGTH; i++) {
-			query += std::string("ic") + std::to_string(i) + std::string(", "); // Input capture
+			measurementColumns += std::string("ic") + std::to_string(i) + std::string(", "); // Input capture
 		}
 		for (int i = 0; i < E_LENGTH - 1; i++) {
-			query += std::string("e") + std::to_string(i) + std::string(", "); // Encoder
+			measurementColumns += std::string("e") + std::to_string(i) + std::string(", "); // Encoder
 		}
-		query += "e2 ";
-		if (offset == -1) {
-			query += "FROM " + std::string(tableName) + " WHERE measurement_id = " + std::to_string(measurementID) + " ORDER BY measurement_id";
+		measurementColumns += "e2";
+
+		// Create query
+		std::string query;
+		if (step == 1) {
+			if (offset == -1 && measurementID == -1) {
+				query = "SELECT " + measurementColumns + " FROM " + std::string(tableName) + " ORDER BY measurement_id";
+			}
+			else {
+				if (measurementID >= 0 && offset == -1) {
+					query = "SELECT " + measurementColumns + " FROM " + std::string(tableName) + " WHERE measurement_id = " + std::to_string(measurementID) + " ORDER BY measurement_id";
+				}
+				else {
+					query = "SELECT " + measurementColumns + " FROM " + std::string(tableName) + " WHERE measurement_id = " + std::to_string(measurementID) + " ORDER BY measurement_id LIMIT " + std::to_string(offset) + ", " + std::to_string(amount);
+				}
+			}
 		}
 		else {
-			query += "FROM " + std::string(tableName) + " WHERE measurement_id = " + std::to_string(measurementID) + " ORDER BY measurement_id LIMIT " + std::to_string(offset) + ", " + std::to_string(amount);
+			// Create a n:th query with rownum
+			if (offset == -1 && measurementID == -1) {
+				query = std::string(tableName) + " ORDER BY measurement_id";
+			}
+			else {
+				if (measurementID >= 0 && offset == -1) {
+					query = std::string(tableName) + " WHERE measurement_id = " + std::to_string(measurementID) + " ORDER BY measurement_id";
+				}
+				else {
+					query = std::string(tableName) + " WHERE measurement_id = " + std::to_string(measurementID) + " ORDER BY measurement_id LIMIT " + std::to_string(offset) + ", " + std::to_string(amount);
+				}
+			}
+
+			std::string nthQuery = "SELECT * FROM ( SELECT @row := @row + 1 AS rownum, " + measurementColumns;
+			nthQuery += " FROM ( SELECT @row := 0 ) r, " + query + ") ranked WHERE rownum % " + std::to_string(step) + " = 1";
+			query = nthQuery;
+			/* Example:
+			* SELECT *
+				FROM (
+					SELECT
+						@row := @row +1 AS rownum, id
+					FROM (
+						SELECT @row :=0) r, opensourcelogger.measurement_table
+					) ranked WHERE rownum % 2 = 1;
+			*/
 		}
 
 		mysqlx::SqlResult result = connection->sql(query).execute();
@@ -332,7 +404,8 @@ std::vector<std::vector<float>> getMeasurementDatabaseValues(const char tableNam
 		if (result.hasData()) {
 			mysqlx::Row row;
 			while (row = result.fetchOne()) {
-				for (int i = 0; i < columnCount; i++) {
+				int i = step == 1 ? 0 : 1; // If step is 1, then we don't have the n:th row query, but if step is not 1, then we need to remove the rownum column i = 0
+				for (; i < columnCount; i++) {
 					switch (row[i].getType()) {
 					case mysqlx::common::Value::UINT64:
 						values.push_back(row[i].get<uint64_t>());

@@ -5,8 +5,6 @@
 #include "nlohmann/json.hpp"
 #include "../../../Hardware/USB/USBHandler.h"
 
-#define CALIBRATION_FIELDS_JSON "Windows/Dialogs/CalibrationDialog/calibrationFields.json"
-
 int createTable(const char collapsingHeaderText[], const char tableName[], const char pheferialName[], float minArray[], float maxArray[], int sizeOfArray, const int popIndexBegin);
 
 // They must be array due to json
