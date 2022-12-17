@@ -64,6 +64,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Hardware\Tools\TimeConverter.h" />
+    <ClInclude Include="Resource files\resource.h" />
+    <ClInclude Include="Resource\resource.h" />
     <ClInclude Include="Windows\Dialogs\ConfigurationSTM32PLCDialog\ConfigurationSTM32PLCDialog.h" />
     <ClInclude Include="Hardware\Database\DatabaseHandler.h" />
     <ClInclude Include="Hardware\USB\Protocols\OpenSourceLogger\OpenSAEJ1939\Hardware\Hardware.h" />
@@ -95,7 +97,13 @@
     <ClInclude Include="Windows\Windows.h" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="pinmap.png" />
+    <Image Include="Resource files\logo.ico" />
+    <Image Include="Resource files\pinmap.png" />
+    <Image Include="Resource\logo.ico" />
+    <Image Include="Resource\pinmap.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Resource\Resource.rc" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

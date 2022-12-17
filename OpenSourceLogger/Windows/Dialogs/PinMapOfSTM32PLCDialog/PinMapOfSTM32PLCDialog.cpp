@@ -13,25 +13,25 @@
 #include "stb_image.h"
 #include "../../../Constants.h"
 
+GLuint my_image_texture = 0;
+int my_image_width = 0;
+int my_image_height = 0;
+bool isImageLoaded = false;
 bool LoadTextureFromFile(const char* filename, GLuint* out_texture, int* out_width, int* out_height);
-
 
 void showPinMapOfSTM32PLCDialog(bool* pinMapOfSTM32PLC) {
     ImGui::SetNextWindowSize(ImVec2(820.0f, 740.0f));
-	ImGui::Begin("Pinmap of STM32PLC", pinMapOfSTM32PLC, ImGuiWindowFlags_NoResize);
-    int my_image_width = 0;
-    int my_image_height = 0;
-    GLuint my_image_texture = 0;
-    if (LoadTextureFromFile(PINMAP_PATH, &my_image_texture, &my_image_width, &my_image_height)) {
+    ImGui::Begin("Pinmap of STM32PLC", pinMapOfSTM32PLC, ImGuiWindowFlags_NoResize);
+    if (!isImageLoaded) {
+        isImageLoaded = LoadTextureFromFile(PINMAP_PATH, &my_image_texture, &my_image_width, &my_image_height);
+    }
+    if (isImageLoaded) {
         ImGui::Image((void*)(intptr_t)my_image_texture, ImVec2(my_image_width, my_image_height));
-    }else {
+    } else {
         ImGui::Text("Missing pinmap image");
     }
- 
-	ImGui::End();
+    ImGui::End();
 }
-
-
 
 // Simple helper function to load an image into a OpenGL texture with common settings
 bool LoadTextureFromFile(const char* filename, GLuint* out_texture, int* out_width, int* out_height)

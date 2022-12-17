@@ -11,7 +11,7 @@ void showSAEJ1939OtherECUView(bool* saeJ1939, J1939* j1939) {
 	ImGui::Begin("SAE J1939 for other ECU", saeJ1939, ImGuiWindowFlags_NoResize);
 	if (isConnectedToUSB()) {
 		static int functionIndex = 0;
-		const char* functionNames = "ECU Name\0Software identification\0Component identification\0ECU identification\0Auxilary valve command\0General valve command\0DM1 messages\0DM2 messages\0DM3 messages";
+		const char* functionNames = "ECU Name\0Software identification\0Component identification\0ECU identification\0Auxilary valve command\0General valve command\0DM1 messages\0DM2 messages\0DM3 messages\0DM16 messages";
 		ImGui::Combo("Select function:", &functionIndex, functionNames);
 		ImGui::Separator();
 
@@ -276,6 +276,14 @@ void showSAEJ1939OtherECUView(bool* saeJ1939, J1939* j1939) {
 			}
 			ImGui::Text("DM3 messages will clear DM2 messages");
 		}
+		case 9: // DM16 messages
+		{
+			// Read the DM16 message
+			ImGui::InputText("DM16 message:", (char*)j1939->from_other_ecu_dm.dm16.raw_binary_data, sizeof(j1939->from_other_ecu_dm.dm16.raw_binary_data), ImGuiInputTextFlags_ReadOnly);
+			ImGui::InputInt("Byte length:", (int*)& j1939->from_other_ecu_dm.dm16.number_of_occurences, 1, 100, ImGuiInputTextFlags_ReadOnly);
+			ImGui::InputInt("From ECU address:", (int*)&j1939->from_other_ecu_dm.dm16.from_ecu_address, 1, 100, ImGuiInputTextFlags_ReadOnly);
+			break;
+		}
 		}
 	}else {
 		ImGui::Text("You need to be connected to the USB");
@@ -289,7 +297,7 @@ void showSAEJ1939ThisECUView(bool* saeJ1939, J1939* j1939) {
 	ImGui::Begin("SAE J1939 for this ECU", saeJ1939, ImGuiWindowFlags_NoResize);
 	if (isConnectedToUSB()) {
 		static int functionIndex = 0;
-		const char* functionNames = "ECU Name\0Software identification\0Component identification\0ECU identification\0DM1 messages\0DM2 messages";
+		const char* functionNames = "ECU Name\0Software identification\0Component identification\0ECU identification\0DM1 messages\0DM2 messages\0DM16 messages";
 		ImGui::Combo("Select function:", &functionIndex, functionNames);
 		ImGui::Separator();
 
@@ -392,6 +400,24 @@ void showSAEJ1939ThisECUView(bool* saeJ1939, J1939* j1939) {
 			}
 			else {
 				ImGui::Text("No DM2 errors active");
+			}
+			break;
+		}
+		case 6: // DM16 messages
+		{
+			// Read the DM16 message
+			int sizeOfRadBinaryDataArray = sizeof(j1939->this_dm.dm16.raw_binary_data);
+			ImGui::InputText("DM16 message:", (char*)j1939->this_dm.dm16.raw_binary_data, sizeOfRadBinaryDataArray);
+			static int DA = 0;
+			inputScalarLimit("ECU Destination address:", ImGuiDataType_U8, &DA, 0, 253); // 254 is the error address and 255 is broadcast address
+			if (ImGui::Button("Send DM16 message")) {
+				for (int i = 0; i < sizeOfRadBinaryDataArray; i++) {
+					// Send the data when the null terminator has been found
+					if (j1939->this_dm.dm16.raw_binary_data[i] == 0) {
+						SAE_J1939_Send_Binary_Data_Transfer_DM16(j1939, DA, i + 1, j1939->this_dm.dm16.raw_binary_data);
+						break;
+					}
+				}
 			}
 			break;
 		}

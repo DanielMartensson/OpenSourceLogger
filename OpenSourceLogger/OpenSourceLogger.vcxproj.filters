@@ -233,10 +233,30 @@
     <ClInclude Include="Windows\Dialogs\PinMapOfSTM32PLCDialog\PinMapOfSTM32PLCDialog.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Resource files\resource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource\resource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="pinmap.png">
+    <Image Include="Resource files\pinmap.png">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="Resource files\logo.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Resource\logo.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Resource\pinmap.jpg">
+      <Filter>Resource Files</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Resource\Resource.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
   </ItemGroup>
 </Project>
