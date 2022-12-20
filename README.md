@@ -45,6 +45,9 @@ Inside `x64/Release` there is a file called `OpenSourceLogger.exe`. Run that.
 
 ![a](https://raw.githubusercontent.com/DanielMartensson/OpenSourceLogger/main/Pictures/Mainview.png)
 
+![a](https://raw.githubusercontent.com/DanielMartensson/OpenSourceLogger/main/Pictures/Databaseview.png)
+
+
 # Status of the project
 
 * Bug testing - This is just the first version
