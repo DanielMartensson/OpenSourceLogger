@@ -3,8 +3,9 @@
 #include "../Hardware/USB/USBHandler.h"
 #include "Dialogs/FileDialog/FileDialog.h"
 #include "Dialogs/ConnectDialog/ConnectDialog.h"
-#include "Dialogs/SAEJ1939Dialog/SAEJ1939Dialog.h"
 #include "Dialogs/CalibrationDialog/CalibrationDialog.h"
+#include "Dialogs/CANDialogs/CANBusDialog/CANBusDialog.h"
+#include "Dialogs/CANDialogs/SAEJ1939Dialog/SAEJ1939Dialog.h"
 #include "Dialogs/PinMapOfSTM32PLCDialog/PinMapOfSTM32PLCDialog.h"
 #include "Dialogs/CollectMeasurementsDialog/CollectMeasurementsDialog.h"
 #include "Dialogs/ConfigurationSTM32PLCDialog/ConfigurationSTM32PLCDialog.h"
@@ -23,6 +24,7 @@ bool collectMeasurements = false;
 bool measurementsFromDatabase = false;
 bool saeJ1939OtherECU = false;
 bool saeJ1939ThisECU = false;
+bool canBusTerminal = false;
 bool pinMapOfSTM32PLC = false;
 
 // Window properties
@@ -89,6 +91,10 @@ void showMainWindow(bool* show_main_window) {
 		if (ImGui::Button("SAE J1939 This ECU")) {
 			saeJ1939ThisECU = true;
 		}
+		ImGui::SameLine();
+		if (ImGui::Button("CAN bus terminal")) {
+			canBusTerminal = true;
+		}
 	}
 
 	if (ImGui::CollapsingHeader("Help")) {
@@ -149,5 +155,9 @@ void showDialogWindows() {
 	if (pinMapOfSTM32PLC) {
 		// Show pin map of STM32PLC
 		showPinMapOfSTM32PLCDialog(&pinMapOfSTM32PLC);
+	}
+	if (canBusTerminal) {
+		// Show CAN-bus terminal
+		showCANBusTerminal(&canBusTerminal);
 	}
 }

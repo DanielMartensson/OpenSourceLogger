@@ -5,6 +5,10 @@
 #ifndef OpenSourceLoggerProtocol
 #define OpenSourceLoggerProtocol
 
+/* IDE in STM32 */
+#define CAN_ID_STD                  (0x00000000U)  /*!< Standard Id */
+#define CAN_ID_EXT                  (0x00000004U)  /*!< Extended Id */
+
 void setReadUSBThreadStart(bool readUSBThreadStart);
 void setUSBThreadActive(bool USBThreadActive);
 void activateJ1939CallBackAndSetJ1939AndSetUSBPort(J1939* j1939, boost::asio::serial_port* port);
@@ -31,6 +35,8 @@ void getAlarmA(uint8_t* enabledAlarmA, uint8_t* activatedAlarmA, uint8_t* dateAl
 void resetAlarmA();
 void getAlarmB(uint8_t* enabledAlarmB, uint8_t* activatedAlarmB, uint8_t* weekDayAlarmB, uint8_t* hourAlarmB, uint8_t* minuteAlarmB);
 void resetAlarmB();
+uint8_t* getRxCanBusMessage(bool* isNewMessage);
+uint8_t* getTxCanBusMessage(bool* isNewMessage);
 
 
 #endif // !OpenSourceLoggerProtocol

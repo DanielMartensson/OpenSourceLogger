@@ -1,8 +1,8 @@
 #include "SAEJ1939Dialog.h"
 #include "imgui.h"
-#include <cstdio>
-#include "../../../Hardware/USB/USBHandler.h"
-#include "../../../Hardware/USB/Protocols/OpenSourceLogger/OpenSAEJ1939/ISO_11783/ISO_11783-7_Application_Layer/Application_Layer.h"
+//#include <cstdio>
+#include "../../../../Hardware/USB/USBHandler.h"
+#include "../../../../Hardware/USB/Protocols/OpenSourceLogger/OpenSAEJ1939/ISO_11783/ISO_11783-7_Application_Layer/Application_Layer.h"
 
 void inputScalarLimit(const char* label, ImGuiDataType data_type, void* p_data, int min, int max);
 
@@ -11,7 +11,7 @@ void showSAEJ1939OtherECUView(bool* saeJ1939, J1939* j1939) {
 	ImGui::Begin("SAE J1939 for other ECU", saeJ1939, ImGuiWindowFlags_NoResize);
 	if (isConnectedToUSB()) {
 		static int functionIndex = 0;
-		const char* functionNames = "ECU Name\0Software identification\0Component identification\0ECU identification\0Auxilary valve command\0General valve command\0DM1 messages\0DM2 messages\0DM3 messages\0DM16 messages";
+		const char* functionNames = "ECU Name\0Software identification\0Component identification\0ECU identification\0Auxilary valve command\0General valve command\0DM1 messages\0DM2 messages\0DM3 messages\0DM14 messages";
 		ImGui::Combo("Select function:", &functionIndex, functionNames);
 		ImGui::Separator();
 
@@ -52,7 +52,7 @@ void showSAEJ1939OtherECUView(bool* saeJ1939, J1939* j1939) {
 			inputScalarLimit("Vehicle system instance:", ImGuiDataType_U8, &j1939->from_other_ecu_name.vehicle_system_instance, 0, 15);
 			inputScalarLimit("Industry group:", ImGuiDataType_U8, &j1939->from_other_ecu_name.industry_group, 0, 7);
 			inputScalarLimit("Arbitary address capable:", ImGuiDataType_U8, &j1939->from_other_ecu_name.arbitrary_address_capable, 0, 1);
-			ImGui::InputInt("From ECU address:", (int*)&j1939->from_other_ecu_name.from_ecu_address, 1, 100, ImGuiInputTextFlags_ReadOnly);
+			inputScalarLimit("From ECU address:", ImGuiDataType_U8, &j1939->from_other_ecu_name.from_ecu_address, 0, 253);
 
 			// Claimed addresses and not claimed addresses
 			ImGui::Separator();
@@ -70,7 +70,7 @@ void showSAEJ1939OtherECUView(bool* saeJ1939, J1939* j1939) {
 			}
 			static int addressIndex = 0;
 			ImGui::Combo("Number of other claimed ECU addresses", &addressIndex, address_of_claimed_addresses);
-			ImGui::InputInt("Number of cannot claim address:", (int*)&j1939->number_of_cannot_claim_address, 1, 100, ImGuiInputTextFlags_ReadOnly);
+			inputScalarLimit("Number of cannot claim address:", ImGuiDataType_U8, &j1939->number_of_cannot_claim_address, 0, 253);
 			break;
 		}
 		case 1: // Software identification
@@ -81,7 +81,8 @@ void showSAEJ1939OtherECUView(bool* saeJ1939, J1939* j1939) {
 				SAE_J1939_Send_Request_Software_Identification(j1939, DA);
 			}
 			ImGui::InputText("Software ID:", (char*)j1939->from_other_ecu_identifications.software_identification.identifications, MAX_IDENTIFICATION, ImGuiInputTextFlags_ReadOnly);
-			ImGui::InputInt("From ECU address:", (int*)&j1939->from_other_ecu_identifications.software_identification.from_ecu_address, 1, 100, ImGuiInputTextFlags_ReadOnly);
+			inputScalarLimit("From ECU address:", ImGuiDataType_U8, &j1939->from_other_ecu_identifications.software_identification.from_ecu_address, 0, 253);
+
 			break;
 		}
 		case 2: // Component identification
@@ -95,7 +96,7 @@ void showSAEJ1939OtherECUView(bool* saeJ1939, J1939* j1939) {
 			ImGui::InputText("Component product date:", (char*)j1939->from_other_ecu_identifications.component_identification.component_product_date, MAX_IDENTIFICATION, ImGuiInputTextFlags_ReadOnly);
 			ImGui::InputText("Component serial number:", (char*)j1939->from_other_ecu_identifications.component_identification.component_serial_number, MAX_IDENTIFICATION, ImGuiInputTextFlags_ReadOnly);
 			ImGui::InputText("Component unit name:", (char*)j1939->from_other_ecu_identifications.component_identification.component_unit_name, MAX_IDENTIFICATION, ImGuiInputTextFlags_ReadOnly);
-			ImGui::InputInt("From ECU address:", (int*)&j1939->from_other_ecu_identifications.component_identification.from_ecu_address, 1, 100, ImGuiInputTextFlags_ReadOnly);
+			inputScalarLimit("From ECU address:", ImGuiDataType_U8, &j1939->from_other_ecu_identifications.component_identification.from_ecu_address, 0, 253);
 			break;
 		}
 		case 3: // ECU identification
@@ -109,7 +110,7 @@ void showSAEJ1939OtherECUView(bool* saeJ1939, J1939* j1939) {
 			ImGui::InputText("ECU part number:", (char*)j1939->from_other_ecu_identifications.ecu_identification.ecu_part_number, MAX_IDENTIFICATION, ImGuiInputTextFlags_ReadOnly);
 			ImGui::InputText("ECU serial number:", (char*)j1939->from_other_ecu_identifications.ecu_identification.ecu_serial_number, MAX_IDENTIFICATION, ImGuiInputTextFlags_ReadOnly);
 			ImGui::InputText("ECU type:", (char*)j1939->from_other_ecu_identifications.ecu_identification.ecu_type, MAX_IDENTIFICATION, ImGuiInputTextFlags_ReadOnly);
-			ImGui::InputInt("From ECU address:", (int*)&j1939->from_other_ecu_identifications.ecu_identification.from_ecu_address, 1, 100, ImGuiInputTextFlags_ReadOnly);
+			inputScalarLimit("From ECU address:", ImGuiDataType_U8, &j1939->from_other_ecu_identifications.ecu_identification.from_ecu_address, 0, 253);
 			break;
 		}
 		case 4: // Auxilary valve command
@@ -210,19 +211,19 @@ void showSAEJ1939OtherECUView(bool* saeJ1939, J1939* j1939) {
 						errorIndex = j1939->from_other_ecu_dm.errors_dm1_active;
 					}
 				}
-				ImGui::InputInt("FMI:", (int*)&j1939->from_other_ecu_dm.dm1.FMI[errorIndex], 1, 100, ImGuiInputTextFlags_ReadOnly);
-				ImGui::InputInt("Occurrence count:", (int*)&j1939->from_other_ecu_dm.dm1.occurrence_count[errorIndex], 1, 100, ImGuiInputTextFlags_ReadOnly);
-				ImGui::InputInt("SPN:", (int*)&j1939->from_other_ecu_dm.dm1.SPN[errorIndex], 1, 100, ImGuiInputTextFlags_ReadOnly);
-				ImGui::InputInt("SPN conversion method:", (int*)&j1939->from_other_ecu_dm.dm1.SPN_conversion_method[errorIndex], 1, 100, ImGuiInputTextFlags_ReadOnly);
-				ImGui::InputInt("SAE flash lamp amber warning:", (int*)&j1939->from_other_ecu_dm.dm1.SAE_flash_lamp_amber_warning, 1, 100, ImGuiInputTextFlags_ReadOnly);
-				ImGui::InputInt("SAE flash lamp malfunction indicator:", (int*)&j1939->from_other_ecu_dm.dm1.SAE_flash_lamp_malfunction_indicator, 1, 100, ImGuiInputTextFlags_ReadOnly);
-				ImGui::InputInt("SAE flash lamp protect lamp:", (int*)&j1939->from_other_ecu_dm.dm1.SAE_flash_lamp_protect_lamp, 1, 100, ImGuiInputTextFlags_ReadOnly);
-				ImGui::InputInt("SAE flash lamp red stop:", (int*)&j1939->from_other_ecu_dm.dm1.SAE_flash_lamp_red_stop, 1, 100, ImGuiInputTextFlags_ReadOnly);
-				ImGui::InputInt("SAE lamp status amber warning:", (int*)&j1939->from_other_ecu_dm.dm1.SAE_lamp_status_amber_warning, 1, 100, ImGuiInputTextFlags_ReadOnly);
-				ImGui::InputInt("SAE lamp status malfunction indicator:", (int*)&j1939->from_other_ecu_dm.dm1.SAE_lamp_status_malfunction_indicator, 1, 100, ImGuiInputTextFlags_ReadOnly);
-				ImGui::InputInt("SAE lamp status protect lamp:", (int*)&j1939->from_other_ecu_dm.dm1.SAE_lamp_status_protect_lamp, 1, 100, ImGuiInputTextFlags_ReadOnly);
-				ImGui::InputInt("SAE lamp status red stop:", (int*)&j1939->from_other_ecu_dm.dm1.SAE_lamp_status_red_stop, 1, 100, ImGuiInputTextFlags_ReadOnly);
-				ImGui::InputInt("From ECU address:", (int*)&j1939->from_other_ecu_dm.dm1.from_ecu_address[errorIndex], 1, 100, ImGuiInputTextFlags_ReadOnly);
+				inputScalarLimit("FMI:", ImGuiDataType_U8, &j1939->from_other_ecu_dm.dm1.FMI[errorIndex], 0, 0x1F);
+				inputScalarLimit("Occurrence count:", ImGuiDataType_U8, &j1939->from_other_ecu_dm.dm1.occurrence_count[errorIndex], 0, 126);
+				inputScalarLimit("SPN:", ImGuiDataType_U32, &j1939->from_other_ecu_dm.dm1.SPN[errorIndex], 0, 0x7FFFFF);
+				inputScalarLimit("SPN conversion method:", ImGuiDataType_U8, &j1939->from_other_ecu_dm.dm1.SPN_conversion_method[errorIndex], 0, 1);
+				inputScalarLimit("SAE flash lamp amber warning:", ImGuiDataType_U8, &j1939->from_other_ecu_dm.dm1.SAE_flash_lamp_amber_warning, 0, 1);
+				inputScalarLimit("SAE flash lamp malfunction indicator:", ImGuiDataType_U8, &j1939->from_other_ecu_dm.dm1.SAE_flash_lamp_malfunction_indicator, 0, 1);
+				inputScalarLimit("SAE flash lamp protect lamp:", ImGuiDataType_U8, &j1939->from_other_ecu_dm.dm1.SAE_flash_lamp_protect_lamp, 0, 1);
+				inputScalarLimit("SAE flash lamp red stop:", ImGuiDataType_U8, &j1939->from_other_ecu_dm.dm1.SAE_flash_lamp_red_stop, 0, 1);
+				inputScalarLimit("SAE lamp status amber warning:", ImGuiDataType_U8, &j1939->from_other_ecu_dm.dm1.SAE_lamp_status_amber_warning, 0, 1);
+				inputScalarLimit("SAE lamp status malfunction indicator:", ImGuiDataType_U8, &j1939->from_other_ecu_dm.dm1.SAE_lamp_status_malfunction_indicator, 0, 1);
+				inputScalarLimit("SAE lamp status protect lamp:", ImGuiDataType_U8, &j1939->from_other_ecu_dm.dm1.SAE_lamp_status_protect_lamp, 0, 1);
+				inputScalarLimit("SAE lamp status red stop:", ImGuiDataType_U8, &j1939->from_other_ecu_dm.dm1.SAE_lamp_status_red_stop, 0, 1);
+				inputScalarLimit("From ECU address:", ImGuiDataType_U8, &j1939->from_other_ecu_dm.dm1.from_ecu_address[errorIndex], 0, 253);
 			}
 			else {
 				ImGui::Text("No DM1 errors available");
@@ -248,19 +249,20 @@ void showSAEJ1939OtherECUView(bool* saeJ1939, J1939* j1939) {
 						errorIndex = j1939->from_other_ecu_dm.errors_dm2_active;
 					}
 				}
-				ImGui::InputInt("FMI:", (int*)&j1939->from_other_ecu_dm.dm2.FMI[errorIndex], 1, 100, ImGuiInputTextFlags_ReadOnly);
-				ImGui::InputInt("Occurrence count:", (int*)&j1939->from_other_ecu_dm.dm2.occurrence_count[errorIndex], 1, 100, ImGuiInputTextFlags_ReadOnly);
-				ImGui::InputInt("SPN:", (int*)&j1939->from_other_ecu_dm.dm2.SPN[errorIndex], 1, 100, ImGuiInputTextFlags_ReadOnly);
-				ImGui::InputInt("SPN conversion method:", (int*)&j1939->from_other_ecu_dm.dm2.SPN_conversion_method[errorIndex], 1, 100, ImGuiInputTextFlags_ReadOnly);
-				ImGui::InputInt("SAE flash lamp amber warning:", (int*)&j1939->from_other_ecu_dm.dm2.SAE_flash_lamp_amber_warning, 1, 100, ImGuiInputTextFlags_ReadOnly);
-				ImGui::InputInt("SAE flash lamp malfunction indicator:", (int*)&j1939->from_other_ecu_dm.dm2.SAE_flash_lamp_malfunction_indicator, 1, 100, ImGuiInputTextFlags_ReadOnly);
-				ImGui::InputInt("SAE flash lamp protect lamp:", (int*)&j1939->from_other_ecu_dm.dm2.SAE_flash_lamp_protect_lamp, 1, 100, ImGuiInputTextFlags_ReadOnly);
-				ImGui::InputInt("SAE flash lamp red stop:", (int*)&j1939->from_other_ecu_dm.dm2.SAE_flash_lamp_red_stop, 1, 100, ImGuiInputTextFlags_ReadOnly);
-				ImGui::InputInt("SAE lamp status amber warning:", (int*)&j1939->from_other_ecu_dm.dm2.SAE_lamp_status_amber_warning, 1, 100, ImGuiInputTextFlags_ReadOnly);
-				ImGui::InputInt("SAE lamp status malfunction indicator:", (int*)&j1939->from_other_ecu_dm.dm2.SAE_lamp_status_malfunction_indicator, 1, 100, ImGuiInputTextFlags_ReadOnly);
-				ImGui::InputInt("SAE lamp status protect lamp:", (int*)&j1939->from_other_ecu_dm.dm2.SAE_lamp_status_protect_lamp, 1, 100, ImGuiInputTextFlags_ReadOnly);
-				ImGui::InputInt("SAE lamp status red stop:", (int*)&j1939->from_other_ecu_dm.dm2.SAE_lamp_status_red_stop, 1, 100, ImGuiInputTextFlags_ReadOnly);
-				ImGui::InputInt("From ECU address:", (int*)&j1939->from_other_ecu_dm.dm2.from_ecu_address[errorIndex], 1, 100, ImGuiInputTextFlags_ReadOnly);
+				inputScalarLimit("FMI:", ImGuiDataType_U8, &j1939->from_other_ecu_dm.dm2.FMI[errorIndex], 0, 0x1F);
+				inputScalarLimit("Occurrence count:", ImGuiDataType_U8, &j1939->from_other_ecu_dm.dm2.occurrence_count[errorIndex], 0, 126);
+				inputScalarLimit("SPN:", ImGuiDataType_U32, &j1939->from_other_ecu_dm.dm2.SPN[errorIndex], 0, 0x7FFFFF);
+				inputScalarLimit("SPN conversion method:", ImGuiDataType_U8, &j1939->from_other_ecu_dm.dm2.SPN_conversion_method[errorIndex], 0, 1);
+				inputScalarLimit("SAE flash lamp amber warning:", ImGuiDataType_U8, &j1939->from_other_ecu_dm.dm2.SAE_flash_lamp_amber_warning, 0, 1);
+				inputScalarLimit("SAE flash lamp malfunction indicator:", ImGuiDataType_U8, &j1939->from_other_ecu_dm.dm2.SAE_flash_lamp_malfunction_indicator, 0, 1);
+				inputScalarLimit("SAE flash lamp protect lamp:", ImGuiDataType_U8, &j1939->from_other_ecu_dm.dm2.SAE_flash_lamp_protect_lamp, 0, 1);
+				inputScalarLimit("SAE flash lamp red stop:", ImGuiDataType_U8, &j1939->from_other_ecu_dm.dm2.SAE_flash_lamp_red_stop, 0, 1);
+				inputScalarLimit("SAE lamp status amber warning:", ImGuiDataType_U8, &j1939->from_other_ecu_dm.dm2.SAE_lamp_status_amber_warning, 0, 1);
+				inputScalarLimit("SAE lamp status malfunction indicator:", ImGuiDataType_U8, &j1939->from_other_ecu_dm.dm2.SAE_lamp_status_malfunction_indicator, 0, 1);
+				inputScalarLimit("SAE lamp status protect lamp:", ImGuiDataType_U8, &j1939->from_other_ecu_dm.dm2.SAE_lamp_status_protect_lamp, 0, 1);
+				inputScalarLimit("SAE lamp status red stop:", ImGuiDataType_U8, &j1939->from_other_ecu_dm.dm2.SAE_lamp_status_red_stop, 0, 1);
+				inputScalarLimit("From ECU address:", ImGuiDataType_U8, &j1939->from_other_ecu_dm.dm2.from_ecu_address[errorIndex], 0, 253);
+
 			}
 			else {
 				ImGui::Text("No DM2 errors available");
@@ -278,10 +280,42 @@ void showSAEJ1939OtherECUView(bool* saeJ1939, J1939* j1939) {
 		}
 		case 9: // DM16 messages
 		{
+			static int DA = 0;
+			static uint16_t number_of_requested_bytes = 0;
+			static uint8_t pointer_type = 0;
+			static uint8_t command = 0;
+			static uint32_t pointer = 0;
+			static uint8_t pointer_extension = 0;
+			static uint16_t key = 0;
+			ImGui::Text("DM 14 request");
+			inputScalarLimit("ECU Destination address:", ImGuiDataType_U8, &DA, 0, 253); // 254 is the error address and 255 is broadcast address
+			inputScalarLimit("Number of requested bytes:", ImGuiDataType_U16, &number_of_requested_bytes, 0, 0x7FF);
+			inputScalarLimit("Pointer type:", ImGuiDataType_U8, &pointer_type, 0, 1);
+			inputScalarLimit("Command:", ImGuiDataType_U8, &command, 0, 0x7);
+			inputScalarLimit("Pointer:", ImGuiDataType_U32, &pointer, 0, 0xFFFFFF);
+			inputScalarLimit("Pointer extension:", ImGuiDataType_U8, &pointer_extension, 0, 0xFF);
+			inputScalarLimit("Key:", ImGuiDataType_U16, &key, 0, 0xFFFF);
+
+			if (ImGui::Button("Send DM14 request")) {
+				SAE_J1939_Send_Request_DM14(j1939, DA, number_of_requested_bytes, pointer_type, command, pointer, pointer_extension, key);
+			}
+
 			// Read the DM16 message
-			ImGui::InputText("DM16 message:", (char*)j1939->from_other_ecu_dm.dm16.raw_binary_data, sizeof(j1939->from_other_ecu_dm.dm16.raw_binary_data), ImGuiInputTextFlags_ReadOnly);
-			ImGui::InputInt("Byte length:", (int*)& j1939->from_other_ecu_dm.dm16.number_of_occurences, 1, 100, ImGuiInputTextFlags_ReadOnly);
-			ImGui::InputInt("From ECU address:", (int*)&j1939->from_other_ecu_dm.dm16.from_ecu_address, 1, 100, ImGuiInputTextFlags_ReadOnly);
+			ImGui::Separator();
+			ImGui::Text("DM 16 message");
+			ImGui::InputText("Message:", (char*)j1939->from_other_ecu_dm.dm16.raw_binary_data, 255, ImGuiInputTextFlags_ReadOnly);
+			inputScalarLimit("Byte length:", ImGuiDataType_U8, &j1939->from_other_ecu_dm.dm16.number_of_occurences, 0, 0xFF);
+			inputScalarLimit("From ECU address:", ImGuiDataType_U8, &j1939->from_other_ecu_dm.dm16.from_ecu_address, 0, 253);
+			ImGui::Separator();
+			// Read the DM15 message
+			ImGui::Text("DM 15 status response");
+			inputScalarLimit("EDCP extention:", ImGuiDataType_U8, &j1939->from_other_ecu_dm.dm15.EDCP_extention, 0, 255);
+			inputScalarLimit("EDC_parameter:", ImGuiDataType_U32, &j1939->from_other_ecu_dm.dm15.EDC_parameter, 0, 0xFFFFFFFF);
+			inputScalarLimit("Number of allowed bytes:", ImGuiDataType_U16, &j1939->from_other_ecu_dm.dm15.number_of_allowed_bytes, 0, 0xFFFF);
+			inputScalarLimit("Seed:", ImGuiDataType_U16, &j1939->from_other_ecu_dm.dm15.seed, 0, 0xFFFF);
+			inputScalarLimit("Status:", ImGuiDataType_U8, &j1939->from_other_ecu_dm.dm15.status, 0, 0xFF);
+			inputScalarLimit("From ECU address:", ImGuiDataType_U8, &j1939->from_other_ecu_dm.dm15.from_ecu_address, 0, 253);
+
 			break;
 		}
 		}
@@ -297,7 +331,7 @@ void showSAEJ1939ThisECUView(bool* saeJ1939, J1939* j1939) {
 	ImGui::Begin("SAE J1939 for this ECU", saeJ1939, ImGuiWindowFlags_NoResize);
 	if (isConnectedToUSB()) {
 		static int functionIndex = 0;
-		const char* functionNames = "ECU Name\0Software identification\0Component identification\0ECU identification\0DM1 messages\0DM2 messages\0DM16 messages";
+		const char* functionNames = "ECU Name\0Software identification\0Component identification\0ECU identification\0DM1 messages\0DM2 messages";
 		ImGui::Combo("Select function:", &functionIndex, functionNames);
 		ImGui::Separator();
 
@@ -320,6 +354,7 @@ void showSAEJ1939ThisECUView(bool* saeJ1939, J1939* j1939) {
 		case 1: // Software identification
 		{
 			ImGui::InputText("Software ID:", (char*)j1939->information_this_ECU.this_identifications.software_identification.identifications, MAX_IDENTIFICATION);
+			j1939->information_this_ECU.this_identifications.software_identification.number_of_fields = MAX_IDENTIFICATION;
 			break;
 		}
 		case 2: // Component identification
@@ -328,6 +363,7 @@ void showSAEJ1939ThisECUView(bool* saeJ1939, J1939* j1939) {
 			ImGui::InputText("Component product date:", (char*)j1939->information_this_ECU.this_identifications.component_identification.component_product_date, MAX_IDENTIFICATION);
 			ImGui::InputText("Component serial number:", (char*)j1939->information_this_ECU.this_identifications.component_identification.component_serial_number, MAX_IDENTIFICATION);
 			ImGui::InputText("Component unit name:", (char*)j1939->information_this_ECU.this_identifications.component_identification.component_unit_name, MAX_IDENTIFICATION);
+			j1939->information_this_ECU.this_identifications.component_identification.length_of_each_field = MAX_IDENTIFICATION;
 			break;
 		}
 		case 3: // ECU identification
@@ -336,6 +372,7 @@ void showSAEJ1939ThisECUView(bool* saeJ1939, J1939* j1939) {
 			ImGui::InputText("ECU part number:", (char*)j1939->information_this_ECU.this_identifications.ecu_identification.ecu_part_number, MAX_IDENTIFICATION);
 			ImGui::InputText("ECU serial number:", (char*)j1939->information_this_ECU.this_identifications.ecu_identification.ecu_serial_number, MAX_IDENTIFICATION);
 			ImGui::InputText("ECU type:", (char*)j1939->information_this_ECU.this_identifications.ecu_identification.ecu_type, MAX_IDENTIFICATION);
+			j1939->information_this_ECU.this_identifications.ecu_identification.length_of_each_field = MAX_IDENTIFICATION;
 			break;
 		}
 		case 4: // DM1 messages
@@ -400,24 +437,6 @@ void showSAEJ1939ThisECUView(bool* saeJ1939, J1939* j1939) {
 			}
 			else {
 				ImGui::Text("No DM2 errors active");
-			}
-			break;
-		}
-		case 6: // DM16 messages
-		{
-			// Read the DM16 message
-			int sizeOfRadBinaryDataArray = sizeof(j1939->this_dm.dm16.raw_binary_data);
-			ImGui::InputText("DM16 message:", (char*)j1939->this_dm.dm16.raw_binary_data, sizeOfRadBinaryDataArray);
-			static int DA = 0;
-			inputScalarLimit("ECU Destination address:", ImGuiDataType_U8, &DA, 0, 253); // 254 is the error address and 255 is broadcast address
-			if (ImGui::Button("Send DM16 message")) {
-				for (int i = 0; i < sizeOfRadBinaryDataArray; i++) {
-					// Send the data when the null terminator has been found
-					if (j1939->this_dm.dm16.raw_binary_data[i] == 0) {
-						SAE_J1939_Send_Binary_Data_Transfer_DM16(j1939, DA, i + 1, j1939->this_dm.dm16.raw_binary_data);
-						break;
-					}
-				}
 			}
 			break;
 		}

@@ -20,6 +20,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Hardware\Tools\TimeConverter.cpp" />
+    <ClCompile Include="Windows\Dialogs\CANDialogs\CANBusDialog\CANBusDialog.cpp" />
     <ClCompile Include="Windows\Dialogs\ConfigurationSTM32PLCDialog\ConfigurationSTM32PLCDialog.cpp" />
     <ClCompile Include="Hardware\Database\DatabaseHandler.cpp" />
     <ClCompile Include="Hardware\USB\Protocols\OpenSourceLogger\OpenSAEJ1939\Hardware\CAN_Transmit_Receive.c" />
@@ -57,7 +58,7 @@
     <ClCompile Include="Windows\Dialogs\ConnectDialog\ConnectDialog.cpp" />
     <ClCompile Include="Windows\Dialogs\FileDialog\FileDialog.cpp" />
     <ClCompile Include="Windows\Dialogs\PinMapOfSTM32PLCDialog\PinMapOfSTM32PLCDialog.cpp" />
-    <ClCompile Include="Windows\Dialogs\SAEJ1939Dialog\SAEJ1939Dialog.cpp" />
+    <ClCompile Include="Windows\Dialogs\CANDialogs\SAEJ1939Dialog\SAEJ1939Dialog.cpp" />
     <ClCompile Include="Windows\Dialogs\UploadMeasurementToDatabaseDialog\UploadMeasurementToDatabaseDialog.cpp" />
     <ClCompile Include="Windows\Dialogs\ViewMeasurementsFromDatabaseDialog\ViewMeasurementsFromDatabaseDialog.cpp" />
     <ClCompile Include="Windows\Windows.cpp" />
@@ -66,6 +67,7 @@
     <ClInclude Include="Hardware\Tools\TimeConverter.h" />
     <ClInclude Include="Resource files\resource.h" />
     <ClInclude Include="Resource\resource.h" />
+    <ClInclude Include="Windows\Dialogs\CANDialogs\CANBusDialog\CANBusDialog.h" />
     <ClInclude Include="Windows\Dialogs\ConfigurationSTM32PLCDialog\ConfigurationSTM32PLCDialog.h" />
     <ClInclude Include="Hardware\Database\DatabaseHandler.h" />
     <ClInclude Include="Hardware\USB\Protocols\OpenSourceLogger\OpenSAEJ1939\Hardware\Hardware.h" />
@@ -91,7 +93,7 @@
     <ClInclude Include="Windows\Dialogs\ConnectDialog\ConnectDialog.h" />
     <ClInclude Include="Windows\Dialogs\FileDialog\FileDialog.h" />
     <ClInclude Include="Windows\Dialogs\PinMapOfSTM32PLCDialog\PinMapOfSTM32PLCDialog.h" />
-    <ClInclude Include="Windows\Dialogs\SAEJ1939Dialog\SAEJ1939Dialog.h" />
+    <ClInclude Include="Windows\Dialogs\CANDialogs\SAEJ1939Dialog\SAEJ1939Dialog.h" />
     <ClInclude Include="Windows\Dialogs\UploadMeasurementToDatabaseDialog\UploadMeasurementToDatabaseDialog.h" />
     <ClInclude Include="Windows\Dialogs\ViewMeasurementsFromDatabaseDialog\ViewMeasurementsFromDatabaseDialog.h" />
     <ClInclude Include="Windows\Windows.h" />

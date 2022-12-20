@@ -25,11 +25,10 @@ typedef enum {
 }MESSAGE_TYPES;
 
 /* For the CAN read callback function */
-static uint8_t RX_CAN_BUS_MESSAGE[CAN_BUS_MESSAGE] = { 0 };
-
-/* IDE in STM32 */
-#define CAN_ID_STD                  (0x00000000U)  /*!< Standard Id */
-#define CAN_ID_EXT                  (0x00000004U)  /*!< Extended Id */
+uint8_t RX_CAN_BUS_MESSAGE[CAN_BUS_MESSAGE] = { 0 };
+uint8_t TX_CAN_BUS_MESSAGE[CAN_BUS_MESSAGE] = { 0 };
+bool isNewRxMessage_ = false;
+bool isNewTxMessage_ = false;
 
 /* Handler for transmitting via USB */
 void handler(const boost::system::error_code& error, std::size_t bytes_transferred) {
@@ -38,16 +37,25 @@ void handler(const boost::system::error_code& error, std::size_t bytes_transferr
 
 /* SAE J1939 callback function for sending a message */
 void Callback_Function_Send(uint32_t ID, uint8_t DLC, uint8_t data[]) {
-	uint8_t txData[1 + CAN_BUS_MESSAGE];
+	uint8_t txData[1 + CAN_BUS_MESSAGE] = { 0 };
 	txData[0] = READ_CAN_BUS_MESSAGE_TYPE;
 	txData[1] = CAN_ID_EXT;
+	TX_CAN_BUS_MESSAGE[0] = CAN_ID_EXT;
 	txData[2] = ID >> 24;
+	TX_CAN_BUS_MESSAGE[1] = ID >> 24;
 	txData[3] = ID >> 16;
+	TX_CAN_BUS_MESSAGE[2] = ID >> 16;
 	txData[4] = ID >> 8;
+	TX_CAN_BUS_MESSAGE[3] = ID >> 8;
 	txData[5] = ID;
+	TX_CAN_BUS_MESSAGE[4] = ID;
 	txData[6] = DLC;
-	for (uint8_t i = 0; i < DLC; i++)
+	TX_CAN_BUS_MESSAGE[5] = DLC;
+	for (uint8_t i = 0; i < DLC; i++) {
 		txData[7 + i] = data[i];
+		TX_CAN_BUS_MESSAGE[6 + i] = data[i];
+	}
+	isNewTxMessage_ = true;
 
 	// Send CAN-bus data
 	port_->async_write_some(boost::asio::buffer(txData, sizeof(txData)), handler);
@@ -62,8 +70,10 @@ void Callback_Function_Read(uint32_t* ID, uint8_t data[], bool* is_new_message) 
 	else {
 		*ID = (RX_CAN_BUS_MESSAGE[1] << 24) | (RX_CAN_BUS_MESSAGE[2] << 16) | (RX_CAN_BUS_MESSAGE[3] << 8) | RX_CAN_BUS_MESSAGE[4];
 		uint8_t DLC = RX_CAN_BUS_MESSAGE[5];
-		for (int i = 0; i < DLC; i++)
+		for (int i = 0; i < DLC; i++) {
 			data[i] = RX_CAN_BUS_MESSAGE[6 + i];
+		}
+		isNewRxMessage_ = true;
 		*is_new_message = true;
 	}
 }
@@ -244,8 +254,13 @@ uint32_t readCanBusMessageFromSTM32PLC(uint8_t data[], uint32_t byteIndex) {
 	RX_CAN_BUS_MESSAGE[3] = data[byteIndex++];
 	RX_CAN_BUS_MESSAGE[4] = data[byteIndex++]; /* ID LSB */
 	RX_CAN_BUS_MESSAGE[5] = data[byteIndex++]; /* DLC */
-	for (int i = 0; i < RX_CAN_BUS_MESSAGE[5]; i++)
-		RX_CAN_BUS_MESSAGE[6 + i] = data[byteIndex++]; /* Data */
+	for (int i = 0; i < 8; i++) {
+		if (i < RX_CAN_BUS_MESSAGE[5]) {
+			RX_CAN_BUS_MESSAGE[6 + i] = data[byteIndex++]; /* Data */
+		} else {
+			byteIndex++;
+		}
+	}
 
 	/*
 	 * Listen for CAN bus data - Only one function will proceed to read message.
@@ -462,4 +477,16 @@ void resetAlarmB() {
 	weekDayAlarmB_ = 1;
 	hourAlarmB_ = 0;
 	minuteAlarmB_ = 0;
+}
+
+uint8_t* getRxCanBusMessage(bool* isNewMessage) {
+	*isNewMessage = isNewRxMessage_;
+	isNewRxMessage_ = false;
+	return RX_CAN_BUS_MESSAGE;
+}
+
+uint8_t* getTxCanBusMessage(bool* isNewMessage) {
+	*isNewMessage = isNewTxMessage_;
+	isNewTxMessage_ = false;
+	return TX_CAN_BUS_MESSAGE;
 }

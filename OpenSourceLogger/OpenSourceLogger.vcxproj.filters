@@ -135,10 +135,13 @@
     <ClCompile Include="Windows\Dialogs\ViewMeasurementsFromDatabaseDialog\ViewMeasurementsFromDatabaseDialog.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Windows\Dialogs\SAEJ1939Dialog\SAEJ1939Dialog.cpp">
+    <ClCompile Include="Windows\Dialogs\CANDialogs\SAEJ1939Dialog\SAEJ1939Dialog.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Windows\Dialogs\PinMapOfSTM32PLCDialog\PinMapOfSTM32PLCDialog.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Windows\Dialogs\CANDialogs\CANBusDialog\CANBusDialog.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -227,7 +230,7 @@
     <ClInclude Include="Windows\Dialogs\ViewMeasurementsFromDatabaseDialog\ViewMeasurementsFromDatabaseDialog.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Windows\Dialogs\SAEJ1939Dialog\SAEJ1939Dialog.h">
+    <ClInclude Include="Windows\Dialogs\CANDialogs\SAEJ1939Dialog\SAEJ1939Dialog.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Windows\Dialogs\PinMapOfSTM32PLCDialog\PinMapOfSTM32PLCDialog.h">
@@ -237,6 +240,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Resource\resource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Windows\Dialogs\CANDialogs\CANBusDialog\CANBusDialog.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
