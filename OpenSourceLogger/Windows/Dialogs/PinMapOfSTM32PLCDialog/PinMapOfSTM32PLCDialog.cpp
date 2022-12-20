@@ -11,19 +11,20 @@
 #define STB_IMAGE_IMPLEMENTATION
 #define GL_CLAMP_TO_EDGE 0x812F
 #include "stb_image.h"
-#include "../../../Constants.h"
+#include <Windows.h>
+#include "../../../Resource/resource.h"
 
 GLuint my_image_texture = 0;
 int my_image_width = 0;
 int my_image_height = 0;
 bool isImageLoaded = false;
-bool LoadTextureFromFile(const char* filename, GLuint* out_texture, int* out_width, int* out_height);
+bool LoadTextureFromFile(GLuint* out_texture, int* out_width, int* out_height);
 
 void showPinMapOfSTM32PLCDialog(bool* pinMapOfSTM32PLC) {
     ImGui::SetNextWindowSize(ImVec2(820.0f, 740.0f));
     ImGui::Begin("Pinmap of STM32PLC", pinMapOfSTM32PLC, ImGuiWindowFlags_NoResize);
     if (!isImageLoaded) {
-        isImageLoaded = LoadTextureFromFile(PINMAP_PATH, &my_image_texture, &my_image_width, &my_image_height);
+        isImageLoaded = LoadTextureFromFile(&my_image_texture, &my_image_width, &my_image_height);
     }
     if (isImageLoaded) {
         ImGui::Image((void*)(intptr_t)my_image_texture, ImVec2(my_image_width, my_image_height));
@@ -34,12 +35,40 @@ void showPinMapOfSTM32PLCDialog(bool* pinMapOfSTM32PLC) {
 }
 
 // Simple helper function to load an image into a OpenGL texture with common settings
-bool LoadTextureFromFile(const char* filename, GLuint* out_texture, int* out_width, int* out_height)
+bool LoadTextureFromFile(GLuint* out_texture, int* out_width, int* out_height)
 {
+
+    // Locate the resource in the application's executable.
+    HRSRC imageResHandle = FindResource(
+        NULL,             // This component.
+        MAKEINTRESOURCE(IDR_IMAGE1),   // Resource name.
+        L"Image");        // Resource type.
+    HRESULT hr = (imageResHandle ? S_OK : E_FAIL);
+
+    // Load the resource to the HGLOBAL.
+    HGLOBAL imageResDataHandle = NULL;
+    if (SUCCEEDED(hr)) {
+        imageResDataHandle = LoadResource(NULL, imageResHandle);
+        hr = (imageResDataHandle ? S_OK : E_FAIL);
+    }
+
+    // Lock the resource to retrieve memory pointer.
+    LPVOID void_data = NULL;
+    DWORD size_of_void_data = 0;
+    if (SUCCEEDED(hr)) {
+        void_data = LockResource(imageResDataHandle);
+        size_of_void_data = SizeofResource(NULL, imageResHandle);
+        UnlockResource(imageResDataHandle);
+        hr = (void_data ? S_OK : E_FAIL);
+    }
+
+    if (void_data == NULL)
+        return false;
+
     // Load from file
     int image_width = 0;
     int image_height = 0;
-    unsigned char* image_data = stbi_load(filename, &image_width, &image_height, NULL, 4);
+    unsigned char* image_data = stbi_load_from_memory((const stbi_uc*)void_data, size_of_void_data, &image_width, &image_height, NULL, 4);
     if (image_data == NULL)
         return false;
 
