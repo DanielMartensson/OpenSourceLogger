@@ -24,7 +24,7 @@ In order to use this software, the following need to be known:
 * 1 x CAN-bus channel
 * 4 x Input Capture for 0 kHz to 10kHz
 * 3 x Encoder for -32768 to 32767 pulses
-* 1 x USB port for connecting with [STM32-PLC](https://github.com/DanielMartensson/OpenSourceLogger)
+* 1 x USB port for connecting with [STM32-PLC](https://github.com/DanielMartensson/STM32-PLC)
 * MySQL database connection
 * SAE-J1939 communication standard with the software [Open-SAE-J1939](https://github.com/DanielMartensson/Open-SAE-J1939)
 * CAN-terminal analyzer
