@@ -43,7 +43,7 @@ Inside `x64/Release` there is a file called `OpenSourceLogger.exe`. Run that.
 
 # Pictures
 
-![a](https://raw.githubusercontent.com/DanielMartensson/OpenSourceLogger/main/pictures/Mainview.png)
+![a](https://raw.githubusercontent.com/DanielMartensson/OpenSourceLogger/main/Pictures/Mainview.png)
 
 # Status of the project
 
