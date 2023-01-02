@@ -39,7 +39,7 @@ run the `.sln` file.
 
 Also install these following dependencies from `vcpkg`
 
- - VCPKG dependencies
+VCPKG dependencies:
   - imgui[core,glfw-binding,opengl3-binding]:x64-windows
   - opengl:x64-windows
   - boost-asio:x64-windows
