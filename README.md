@@ -39,13 +39,13 @@ run the `.sln` file.
 
 Also install these following dependencies from `vcpkg`
 
- -VCPKG dependencies
-  -imgui[core,glfw-binding,opengl3-binding]:x64-windows
-  -opengl:x64-windows
-  -boost-asio:x64-windows
-  -mysql-connector-cpp:x64-windows
-  -nlohmann-json:x64-windows
-  -stb:x64-windows
+ - VCPKG dependencies
+  - imgui[core,glfw-binding,opengl3-binding]:x64-windows
+  - opengl:x64-windows
+  - boost-asio:x64-windows
+  - mysql-connector-cpp:x64-windows
+  - nlohmann-json:x64-windows
+  - stb:x64-windows
 
 
 ## Run pre-built binaries
