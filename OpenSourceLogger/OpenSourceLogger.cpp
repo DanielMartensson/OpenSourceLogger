@@ -24,6 +24,9 @@
 #endif
 #include <GLFW/glfw3.h> // Will drag system OpenGL headers
 
+// No console
+#pragma comment(linker, "/SUBSYSTEM:windows /ENTRY:mainCRTStartup")
+
 /* My own header fiels */
 #include "Windows/Windows.h"
 #include "Hardware/USB/USBHandler.h"

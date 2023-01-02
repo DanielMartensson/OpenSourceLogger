@@ -33,9 +33,20 @@ In order to use this software, the following need to be known:
 
 ## Building from source
 
-Donwload Microsoft Visual Studio. I have been using Microsoft Visual Studio 2022 to create this software.
+Download Microsoft Visual Studio. I have been using Microsoft Visual Studio 2022 to create this software.
 You need a MSVC-compiler as well. The C++ standard of this project is C++20. Clone the project and 
 run the `.sln` file.
+
+Also install these following dependencies from `vcpkg`
+
+ -VCPKG dependencies
+  -imgui[core,glfw-binding,opengl3-binding]:x64-windows
+  -opengl:x64-windows
+  -boost-asio:x64-windows
+  -mysql-connector-cpp:x64-windows
+  -nlohmann-json:x64-windows
+  -stb:x64-windows
+
 
 ## Run pre-built binaries
 
