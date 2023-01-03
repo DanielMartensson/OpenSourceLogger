@@ -1,13 +1,14 @@
-﻿  OpenSourceLogger.cpp
+﻿  PulseMeasurementsDialog.cpp
   Please define _WIN32_WINNT or _WIN32_WINDOWS appropriately. For example:
   - add -D_WIN32_WINNT=0x0601 to the compiler command line; or
   - add _WIN32_WINNT=0x0601 to your project's Preprocessor Definitions.
   Assuming _WIN32_WINNT=0x0601 (i.e. Windows 7 target).
-C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\minwindef.h(130,1): warning C4005: 'APIENTRY': macro redefinition
-C:\vcpkg\installed\x64-windows\include\GLFW\glfw3.h(123): message : see previous definition of 'APIENTRY'
+C:\Users\dmn\GitHub\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\Measurement\PulseMeasurementDialog\PulseMeasurementsDialog.cpp(465,126): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\dmn\GitHub\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\Measurement\PulseMeasurementDialog\PulseMeasurementsDialog.cpp(473,59): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\dmn\GitHub\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\Measurement\PulseMeasurementDialog\PulseMeasurementsDialog.cpp(482,57): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
   Generating code
-  0 of 4960 functions ( 0.0%) were compiled, the rest were copied from previous compilation.
-    0 functions were new in current compilation
-    0 functions had inline decision re-evaluated but remain unchanged
+  560 of 4988 functions (11.2%) were compiled, the rest were copied from previous compilation.
+    5 functions were new in current compilation
+    170 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
   OpenSourceLogger.vcxproj -> C:\Users\dmn\GitHub\OpenSourceLogger\x64\Release\OpenSourceLogger.exe

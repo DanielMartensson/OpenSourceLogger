@@ -3,14 +3,15 @@
 #include "../Hardware/USB/USBHandler.h"
 #include "Dialogs/FileDialog/FileDialog.h"
 #include "Dialogs/ConnectDialog/ConnectDialog.h"
-#include "Dialogs/CalibrationDialog/CalibrationDialog.h"
+#include "Dialogs/Measurement/CalibrationDialog/CalibrationDialog.h"
 #include "Dialogs/CANDialogs/CANBusDialog/CANBusDialog.h"
 #include "Dialogs/CANDialogs/SAEJ1939Dialog/SAEJ1939Dialog.h"
 #include "Dialogs/PinMapOfSTM32PLCDialog/PinMapOfSTM32PLCDialog.h"
-#include "Dialogs/CollectMeasurementsDialog/CollectMeasurementsDialog.h"
+#include "Dialogs/Measurement/CollectMeasurementsDialog/CollectMeasurementsDialog.h"
 #include "Dialogs/ConfigurationSTM32PLCDialog/ConfigurationSTM32PLCDialog.h"
 #include "Dialogs/UploadMeasurementToDatabaseDialog/UploadMeasurementToDatabaseDialog.h"
 #include "Dialogs/ViewMeasurementsFromDatabaseDialog/ViewMeasurementsFromDatabaseDialog.h"
+#include "Dialogs/Measurement/PulseMeasurementDialog/PulseMeasurementsDialog.h"
 
 // Window states
 bool mainWindowClosed = false;
@@ -26,6 +27,7 @@ bool saeJ1939OtherECU = false;
 bool saeJ1939ThisECU = false;
 bool canBusTerminal = false;
 bool pinMapOfSTM32PLC = false;
+bool pulseMeasurement = false;
 
 // Window properties
 char file_folder_path[1000];
@@ -76,7 +78,12 @@ void showMainWindow(bool* show_main_window) {
 		if (ImGui::Button("Collect measurements")) {
 			collectMeasurements = true;
 		}
+		ImGui::SameLine();
+		if (ImGui::Button("Pulse measurement")) {
+			pulseMeasurement = true;
+		}
 	}
+	
 
 	if (ImGui::CollapsingHeader("View")) {
 		if (ImGui::Button("Measurements from database")) {
@@ -159,5 +166,9 @@ void showDialogWindows() {
 	if (canBusTerminal) {
 		// Show CAN-bus terminal
 		showCANBusTerminal(&canBusTerminal);
+	}
+	if (pulseMeasurement) {
+		// Show pulse measurement
+		showPulseMeasureDialog(&pulseMeasurement, file_folder_path);
 	}
 }

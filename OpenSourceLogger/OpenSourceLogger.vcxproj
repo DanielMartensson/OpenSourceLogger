@@ -53,10 +53,11 @@
     <ClCompile Include="Hardware\USB\USBHandler.cpp" />
     <ClCompile Include="OpenSourceLogger.cpp" />
     <ClCompile Include="Hardware\USB\Protocols\OpenSourceLogger\OpenSourceLoggerProtocol.cpp" />
-    <ClCompile Include="Windows\Dialogs\CalibrationDialog\CalibrationDialog.cpp" />
-    <ClCompile Include="Windows\Dialogs\CollectMeasurementsDialog\CollectMeasurementsDialog.cpp" />
+    <ClCompile Include="Windows\Dialogs\Measurement\CalibrationDialog\CalibrationDialog.cpp" />
+    <ClCompile Include="Windows\Dialogs\Measurement\CollectMeasurementsDialog\CollectMeasurementsDialog.cpp" />
     <ClCompile Include="Windows\Dialogs\ConnectDialog\ConnectDialog.cpp" />
     <ClCompile Include="Windows\Dialogs\FileDialog\FileDialog.cpp" />
+    <ClCompile Include="Windows\Dialogs\Measurement\PulseMeasurementDialog\PulseMeasurementsDialog.cpp" />
     <ClCompile Include="Windows\Dialogs\PinMapOfSTM32PLCDialog\PinMapOfSTM32PLCDialog.cpp" />
     <ClCompile Include="Windows\Dialogs\CANDialogs\SAEJ1939Dialog\SAEJ1939Dialog.cpp" />
     <ClCompile Include="Windows\Dialogs\UploadMeasurementToDatabaseDialog\UploadMeasurementToDatabaseDialog.cpp" />
@@ -88,10 +89,11 @@
     <ClInclude Include="Hardware\USB\Protocols\OpenSourceLogger\OpenSAEJ1939\SAE_J1939\SAE_J1939_Enums\Enum_Send_Status.h" />
     <ClInclude Include="Hardware\USB\USBHandler.h" />
     <ClInclude Include="Hardware\USB\Protocols\OpenSourceLogger\OpenSourceLoggerProtocol.h" />
-    <ClInclude Include="Windows\Dialogs\CalibrationDialog\CalibrationDialog.h" />
-    <ClInclude Include="Windows\Dialogs\CollectMeasurementsDialog\CollectMeasurementsDialog.h" />
+    <ClInclude Include="Windows\Dialogs\Measurement\CalibrationDialog\CalibrationDialog.h" />
+    <ClInclude Include="Windows\Dialogs\Measurement\CollectMeasurementsDialog\CollectMeasurementsDialog.h" />
     <ClInclude Include="Windows\Dialogs\ConnectDialog\ConnectDialog.h" />
     <ClInclude Include="Windows\Dialogs\FileDialog\FileDialog.h" />
+    <ClInclude Include="Windows\Dialogs\Measurement\PulseMeasurementDialog\PulseMeasurementsDialog.h" />
     <ClInclude Include="Windows\Dialogs\PinMapOfSTM32PLCDialog\PinMapOfSTM32PLCDialog.h" />
     <ClInclude Include="Windows\Dialogs\CANDialogs\SAEJ1939Dialog\SAEJ1939Dialog.h" />
     <ClInclude Include="Windows\Dialogs\UploadMeasurementToDatabaseDialog\UploadMeasurementToDatabaseDialog.h" />
