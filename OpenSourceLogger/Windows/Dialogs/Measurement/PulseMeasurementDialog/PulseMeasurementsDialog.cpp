@@ -354,8 +354,8 @@ void showPulseMeasureDialog(bool* collectMeasurements, char file_folder_path[]) 
 			createMeasurementPlotsForPulses(E, "E", enableE, E_LENGTH);
 			ImGui::EndChild();
 
-			// Break when DI0 is high. This is security alert.
-			if (DI->at(0) > 0.5f) {
+			// Break when DI0 is low. This is security alert.
+			if (DI->at(0) < 0.5f) {
 				closeDownTheSystem();
 			}
 
