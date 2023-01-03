@@ -355,7 +355,7 @@ void showPulseMeasureDialog(bool* collectMeasurements, char file_folder_path[]) 
 			ImGui::EndChild();
 
 			// Break when DI0 is low. This is security alert.
-			if (DI->at(0) < 0.5f) {
+			if (DI[0].back() < 0.5f) {
 				closeDownTheSystem();
 			}
 
