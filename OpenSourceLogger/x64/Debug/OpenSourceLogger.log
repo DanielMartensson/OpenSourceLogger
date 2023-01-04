@@ -5,7 +5,8 @@
   Assuming _WIN32_WINNT=0x0601 (i.e. Windows 7 target).
 C:\vcpkg\installed\x64-windows\include\mysqlx\common.h(38,1): warning C4005: '_SILENCE_CXX17_ITERATOR_BASE_CLASS_DEPRECATION_WARNING': macro redefinition
 C:\vcpkg\installed\x64-windows\include\mysqlx\common.h(38,1): message : '_SILENCE_CXX17_ITERATOR_BASE_CLASS_DEPRECATION_WARNING' previously declared on the command line
-C:\Users\dmn\GitHub\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\Measurement\PulseMeasurementDialog\PulseMeasurementsDialog.cpp(466,126): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\dmn\GitHub\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\Measurement\PulseMeasurementDialog\PulseMeasurementsDialog.cpp(474,59): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\dmn\GitHub\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\Measurement\PulseMeasurementDialog\PulseMeasurementsDialog.cpp(483,57): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\dmn\GitHub\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\Measurement\PulseMeasurementDialog\PulseMeasurementsDialog.cpp(362,25): warning C4244: '+=': conversion from '__int64' to 'int', possible loss of data
+C:\Users\dmn\GitHub\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\Measurement\PulseMeasurementDialog\PulseMeasurementsDialog.cpp(473,126): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\dmn\GitHub\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\Measurement\PulseMeasurementDialog\PulseMeasurementsDialog.cpp(481,59): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\dmn\GitHub\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\Measurement\PulseMeasurementDialog\PulseMeasurementsDialog.cpp(490,57): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
   OpenSourceLogger.vcxproj -> C:\Users\dmn\GitHub\OpenSourceLogger\x64\Debug\OpenSourceLogger.exe

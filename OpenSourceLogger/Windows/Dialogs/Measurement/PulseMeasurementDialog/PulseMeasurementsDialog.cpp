@@ -41,6 +41,8 @@ void showPulseMeasureDialog(bool* collectMeasurements, char file_folder_path[]) 
 
 	// Settings fields for sampling
 	static int showSamplesInPlot = 0;
+	static int alarmStopTime = 0;
+	static int alarmStopTimeSum = 0;
 	static long long timeDifferenceSamplingSum = 0;
 	static long long timeDifferencePWMPulseSum[PWM_LENGTH] = { 0 };
 	static long long timeDifferenceDACPulseSum[DAC_LENGTH] = { 0 };
@@ -131,8 +133,8 @@ void showPulseMeasureDialog(bool* collectMeasurements, char file_folder_path[]) 
 		// Sample settings
 		ImGui::BeginChild("groupBoxSettings", ImVec2(0, ImGui::GetFontSize() * 15.0f), true);
 		ImGui::Text("Settings:");
-		ImGui::Text("When DI0 is 0, then the pulse system will stop. Keep DI0 high.");
 		ImGui::SliderInt("Show samples for line plot", &showSamplesInPlot, 0, 2000);
+		ImGui::InputInt("Alarm stop time [ms] for DI0 < 0.5", &alarmStopTime);
 
 		// Buttons
 		if (startLogging) {
@@ -355,9 +357,14 @@ void showPulseMeasureDialog(bool* collectMeasurements, char file_folder_path[]) 
 			createMeasurementPlotsForPulses(E, "E", enableE, E_LENGTH);
 			ImGui::EndChild();
 
-			// Break when DI0 is low. This is security alert.
-			if (DI[0].back() < 0.5f) {
-				closeDownTheSystem();
+			// Break when DI0 is low for the time alarmStopTime. This is security alert.
+			if (calibratedDI[0] < 0.5f) {
+				alarmStopTimeSum += timeDifference;
+				if (alarmStopTimeSum > alarmStopTime) {
+					closeDownTheSystem();
+				}				
+			}else {
+				alarmStopTimeSum = 0; // Reset
 			}
 
 			// Break when all pulses have reached its limits
