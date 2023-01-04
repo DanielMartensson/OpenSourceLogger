@@ -134,7 +134,11 @@ void showPulseMeasureDialog(bool* collectMeasurements, char file_folder_path[]) 
 		ImGui::BeginChild("groupBoxSettings", ImVec2(0, ImGui::GetFontSize() * 15.0f), true);
 		ImGui::Text("Settings:");
 		ImGui::SliderInt("Show samples for line plot", &showSamplesInPlot, 0, 2000);
-		ImGui::InputInt("Alarm stop time [ms] for DI0 < 0.5", &alarmStopTime);
+		if (ImGui::InputInt("Alarm stop time [ms] for DI0 < 0.5", &alarmStopTime)) {
+			if (alarmStopTime < 0) {
+				alarmStopTime = 0;
+			}
+		}
 
 		// Buttons
 		if (startLogging) {
