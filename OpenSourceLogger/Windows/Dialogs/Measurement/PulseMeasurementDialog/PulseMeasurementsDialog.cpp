@@ -131,6 +131,7 @@ void showPulseMeasureDialog(bool* collectMeasurements, char file_folder_path[]) 
 		// Sample settings
 		ImGui::BeginChild("groupBoxSettings", ImVec2(0, ImGui::GetFontSize() * 15.0f), true);
 		ImGui::Text("Settings:");
+		ImGui::Text("When DI0 is 0, then the pulse system will stop. Keep DI0 high.");
 		ImGui::SliderInt("Show samples for line plot", &showSamplesInPlot, 0, 2000);
 
 		// Buttons

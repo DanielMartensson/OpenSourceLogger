@@ -3,9 +3,9 @@
   - add -D_WIN32_WINNT=0x0601 to the compiler command line; or
   - add _WIN32_WINNT=0x0601 to your project's Preprocessor Definitions.
   Assuming _WIN32_WINNT=0x0601 (i.e. Windows 7 target).
-C:\Users\dmn\GitHub\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\Measurement\PulseMeasurementDialog\PulseMeasurementsDialog.cpp(465,126): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\dmn\GitHub\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\Measurement\PulseMeasurementDialog\PulseMeasurementsDialog.cpp(473,59): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\dmn\GitHub\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\Measurement\PulseMeasurementDialog\PulseMeasurementsDialog.cpp(482,57): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\dmn\GitHub\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\Measurement\PulseMeasurementDialog\PulseMeasurementsDialog.cpp(466,126): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\dmn\GitHub\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\Measurement\PulseMeasurementDialog\PulseMeasurementsDialog.cpp(474,59): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\dmn\GitHub\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\Measurement\PulseMeasurementDialog\PulseMeasurementsDialog.cpp(483,57): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
   Generating code
   1 of 4988 functions (<0.1%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
