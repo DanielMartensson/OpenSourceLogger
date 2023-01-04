@@ -313,18 +313,18 @@ void showPulseMeasureDialog(bool* collectMeasurements, char file_folder_path[]) 
 			// Set the control signals
 			setControlSignals(controlPWM, controlDAC);
 
+			// Calibrate the measurements
+			float calibratedADC[ADC_LENGTH];
+			float calibratedDADC[DADC_LENGTH];
+			float calibratedDI[DI_LENGTH];
+			float calibratedIC[IC_LENGTH];
+			float calibratedE[E_LENGTH];
+			getCalibrateMeasurementsFromRawData(calibratedADC, calibratedDADC, calibratedDI, calibratedIC, calibratedE);
+
 			// Update the sampling
 			if (sampleTime <= timeDifferenceSamplingSum) {
 				// Check if samples is above 0
 				if (showSamplesInPlot > 0) {
-
-					// Calibrate the measurements
-					float calibratedADC[ADC_LENGTH];
-					float calibratedDADC[DADC_LENGTH];
-					float calibratedDI[DI_LENGTH];
-					float calibratedIC[IC_LENGTH];
-					float calibratedE[E_LENGTH];
-					getCalibrateMeasurementsFromRawData(calibratedADC, calibratedDADC, calibratedDI, calibratedIC, calibratedE);
 
 					// Update vectors
 					updateVectorsForPlot(ADC, showSamplesInPlot, ADC_LENGTH, calibratedADC);
