@@ -1,6 +1,5 @@
 #include "SAEJ1939Dialog.h"
 #include "imgui.h"
-//#include <cstdio>
 #include "../../../../Hardware/USB/USBHandler.h"
 #include "../../../../Hardware/USB/Protocols/OpenSourceLogger/OpenSAEJ1939/ISO_11783/ISO_11783-7_Application_Layer/Application_Layer.h"
 
@@ -127,14 +126,6 @@ void showSAEJ1939OtherECUView(bool* saeJ1939, J1939* j1939) {
 				ImGui::Checkbox(text, &auxiliaryValveActive[i++]);
 			}
 
-			// Time difference
-			static std::chrono::steady_clock::time_point t1;
-			static std::chrono::steady_clock::time_point t2;
-			t2 = std::chrono::steady_clock::now();
-			static long timeDifferenceSum = 0;
-			timeDifferenceSum += std::chrono::duration_cast<std::chrono::milliseconds>(t2 - t1).count();
-			t1 = t2;
-
 			// Display sliders
 			for (int i = 0; i < 16; i++) {
 				if (auxiliaryValveActive[i]) {
@@ -151,14 +142,11 @@ void showSAEJ1939OtherECUView(bool* saeJ1939, J1939* j1939) {
 				}
 			}
 
-			// For every 50 milliseconds, send the CAN-messagess
-			if (timeDifferenceSum > 50) {
-				for (int i = 0; i < 16; i++) {
-					if (auxiliaryValveActive[i]) {
-						ISO_11783_Send_Auxiliary_Valve_Command(j1939, i, auxiliaryValveFlow[i], FAIL_SAFE_MODE_BLOCKED, auxiliaryValveState[i]);
-					}
+			// Send CAN-bus message
+			for (int i = 0; i < 16; i++) {
+				if (auxiliaryValveActive[i]) {
+					ISO_11783_Send_Auxiliary_Valve_Command(j1939, i, abs(auxiliaryValveFlow[i]), FAIL_SAFE_MODE_BLOCKED, auxiliaryValveState[i]);
 				}
-				timeDifferenceSum = 0;
 			}
 			break;
 		}
@@ -166,14 +154,6 @@ void showSAEJ1939OtherECUView(bool* saeJ1939, J1939* j1939) {
 		{
 			static int DA = 0;
 			inputScalarLimit("ECU Destination address:", ImGuiDataType_U8, &DA, 0, 253); // 254 is the error address and 255 is broadcast address
-
-			// Time difference
-			static std::chrono::steady_clock::time_point t1;
-			static std::chrono::steady_clock::time_point t2;
-			t2 = std::chrono::steady_clock::now();
-			static long timeDifferenceSum = 0;
-			timeDifferenceSum += std::chrono::duration_cast<std::chrono::milliseconds>(t2 - t1).count();
-			t1 = t2;
 
 			// Show slider
 			static int standardFlow = 0;
@@ -186,11 +166,8 @@ void showSAEJ1939OtherECUView(bool* saeJ1939, J1939* j1939) {
 				valveState = VALVE_STATE_RETRACT;
 			}
 
-			// For every 50 milliseconds, send the CAN-messagess
-			if (timeDifferenceSum > 50) {
-				ISO_11783_Send_General_Purpose_Valve_Command(j1939, DA, standardFlow, FAIL_SAFE_MODE_BLOCKED, valveState, 0);
-				timeDifferenceSum = 0;
-			}
+			// Send CAN-bus message
+			ISO_11783_Send_General_Purpose_Valve_Command(j1939, DA, abs(standardFlow), FAIL_SAFE_MODE_BLOCKED, valveState, 0);
 			break;
 		}
 		case 6: // DM1 messages
@@ -319,7 +296,8 @@ void showSAEJ1939OtherECUView(bool* saeJ1939, J1939* j1939) {
 			break;
 		}
 		}
-	}else {
+	}
+	else {
 		ImGui::Text("You need to be connected to the USB");
 	}
 
