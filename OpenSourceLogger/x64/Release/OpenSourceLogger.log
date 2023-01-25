@@ -6,8 +6,8 @@
 C:\Users\dmn\GitHub\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\CANDialogs\SAEJ1939Dialog\SAEJ1939Dialog.cpp(459,29): warning C4018: '<': signed/unsigned mismatch
 C:\Users\dmn\GitHub\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\CANDialogs\SAEJ1939Dialog\SAEJ1939Dialog.cpp(462,29): warning C4018: '>': signed/unsigned mismatch
   Generating code
-  2 of 4988 functions (<0.1%) were compiled, the rest were copied from previous compilation.
+  1 of 4988 functions (<0.1%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
-    24 functions had inline decision re-evaluated but remain unchanged
+    18 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
   OpenSourceLogger.vcxproj -> C:\Users\dmn\GitHub\OpenSourceLogger\x64\Release\OpenSourceLogger.exe

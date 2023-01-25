@@ -20,8 +20,8 @@ void showSAEJ1939OtherECUView(bool* saeJ1939, J1939* j1939) {
 		{
 			static int DA = 0;
 			static int newDA = 0;
-			inputScalarLimit("ECU Destination address:", ImGuiDataType_U8, &DA, 0, 253); // 254 is the error address and 255 is broadcast address
-			inputScalarLimit("New ECU Destination address:", ImGuiDataType_U8, &newDA, 0, 253); // 254 is the error address and 255 is broadcast address
+			inputScalarLimit("ECU Destination address:", ImGuiDataType_U8, &DA, 0, 255);
+			inputScalarLimit("New ECU Destination address:", ImGuiDataType_U8, &newDA, 0, 255);
 
 			if (ImGui::Button("Send name request")) {
 				SAE_J1939_Send_Request_Address_Claimed(j1939, DA);
