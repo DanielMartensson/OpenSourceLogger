@@ -3,7 +3,6 @@
 #include "../../../../Hardware/USB/USBHandler.h"
 #include "../../../../Hardware/USB/Protocols/OpenSourceLogger/OpenSourceLoggerProtocol.h"
 
-bool isNewMessage;
 std::vector<std::string> direction;
 std::vector<uint8_t> canType;
 std::vector<uint32_t> canID;
@@ -11,12 +10,14 @@ std::vector<uint8_t> canDLC;
 std::vector<std::vector<uint8_t>> canData;
 
 void getMessage(uint8_t CAN_BUS_MESSAGE[], bool isRxData);
+void clearTable();
 
 void showCANBusTerminal(bool* canBusTerminal) {
 	ImGui::SetNextWindowSize(ImVec2(1000.f, 440.0f));
 	ImGui::Begin("CAN Terminal", canBusTerminal, ImGuiWindowFlags_NoResize);
 	if (isConnectedToUSB()) {
 		// Get data
+		bool isNewMessage = false;
 		uint8_t* CAN_BUS_MESSAGE = getRxCanBusMessage(&isNewMessage);
 		if (isNewMessage)
 			getMessage(CAN_BUS_MESSAGE, true);
@@ -27,11 +28,7 @@ void showCANBusTerminal(bool* canBusTerminal) {
 
 		// Clear table
 		if(ImGui::Button("Clear table")) {
-			direction.clear();
-			canType.clear();
-			canID.clear();
-			canDLC.clear();
-			canData.clear();
+			clearTable();
 		}
 
 		// Create table
@@ -95,11 +92,7 @@ void showCANBusTerminal(bool* canBusTerminal) {
 
 	}
 	else {
-		direction.clear();
-		canType.clear();
-		canID.clear();
-		canDLC.clear();
-		canData.clear();
+		clearTable();
 		ImGui::Text("You need to be connected to the USB");
 	}
 	ImGui::End();
@@ -116,4 +109,12 @@ void getMessage(uint8_t CAN_BUS_MESSAGE[], bool isRxData) {
 		data.push_back(CAN_BUS_MESSAGE[6 + i]);
 	}
 	canData.push_back(data);
+}
+
+void clearTable() {
+	direction.clear();
+	canType.clear();
+	canID.clear();
+	canDLC.clear();
+	canData.clear();
 }

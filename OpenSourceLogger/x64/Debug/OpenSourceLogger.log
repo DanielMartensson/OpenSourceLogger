@@ -3,6 +3,6 @@
   - add -D_WIN32_WINNT=0x0601 to the compiler command line; or
   - add _WIN32_WINNT=0x0601 to your project's Preprocessor Definitions.
   Assuming _WIN32_WINNT=0x0601 (i.e. Windows 7 target).
-C:\Users\dmn\GitHub\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\CANDialogs\SAEJ1939Dialog\SAEJ1939Dialog.cpp(459,29): warning C4018: '<': signed/unsigned mismatch
-C:\Users\dmn\GitHub\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\CANDialogs\SAEJ1939Dialog\SAEJ1939Dialog.cpp(462,29): warning C4018: '>': signed/unsigned mismatch
+C:\Users\dmn\GitHub\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\CANDialogs\SAEJ1939Dialog\SAEJ1939Dialog.cpp(475,29): warning C4018: '<': signed/unsigned mismatch
+C:\Users\dmn\GitHub\OpenSourceLogger\OpenSourceLogger\Windows\Dialogs\CANDialogs\SAEJ1939Dialog\SAEJ1939Dialog.cpp(478,29): warning C4018: '>': signed/unsigned mismatch
   OpenSourceLogger.vcxproj -> C:\Users\dmn\GitHub\OpenSourceLogger\x64\Debug\OpenSourceLogger.exe

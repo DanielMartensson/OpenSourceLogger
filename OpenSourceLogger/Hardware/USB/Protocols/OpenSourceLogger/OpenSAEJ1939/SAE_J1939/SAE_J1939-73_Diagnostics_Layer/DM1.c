@@ -29,10 +29,10 @@ ENUM_J1939_STATUS_CODES SAE_J1939_Response_Request_DM1(J1939* j1939, uint8_t DA)
 		uint8_t data[8];
 		data[0] = (j1939->this_dm.dm1.SAE_lamp_status_malfunction_indicator << 6) | (j1939->this_dm.dm1.SAE_lamp_status_red_stop << 4) | (j1939->this_dm.dm1.SAE_lamp_status_amber_warning << 2) | (j1939->this_dm.dm1.SAE_lamp_status_protect_lamp);
 		data[1] = (j1939->this_dm.dm1.SAE_flash_lamp_malfunction_indicator << 6) | (j1939->this_dm.dm1.SAE_flash_lamp_red_stop << 4) | (j1939->this_dm.dm1.SAE_flash_lamp_amber_warning << 2) | (j1939->this_dm.dm1.SAE_flash_lamp_protect_lamp);
-		data[2] = j1939->this_dm.dm1.SPN[1];
-		data[3] = j1939->this_dm.dm1.SPN[1] >> 8;
-		data[4] = ((j1939->this_dm.dm1.SPN[1] >> 11) & 0b11100000) | j1939->this_dm.dm1.FMI[1];
-		data[5] = (j1939->this_dm.dm1.SPN_conversion_method[1] << 7) | j1939->this_dm.dm1.occurrence_count[1];
+		data[2] = j1939->this_dm.dm1.SPN[0];
+		data[3] = j1939->this_dm.dm1.SPN[0] >> 8;
+		data[4] = ((j1939->this_dm.dm1.SPN[0] >> 11) & 0b11100000) | j1939->this_dm.dm1.FMI[0];
+		data[5] = (j1939->this_dm.dm1.SPN_conversion_method[0] << 7) | j1939->this_dm.dm1.occurrence_count[0];
 		data[6] = 0xFF;													/* Reserved */
 		data[7] = 0xFF;													/* Reserved */
 		return CAN_Send_Message(ID, data);

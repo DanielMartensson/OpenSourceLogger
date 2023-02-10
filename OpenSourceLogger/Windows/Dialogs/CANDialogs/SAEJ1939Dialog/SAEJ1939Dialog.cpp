@@ -126,6 +126,10 @@ void showSAEJ1939OtherECUView(bool* saeJ1939, J1939* j1939) {
 				ImGui::Checkbox(text, &auxiliaryValveActive[i++]);
 			}
 
+			// Force
+			static bool forceReInitialisation = false;
+			ImGui::Checkbox("Force re-initialisation", &forceReInitialisation);
+
 			// Display sliders
 			for (int i = 0; i < 16; i++) {
 				if (auxiliaryValveActive[i]) {
@@ -138,16 +142,26 @@ void showSAEJ1939OtherECUView(bool* saeJ1939, J1939* j1939) {
 					if (auxiliaryValveFlow[i] < 0) {
 						valveState = VALVE_STATE_RETRACT;
 					}
+					if (forceReInitialisation) {
+						valveState = VALVE_STATE_INITIALISATION;
+					}
 					auxiliaryValveState[i] = valveState;
 				}
 			}
 
+
 			// Send CAN-bus message
-			for (int i = 0; i < 16; i++) {
-				if (auxiliaryValveActive[i]) {
-					ISO_11783_Send_Auxiliary_Valve_Command(j1939, i, abs(auxiliaryValveFlow[i]), FAIL_SAFE_MODE_BLOCKED, auxiliaryValveState[i]);
+			static int count = 0;
+			count++;
+			if (count > 50) {
+				for (int i = 0; i < 16; i++) {
+					if (auxiliaryValveActive[i]) {
+						ISO_11783_Send_Auxiliary_Valve_Command(j1939, i, abs(auxiliaryValveFlow[i]), FAIL_SAFE_MODE_BLOCKED, auxiliaryValveState[i]);
+					}
 				}
+				count = 0;
 			}
+
 			break;
 		}
 		case 5: // General valve command
@@ -177,15 +191,16 @@ void showSAEJ1939OtherECUView(bool* saeJ1939, J1939* j1939) {
 			if (ImGui::Button("Send DM1 request")) {
 				SAE_J1939_Send_Request_DM1(j1939, DA);
 			}
+
 			if (j1939->from_other_ecu_dm.errors_dm1_active > 0) {
 				// At least one error...
-				static int errorIndex = 1;
+				static int errorIndex = 0;
 				if (ImGui::InputInt("Select DM1 error:", &errorIndex)) {
-					if (errorIndex < 1) {
-						errorIndex = 1;
+					if (errorIndex < 0) {
+						errorIndex = 0;
 					}
-					if (errorIndex > j1939->from_other_ecu_dm.errors_dm1_active) {
-						errorIndex = j1939->from_other_ecu_dm.errors_dm1_active;
+					if (errorIndex > MAX_DM_FIELD) {
+						errorIndex = MAX_DM_FIELD;
 					}
 				}
 				inputScalarLimit("FMI:", ImGuiDataType_U8, &j1939->from_other_ecu_dm.dm1.FMI[errorIndex], 0, 0x1F);
@@ -217,13 +232,13 @@ void showSAEJ1939OtherECUView(bool* saeJ1939, J1939* j1939) {
 			}
 			if (j1939->from_other_ecu_dm.errors_dm2_active > 0) {
 				// At least one error...
-				static int errorIndex = 1;
+				static int errorIndex = 0;
 				if (ImGui::InputInt("Select DM2 error:", &errorIndex)) {
-					if (errorIndex < 1) {
-						errorIndex = 1;
+					if (errorIndex < 0) {
+						errorIndex = 0;
 					}
-					if (errorIndex > j1939->from_other_ecu_dm.errors_dm2_active) {
-						errorIndex = j1939->from_other_ecu_dm.errors_dm2_active;
+					if (errorIndex > MAX_DM_FIELD) {
+						errorIndex = MAX_DM_FIELD;
 					}
 				}
 				inputScalarLimit("FMI:", ImGuiDataType_U8, &j1939->from_other_ecu_dm.dm2.FMI[errorIndex], 0, 0x1F);
@@ -254,6 +269,7 @@ void showSAEJ1939OtherECUView(bool* saeJ1939, J1939* j1939) {
 				SAE_J1939_Send_Request_DM3(j1939, DA);
 			}
 			ImGui::Text("DM3 messages will clear DM2 messages");
+			break;
 		}
 		case 9: // DM16 messages
 		{
@@ -358,13 +374,13 @@ void showSAEJ1939ThisECUView(bool* saeJ1939, J1939* j1939) {
 			inputScalarLimit("DM1 errors active:", ImGuiDataType_U8, &j1939->this_dm.errors_dm1_active, 0, MAX_DM_FIELD);
 			if (j1939->this_dm.errors_dm1_active > 0) {
 				// At least one error...
-				static int errorIndex = 1;
+				static int errorIndex = 0;
 				if (ImGui::InputInt("Select DM1 error:", &errorIndex)) {
-					if (errorIndex < 1) {
-						errorIndex = 1;
+					if (errorIndex < 0) {
+						errorIndex = 0;
 					}
-					if (errorIndex > j1939->this_dm.errors_dm1_active) {
-						errorIndex = j1939->this_dm.errors_dm1_active;
+					if (errorIndex > MAX_DM_FIELD) {
+						errorIndex = MAX_DM_FIELD;
 					}
 				}
 				inputScalarLimit("FMI:", ImGuiDataType_U8, &j1939->this_dm.dm1.FMI[errorIndex], 0, 255);
@@ -391,13 +407,13 @@ void showSAEJ1939ThisECUView(bool* saeJ1939, J1939* j1939) {
 			inputScalarLimit("DM2 errors active:", ImGuiDataType_U8, &j1939->this_dm.errors_dm2_active, 0, MAX_DM_FIELD);
 			if (j1939->this_dm.errors_dm2_active > 0) {
 				// At least one error...
-				static int errorIndex = 1;
+				static int errorIndex = 0;
 				if (ImGui::InputInt("Select DM2 error:", &errorIndex)) {
-					if (errorIndex < 1) {
-						errorIndex = 1;
+					if (errorIndex < 0) {
+						errorIndex = 0;
 					}
-					if (errorIndex > j1939->this_dm.errors_dm2_active) {
-						errorIndex = j1939->this_dm.errors_dm2_active;
+					if (errorIndex > MAX_DM_FIELD) {
+						errorIndex = MAX_DM_FIELD;
 					}
 				}
 				inputScalarLimit("FMI:", ImGuiDataType_U8, &j1939->this_dm.dm2.FMI[errorIndex], 0, 255);

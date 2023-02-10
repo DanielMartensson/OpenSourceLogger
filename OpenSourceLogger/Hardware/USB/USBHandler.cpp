@@ -10,8 +10,13 @@ bool openUSBConnection(std::string portName, int baudrateIndex, J1939* j1939) {
 	// Connect 
 	if (portName.length() > 0 && !isConnectedToUSB()) {
 		// Open port
-		port.open(portName);
-
+		try {
+			port.open(portName);
+		}catch (...) {
+			port.close();
+			return isConnectedToUSB();
+		}
+		
 		// Sett settings
 		int baudrate = 0;
 		switch (baudrateIndex) {
