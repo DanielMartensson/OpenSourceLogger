@@ -4,6 +4,8 @@ This is a data acquisition software made in C++ with ImGui framwork and OpenGL.
 The purpose with this software is to collect measurement data and store that data inside a database
 and also downloading measurement data from that database. 
 
+# This software is no longer maintained. The work of OpenSourceLogger will be in https://github.com/DanielMartensson/GoobySoft
+
 In order to use this software, the following need to be known:
 
 * Calibration with straight line equation
